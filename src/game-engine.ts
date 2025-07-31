@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import GameObject from '~/game-objects/game-object'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { GlobalUniforms } from '~/types'
-import DebugCube from '~/game-objects/debug-cube'
+import Hub from '~/game-objects/hub'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -26,7 +26,7 @@ export default class GameEngine {
     this.scene = new Scene
     this.scene.background = new Color(0x00404f)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(0, 0, 3)
+    this.camera.position.set(0, 3, 3)
     this.entities = []
 
     this.renderer = new WebGPURenderer
@@ -36,7 +36,7 @@ export default class GameEngine {
     this.registerEventListeners()
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
 
-    this.addEntity(new DebugCube)
+    this.addEntity(new Hub)
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
