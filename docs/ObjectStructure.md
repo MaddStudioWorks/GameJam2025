@@ -3,12 +3,12 @@
   - Player
   - Hub
     - RoomEntry x12
-      - DoorFrame
-      - Door
-      - PointOfInterest
+      -x DoorFrame
+      -x Door
+      -x PointOfInterest
         - In front of Door
         - Inside
-      - Room
+      -x Room
 
 # PointOfInterest
 - position (vec3)
