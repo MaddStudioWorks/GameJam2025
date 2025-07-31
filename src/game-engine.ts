@@ -6,6 +6,7 @@ import { GlobalUniforms } from '~/types'
 import ExampleLevel from '~/assets/ExampleLevel.ldtk?url'
 import Level from '~/game-objects/level'
 import Player from '~/game-objects/player'
+import GameClock from '~/game-objects/clock'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -23,6 +24,7 @@ export default class GameEngine {
   stats: Stats
   player: Player
   level: Level
+  gameClock: GameClock
 
   constructor() {
     this.clock = new Clock
@@ -30,7 +32,7 @@ export default class GameEngine {
     this.scene = new Scene
     this.scene.background = new Color(0x00404f)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(0, 0, 24)
+    this.camera.position.set(0, 4, 8)
     this.entities = []
 
     this.renderer = new WebGPURenderer
@@ -41,9 +43,10 @@ export default class GameEngine {
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
 
     this.player = new Player()
-    this.addEntity(this.player)
-    this.level = new Level(ExampleLevel, this.player)
-    this.addEntity(this.level)
+    this.gameClock = new GameClock();
+    /*this.addEntity(this.player)
+    this.level = new Level(ExampleLevel, this.player)*/
+    this.addEntity(this.gameClock)
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
