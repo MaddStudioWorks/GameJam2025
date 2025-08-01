@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="module" src="src/index.ts"></script>
-  <link rel="stylesheet" href="style.css">
-  <title>GAMEJAM</title>
-</head>
-<body>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="src/index.ts"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>GAMEJAM</title>
+  </head>
+  <body>
+    <section id="keys" class="containerKeys">
+      <div
+        style="background-image: url('/key1.png')"
+        class="containerKeys-key"
+        id="key-1"
+      ></div>
+      <div
+        style="background-image: url('/key2.png')"
+        class="containerKeys-key"
+        id="key-2"
+      ></div>
+      <div
+        style="background-image: url('/key3.png')"
+        class="containerKeys-key"
+        id="key-3"
+      ></div>
+    </section>
+    <div class="dialog"></div>
+    <button class="escape" style="background-image: url('/escape.png')"></button>
+    <div class="debug-ui">
+      <button id="dText">dialog text</button>
+      <button id="dImage">dialog image</button>
+      <button id="dImageText">dialog image/text</button>
+      <button id="dClose">close dialog</button>
+      <button id="Key1">add key 1</button>
+      <button id="Key2">add key 2</button>
+      <button id="Key3">add key 3</button>
+      <button id="escape">show escape</button>
+      <button id="escapehide">hide escape</button>
+    </div>
+  </body>
 </html>
