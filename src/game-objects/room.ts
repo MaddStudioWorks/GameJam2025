@@ -31,23 +31,21 @@ export default class Room extends GameObject {
 
     this.poi = {
       outside: {
-        position: new Vector3(0, 0.25, 0.25),
+        position: new Vector3(0, 0.25, 0),
         lookAt: new Vector3(0, 0, 1),
         movementAmplitude: {
           minPolarAngle: Math.PI/2 * 0.5,
           maxPolarAngle: Math.PI/2 * 1.05,
-          // Fix: Correct the azimuth angles relative to room rotation
           minAzimuthAngle: roomAngle - azimuthRange,
           maxAzimuthAngle: roomAngle + azimuthRange
         }
       },
       inside: {
-        position: new Vector3(0, 0.25, -0.15),
+        position: new Vector3(0, 0.15, -0.15),
         lookAt: new Vector3(0, 0, -1),
         movementAmplitude: {
           minPolarAngle: Math.PI/2 * 0.5,
           maxPolarAngle: Math.PI/2 * 1.05,
-          // Fix: Correct the azimuth angles relative to room rotation
           minAzimuthAngle: roomAngle - azimuthRange,
           maxAzimuthAngle: roomAngle + azimuthRange
         }
@@ -84,6 +82,9 @@ export default class Room extends GameObject {
 
     // Room mesh
     this.roomInterior = new RoomInterior
+    // Place the room behind the entrance
+    this.roomInterior.meshGroup.position.z = -this.roomInterior.roomSize * 0.5
+
     this.meshGroup.add(this.roomInterior.meshGroup)
   }
 

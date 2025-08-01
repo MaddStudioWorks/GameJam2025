@@ -1,17 +1,19 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { Mesh, MeshNormalNodeMaterial } from 'three/webgpu'
+import { Color, Mesh, MeshBasicNodeMaterial } from 'three/webgpu'
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import DoorModelL from '~/assets/meshes/Room_Door_L.glb?url'
 import DoorModelR from '~/assets/meshes/Room_Door_R.glb?url'
 
 export default class RoomDoor extends GameObject {
-  material: MeshNormalNodeMaterial
+  material: MeshBasicNodeMaterial
 
   constructor(side: "left" | "right") {
     super()
 
-    this.material = new MeshNormalNodeMaterial()
+    this.material = new MeshBasicNodeMaterial({
+      color: new Color("#603018")
+    })
 
     const loader = new GLTFLoader()
     const model = side === "left" ? DoorModelL : DoorModelR
@@ -26,7 +28,7 @@ export default class RoomDoor extends GameObject {
         }
       })
 
-      // this.meshGroup.add(object)
+      this.meshGroup.add(object)
     })    
   }
 

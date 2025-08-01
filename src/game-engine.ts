@@ -59,9 +59,13 @@ export default class GameEngine {
     // The Hub spawns everything else as children
     this.hub = new Hub
     this.addEntity(this.hub)
+    
+    // this.camera.position.set(0, 0.25, 1)
+    // this.orbitControls.target.set(0, 0.25, 0)
+    // this.addEntity(new RoomInterior)
 
     // On game start, trigger enterHubMode
-    this.cameraControls.enterHubMode()
+    // this.cameraControls.enterHubMode()
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
@@ -124,8 +128,12 @@ export default class GameEngine {
     const room = this.getHoveredRoom()
     if(room && !this.wasOrbiting()){
       if (this.activeMode === 'doorstep') {
-        this.cameraControls.enterRoomInspectionMode(room)
-        this.activeMode = 'roomInspection'
+        room.doorLeft.meshGroup.visible = false
+        room.doorRight.meshGroup.visible = false
+        setTimeout(() => {
+          this.cameraControls.enterRoomInspectionMode(room)
+          this.activeMode = 'roomInspection'
+        }, 500);
       } else {
         this.cameraControls.enterDoorstepMode(room)
         this.activeMode = 'doorstep'
@@ -135,6 +143,10 @@ export default class GameEngine {
 
   onKeyUp(event: KeyboardEvent) {
     if(event.key === 'Escape'){
+      this.hub.rooms.forEach(room => {
+        room.doorLeft.meshGroup.visible = true
+        room.doorRight.meshGroup.visible = true
+      })
       this.cameraControls.enterHubMode()
       this.activeMode = 'hub'
     }
