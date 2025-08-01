@@ -35,8 +35,6 @@ export default class GameEngine {
   // Temp
   raycaster = new Raycaster
 
-  orbitMode = true
-
   constructor() {
     this.uniforms.time.onFrameUpdate(() => this.clock.getElapsedTime())
     this.scene
@@ -58,8 +56,8 @@ export default class GameEngine {
     this.hub = new Hub
     this.addEntity(this.hub)
 
-    // Camera Controls usage
-    this.cameraControls.enterHubMode()
+    // On game start, trigger enterHubMode
+    // this.cameraControls.enterHubMode()
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)

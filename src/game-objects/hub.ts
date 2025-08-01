@@ -1,11 +1,11 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { Mesh, MeshBasicNodeMaterial, CircleGeometry, Vector3, TextureLoader } from 'three/webgpu'
+import { Vector3 } from 'three/webgpu'
 import Room from '~/game-objects/room'
-import TextureClockFace from '~/assets/textures/clock-face.png?url'
+import HubFloor from '~/game-objects/hub-floor'
+import GameClock from '~/game-objects/clock'
 
 export default class Hub extends GameObject {
-  material: MeshBasicNodeMaterial
   rooms: Room[] = []
 
   constructor() {
@@ -14,15 +14,11 @@ export default class Hub extends GameObject {
     const radius = 1
 
     // Hub Geometry
-    const geometry = new CircleGeometry(radius, 24)
-    geometry.rotateX(-Math.PI/2)
-    const map = new TextureLoader().load(TextureClockFace)
-    map.anisotropy = 16
-    this.material = new MeshBasicNodeMaterial({
-      map
-    })
-    const mesh = new Mesh(geometry, this.material)
-    this.meshGroup.add(mesh)
+    const hubFloor = new HubFloor(1)
+    this.meshGroup.add(hubFloor.meshGroup)
+    const clock = new GameClock(radius)
+    this.children.push(clock)
+    this.meshGroup.add(clock.meshGroup)
 
     // Rooms
     for(let i = 0; i < 12; i++) {
@@ -36,8 +32,7 @@ export default class Hub extends GameObject {
     }
   }
 
-
-
   tick(engine: GameEngine) {
+    this.children.forEach((child) => child.tick(engine))
   }
 }
