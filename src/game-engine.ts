@@ -24,6 +24,8 @@ export default class GameEngine {
   cameraControls: CameraControls
   renderer: WebGPURenderer
   orbitControls: OrbitControls
+  orbitingStart = 0
+  isOrbiting = false
   entities: GameObject[]
 
   // Root Game Objects
@@ -57,7 +59,7 @@ export default class GameEngine {
     this.addEntity(this.hub)
 
     // On game start, trigger enterHubMode
-    // this.cameraControls.enterHubMode()
+    this.cameraControls.enterHubMode()
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
@@ -89,9 +91,26 @@ export default class GameEngine {
   registerEventListeners() {
     window.addEventListener('resize', () => { this.setView() })
     window.addEventListener('pointermove', (event) => { this.onPointerMove(event) })
-    window.addEventListener('click', (event) => { this.onClick(event) })
+    window.addEventListener('pointerup', (event) => { this.onPointerUp(event) })
     window.addEventListener('keydown', (event) => { this.onKeyDown(event) })
     window.addEventListener('keyup', (event) => { this.onKeyUp(event) })
+    this.orbitControls.addEventListener('start', () => this.onOrbitStart())
+    this.orbitControls.addEventListener('end', () => this.onOrbitEnd())
+  }
+
+  onOrbitStart() {
+    this.orbitingStart = Date.now()
+    this.isOrbiting = true
+  }
+
+  onOrbitEnd() {
+    this.isOrbiting = false
+  }
+
+  wasOrbiting() {
+    const orbitDuration = Date.now() - this.orbitingStart
+    const wasOrbiting = orbitDuration > 100
+    return wasOrbiting
   }
 
   onPointerMove(event: PointerEvent) {
@@ -99,9 +118,9 @@ export default class GameEngine {
     this.cursor.y = -(event.clientY / window.innerHeight) * 2 + 1
   }
 
-  onClick(event: MouseEvent) {
+  onPointerUp(event: MouseEvent) {
     const room = this.getHoveredRoom()
-    if(room) this.cameraControls.enterDoorstepMode(room)
+    if(room && !this.wasOrbiting()) this.cameraControls.enterDoorstepMode(room)
   }
 
   onKeyUp(event: KeyboardEvent) {
@@ -113,11 +132,13 @@ export default class GameEngine {
   }
 
   tick() {
-    // Move to Room or Hub class
-    const hoveredRoom = this.getHoveredRoom()
-    this.hub.rooms.forEach(room => {
-      room.hitbox.visible = room.index === hoveredRoom?.index
-    })
+    if(!this.isOrbiting){
+      // Move to Room or Hub class
+      const hoveredRoom = this.getHoveredRoom()
+      this.hub.rooms.forEach(room => {
+        room.hitbox.visible = room.index === hoveredRoom?.index
+      })
+    }
 
     this.deltaTime = this.clock.getDelta()
     this.entities.forEach(entry => entry.tick(this))
