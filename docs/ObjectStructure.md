@@ -1,16 +1,13 @@
 # Game Hierarchy
-- GameEngine
-  - Player
-  - Hub
-    - RoomEntry x12
-      -x DoorFrame
-      -x Door
-      -x PointOfInterest
-        - In front of Door
-        - Inside
-      -x Room
 
-# PointOfInterest
-- position (vec3)
-- lookAt (vec3)
-- movementAmplitude (vec2)
+- GameEngine
+  - [ ] GameControls
+  - [x] CameraControls
+  - [ ] Hub
+    - [x] RoomEntry x12
+      - [x] DoorFrame
+      - [x] Door
+      - [x] PointOfInterest
+        - [x] In front of Door
+        - [ ] Inside
+      - [x] Room
