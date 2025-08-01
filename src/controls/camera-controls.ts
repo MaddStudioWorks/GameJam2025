@@ -26,7 +26,12 @@ export default class CameraControls {
 
   /** CameraConstraints when in Doorstep mode */
   enterDoorstepMode(room: Room){
-    const newCameraPosition = room.meshGroup.position.clone().add(room.poi.outside.position)
+    const newCameraPosition = room.poi.outside.position.clone()
+    room.meshGroup.localToWorld(newCameraPosition)
+
+    // la camera ne regarde pas dans la bonne direction 
+    // pour les portes != 1
+
     this.orbitControls.target = newCameraPosition
     this.orbitControls.minDistance = 1
     this.orbitControls.maxDistance = 1

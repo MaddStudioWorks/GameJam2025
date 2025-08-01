@@ -1,4 +1,4 @@
-import { Vector3, Mesh, SphereGeometry, MeshBasicMaterial } from 'three'
+import { Vector3, Mesh, SphereGeometry, MeshBasicMaterial, BoxGeometry, Box3 } from 'three'
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
 import RoomInterior from '~/game-objects/room-interior'
@@ -7,6 +7,7 @@ import RoomDoorFrame from '~/game-objects/room-door-frame'
 import { PointOfInterest } from '~/interfaces/point-of-interest'
 
 export default class Room extends GameObject {
+  index: number
   poi: {
     outside: PointOfInterest
     inside: PointOfInterest
@@ -15,9 +16,12 @@ export default class Room extends GameObject {
   doorLeft: RoomDoor
   doorRight: RoomDoor
   roomInterior: RoomInterior
+  hitbox: Mesh
 
-  constructor() {
+  constructor(index: number) {
     super()
+
+    this.index = index
 
     this.poi = {
       outside: {
@@ -57,6 +61,19 @@ export default class Room extends GameObject {
     this.meshGroup.add(this.doorFrame.meshGroup)
     this.meshGroup.add(this.doorLeft.meshGroup)
     this.meshGroup.add(this.doorRight.meshGroup)
+
+    // Entrance Hitbox
+    const hitboxHeight = 0.75
+    this.hitbox = new Mesh(
+      new BoxGeometry(0.45, hitboxHeight, 0.25),
+      new MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.5 })
+    )
+    this.hitbox.translateY(hitboxHeight/2)
+    this.hitbox.visible = false
+    this.hitbox.userData = {
+      index: this.index
+    }
+    this.meshGroup.add(this.hitbox)
 
     // Room mesh
     this.roomInterior = new RoomInterior
