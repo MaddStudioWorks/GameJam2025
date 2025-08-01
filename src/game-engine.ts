@@ -1,9 +1,10 @@
-import { Scene, PerspectiveCamera, Color, Clock, WebGPURenderer, uniform } from 'three/webgpu'
+import { Scene, PerspectiveCamera, Color, Clock, WebGPURenderer, uniform, Vector3 } from 'three/webgpu'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import GameObject from '~/game-objects/game-object'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { GlobalUniforms } from '~/types'
 import Hub from '~/game-objects/hub'
+import CameraControls from '~/controls/camera-controls'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -15,6 +16,7 @@ export default class GameEngine {
   deltaTime: number = 0
   scene: Scene
   camera: PerspectiveCamera
+  cameraControls: CameraControls
   renderer: WebGPURenderer
   orbitControls: OrbitControls
   entities: GameObject[]
@@ -26,17 +28,23 @@ export default class GameEngine {
     this.scene = new Scene
     this.scene.background = new Color(0x00404f)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(0, 3, 3)
+    this.camera.position.set(0, 0.5, 1)
     this.entities = []
 
     this.renderer = new WebGPURenderer
     document.body.appendChild(this.renderer.domElement)
     this.setView()
 
-    this.registerEventListeners()
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
+    this.cameraControls = new CameraControls(this.camera, this.orbitControls)
+    this.registerEventListeners()
 
-    this.addEntity(new Hub)
+    const hub = new Hub
+    this.addEntity(hub)
+
+    // Camera Controls usage
+    this.cameraControls.enterHubMode()
+    this.cameraControls.enterDoorstepMode(hub.rooms[0])
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)

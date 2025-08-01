@@ -1,10 +1,11 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
 import { Mesh, MeshBasicNodeMaterial, CircleGeometry, Vector3 } from 'three/webgpu'
-import RoomEntry from '~/game-objects/room-entry'
+import RoomEntry from '~/game-objects/room'
 
 export default class Hub extends GameObject {
   material: MeshBasicNodeMaterial
+  rooms: RoomEntry[] = []
 
   constructor() {
     super()
@@ -22,14 +23,17 @@ export default class Hub extends GameObject {
 
     // Doors
     for(let i = 0; i < 12; i++) {
-      const door = new RoomEntry
+      const roomEntry = new RoomEntry
       const angle = i * -Math.PI*2 / 12
-      door.meshGroup.rotateY(angle)
-      const projectionVector = new Vector3(0, 0, 1).applyEuler(door.meshGroup.rotation);
-      door.meshGroup.position.addScaledVector(projectionVector, radius)
-      this.meshGroup.add(door.meshGroup)
-    }    
+      roomEntry.meshGroup.rotateY(angle)
+      const projectionVector = new Vector3(0, 0, 1).applyEuler(roomEntry.meshGroup.rotation);
+      roomEntry.meshGroup.position.addScaledVector(projectionVector, radius)
+      this.rooms.push(roomEntry)
+      this.meshGroup.add(roomEntry.meshGroup)
+    }
   }
+
+
 
   tick(engine: GameEngine) {
   }

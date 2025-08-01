@@ -1,7 +1,12 @@
-import { Vector2, Vector3 } from 'three'
+import { Vector3 } from 'three'
 
 export interface PointOfInterest {
   position: Vector3
   lookAt: Vector3
-  movementAmplitude: Vector2
+  movementAmplitude: {
+    minPolarAngle: number
+    maxPolarAngle: number
+    maxAzimuthAngle: number
+    minAzimuthAngle: number
+  }
 }
