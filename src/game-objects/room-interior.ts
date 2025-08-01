@@ -11,7 +11,7 @@ export default class RoomInterior extends GameObject {
     super()
         
     this.geometry = new BoxGeometry(0.5, 0.5, 0.5)
-    this.material = new MeshBasicNodeMaterial({ color: 0x333300 })
+    this.material = new MeshBasicNodeMaterial({ wireframe: true })
     this.mesh = new Mesh(this.geometry, this.material)
     this.meshGroup.add(this.mesh)
 
@@ -19,7 +19,7 @@ export default class RoomInterior extends GameObject {
     const size = new Vector3
     box.getSize(size)
     this.mesh.position.y = size.y / 2
-    this.mesh.position.z = size.z / 2
+    this.mesh.position.z = -size.z / 2
   }
 
   tick(engine: GameEngine) {

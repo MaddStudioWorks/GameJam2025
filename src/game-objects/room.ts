@@ -23,15 +23,22 @@ export default class Room extends GameObject {
 
     this.index = index
 
+    // Calculate the room's angle around the hub
+    const roomAngle = index * Math.PI * 2 / 12
+
+    // Define the azimuth range (90 degrees total, 45 degrees each side)
+    const azimuthRange = Math.PI / 4 // 45 degrees each side
+
     this.poi = {
       outside: {
-        position: new Vector3(0, 0.25, -0.33),
+        position: new Vector3(0, 0.25, 0.33),
         lookAt: new Vector3(0, 0, 1),
         movementAmplitude: {
           minPolarAngle: Math.PI/2 * 0.5,
           maxPolarAngle: Math.PI/2 * 1.05,
-          maxAzimuthAngle: -(Math.PI/2 + Math.PI/2 * 0.5),
-          minAzimuthAngle: Math.PI/2 + Math.PI/2 * 0.5
+          // Fix: Correct the azimuth angles relative to room rotation
+          minAzimuthAngle: roomAngle - azimuthRange,
+          maxAzimuthAngle: roomAngle + azimuthRange
         }
       },
       inside: {
@@ -40,19 +47,20 @@ export default class Room extends GameObject {
         movementAmplitude: {
           minPolarAngle: Math.PI/2 * 0.5,
           maxPolarAngle: Math.PI/2 * 1.05,
-          maxAzimuthAngle: -(Math.PI/2 + Math.PI/2 * 0.5),
-          minAzimuthAngle: Math.PI/2 + Math.PI/2 * 0.5
+          // Fix: Correct the azimuth angles relative to room rotation
+          minAzimuthAngle: roomAngle - azimuthRange,
+          maxAzimuthAngle: roomAngle + azimuthRange
         }
       }
     }
 
     // temp: debug spheres for the POIs
-    const outsideSphere = new Mesh(new SphereGeometry(0.025), new MeshBasicMaterial({ color: 0xff0000 }))
-    outsideSphere.position.copy(this.poi.outside.position)
-    this.meshGroup.add(outsideSphere)
-    const insideSphere = new Mesh(new SphereGeometry(0.025), new MeshBasicMaterial({ color: 0xff0000 }))
-    insideSphere.position.copy(this.poi.inside.position)
-    this.meshGroup.add(insideSphere)
+    // const outsideSphere = new Mesh(new SphereGeometry(0.025), new MeshBasicMaterial({ color: 0xff0000 }))
+    // outsideSphere.position.copy(this.poi.outside.position)
+    // this.meshGroup.add(outsideSphere)
+    // const insideSphere = new Mesh(new SphereGeometry(0.025), new MeshBasicMaterial({ color: 0xff00ff }))
+    // insideSphere.position.copy(this.poi.inside.position)
+    // this.meshGroup.add(insideSphere)
 
     // Room Entrance meshes
     this.doorFrame = new RoomDoorFrame
@@ -69,7 +77,6 @@ export default class Room extends GameObject {
       new MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.5 })
     )
     this.hitbox.translateY(hitboxHeight/2)
-    this.hitbox.visible = false
     this.hitbox.userData = {
       index: this.index
     }

@@ -17,7 +17,7 @@ export default class RoomDoor extends GameObject {
     const model = side === "left" ? DoorModelL : DoorModelR
     loader.load(model, (gltf) => {
       const object = gltf.scene
-      object.rotateY(-Math.PI/2)
+      object.rotateY(Math.PI/2)
       
       object.traverse((child) => {
         if (child.type === "Mesh") {

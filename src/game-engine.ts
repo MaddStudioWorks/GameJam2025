@@ -5,6 +5,7 @@ import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { GlobalUniforms } from '~/types'
 import Hub from '~/game-objects/hub'
 import CameraControls from '~/controls/camera-controls'
+import Room from '~/game-objects/room'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -34,6 +35,8 @@ export default class GameEngine {
   // Temp
   raycaster = new Raycaster
 
+  orbitMode = true
+
   constructor() {
     this.uniforms.time.onFrameUpdate(() => this.clock.getElapsedTime())
     this.scene
@@ -57,7 +60,6 @@ export default class GameEngine {
 
     // Camera Controls usage
     this.cameraControls.enterHubMode()
-    // this.cameraControls.enterDoorstepMode(this.hub.rooms[0])
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
@@ -65,14 +67,14 @@ export default class GameEngine {
     this.renderer.setAnimationLoop(() => { this.tick() })
   }
 
-  raycast(){
+  getHoveredRoom(){
     this.raycaster.setFromCamera(this.cursor, this.camera)
     const results = this.raycaster.intersectObjects(this.hub.rooms.map(room => room.hitbox), false)
-    if(results.length > 0){
-      const roomIndex = results[0].object.userData.index
-      console.log("going to room", this.hub.rooms[roomIndex])
-      this.cameraControls.enterDoorstepMode(this.hub.rooms[roomIndex])
-    }
+    return results.length > 0 ? this.hub.rooms[results[0].object.userData.index] : null
+  }
+
+  highlightRoom(room: Room){
+    room.hitbox.visible = true
   }
 
   addEntity(entity: GameObject) {
@@ -100,7 +102,8 @@ export default class GameEngine {
   }
 
   onClick(event: MouseEvent) {
-    this.raycast()
+    const room = this.getHoveredRoom()
+    if(room) this.cameraControls.enterDoorstepMode(room)
   }
 
   onKeyUp(event: KeyboardEvent) {
@@ -112,6 +115,12 @@ export default class GameEngine {
   }
 
   tick() {
+    // Move to Room or Hub class
+    const hoveredRoom = this.getHoveredRoom()
+    this.hub.rooms.forEach(room => {
+      room.hitbox.visible = room.index === hoveredRoom?.index
+    })
+
     this.deltaTime = this.clock.getDelta()
     this.entities.forEach(entry => entry.tick(this))
     this.orbitControls.update()
