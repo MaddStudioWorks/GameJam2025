@@ -70,7 +70,7 @@ export default class GameEngine {
   }
 
   onKeyUp(event: KeyboardEvent) {
-    
+    if(event.key === 'Escape') this.cameraControls.enterHubMode()
   }
 
   onKeyDown(event: KeyboardEvent) {
