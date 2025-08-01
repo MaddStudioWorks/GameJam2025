@@ -31,7 +31,7 @@ export default class Room extends GameObject {
 
     this.poi = {
       outside: {
-        position: new Vector3(0, 0.25, 0.33),
+        position: new Vector3(0, 0.25, 0.25),
         lookAt: new Vector3(0, 0, 1),
         movementAmplitude: {
           minPolarAngle: Math.PI/2 * 0.5,
@@ -42,7 +42,7 @@ export default class Room extends GameObject {
         }
       },
       inside: {
-        position: new Vector3(0, 0.25, 0.15),
+        position: new Vector3(0, 0.25, -0.15),
         lookAt: new Vector3(0, 0, -1),
         movementAmplitude: {
           minPolarAngle: Math.PI/2 * 0.5,

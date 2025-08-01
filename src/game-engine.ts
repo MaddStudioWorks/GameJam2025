@@ -6,6 +6,7 @@ import { GlobalUniforms } from '~/types'
 import Hub from '~/game-objects/hub'
 import CameraControls from '~/controls/camera-controls'
 import Room from '~/game-objects/room'
+import RoomInterior from '~/game-objects/room-interior'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -36,6 +37,7 @@ export default class GameEngine {
 
   // Temp
   raycaster = new Raycaster
+  activeMode: 'hub' | 'doorstep' | 'roomInspection' = 'hub'
 
   constructor() {
     this.uniforms.time.onFrameUpdate(() => this.clock.getElapsedTime())
@@ -109,7 +111,7 @@ export default class GameEngine {
 
   wasOrbiting() {
     const orbitDuration = Date.now() - this.orbitingStart
-    const wasOrbiting = orbitDuration > 100
+    const wasOrbiting = orbitDuration > 300
     return wasOrbiting
   }
 
@@ -120,11 +122,22 @@ export default class GameEngine {
 
   onPointerUp(event: MouseEvent) {
     const room = this.getHoveredRoom()
-    if(room && !this.wasOrbiting()) this.cameraControls.enterDoorstepMode(room)
+    if(room && !this.wasOrbiting()){
+      if (this.activeMode === 'doorstep') {
+        this.cameraControls.enterRoomInspectionMode(room)
+        this.activeMode = 'roomInspection'
+      } else {
+        this.cameraControls.enterDoorstepMode(room)
+        this.activeMode = 'doorstep'
+      }
+    }
   }
 
   onKeyUp(event: KeyboardEvent) {
-    if(event.key === 'Escape') this.cameraControls.enterHubMode()
+    if(event.key === 'Escape'){
+      this.cameraControls.enterHubMode()
+      this.activeMode = 'hub'
+    }
   }
 
   onKeyDown(event: KeyboardEvent) {

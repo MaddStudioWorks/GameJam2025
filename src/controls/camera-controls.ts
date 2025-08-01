@@ -28,7 +28,6 @@ export default class CameraControls {
   enterDoorstepMode(room: Room){
     // Get the POI position in world coordinates
     const poiWorldPosition = room.meshGroup.localToWorld(room.poi.outside.position.clone())
-    console.log('poiWorldPosition', poiWorldPosition)
 
     // Set the orbit target to the POI position
     this.orbitControls.target.copy(poiWorldPosition)
@@ -42,6 +41,31 @@ export default class CameraControls {
     this.orbitControls.maxPolarAngle = room.poi.outside.movementAmplitude.maxPolarAngle
     this.orbitControls.minAzimuthAngle = room.poi.outside.movementAmplitude.minAzimuthAngle
     this.orbitControls.maxAzimuthAngle = room.poi.outside.movementAmplitude.maxAzimuthAngle
+
+    this.orbitControls.enablePan = false
+    this.orbitControls.enableZoom = false
+
+    // Force controls to update to apply the new constraints
+    this.orbitControls.update()
+  }
+
+  /** CameraConstraints when in RoomInspection mode */
+  enterRoomInspectionMode(room: Room){
+    // Get the POI position in world coordinates
+    const poiWorldPosition = room.meshGroup.localToWorld(room.poi.inside.position.clone())
+
+    // Set the orbit target to the POI position
+    this.orbitControls.target.copy(poiWorldPosition)
+
+    // Set distance constraints
+    this.orbitControls.minDistance = 0.25
+    this.orbitControls.maxDistance = 0.25
+
+    // Set angle constraints from the room's POI
+    this.orbitControls.minPolarAngle = room.poi.inside.movementAmplitude.minPolarAngle
+    this.orbitControls.maxPolarAngle = room.poi.inside.movementAmplitude.maxPolarAngle
+    this.orbitControls.minAzimuthAngle = room.poi.inside.movementAmplitude.minAzimuthAngle
+    this.orbitControls.maxAzimuthAngle = room.poi.inside.movementAmplitude.maxAzimuthAngle
 
     this.orbitControls.enablePan = false
     this.orbitControls.enableZoom = false
