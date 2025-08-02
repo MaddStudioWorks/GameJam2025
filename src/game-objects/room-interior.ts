@@ -1,12 +1,13 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { BoxGeometry, color, Fn, Mesh, MeshBasicNodeMaterial, mix, SRGBColorSpace, texture, TextureLoader, uv } from 'three/webgpu'
+import { Box3, BoxGeometry, color, Fn, Mesh, MeshBasicNodeMaterial, mix, SRGBColorSpace, texture, TextureLoader, uv, Vector3 } from 'three/webgpu'
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import RoomInteriorModel from '~/assets/meshes/Room_Interior.glb?url'
 import RoomTexture from '~/assets/textures/rooms/room-denial.png?url'
 import { RoomProps } from '~/interfaces/room-props'
 import { InteractableObject } from '~/controls/raycaster-handler'
 import Key from '~/game-objects/key-objects/key'
+import Switch from '~/game-objects/key-objects/switch'
 
 export default class RoomInterior extends GameObject {
   material: MeshBasicNodeMaterial
@@ -19,14 +20,13 @@ export default class RoomInterior extends GameObject {
     this.roomSize = 0.5
 
     props.content.keyObjects.forEach(keyObject => {
-      // Create the 3D object in the scene
-      // TODO replace with a switch to spawn 
-      // the corresponding keyObject of type `keyObject.type`
-      // (instead of new Key)
-      const newKeyObject = new Key(keyObject.type)
-      // TODO compute the hitbox size based on the keyObject Boundingbox
+      const newKeyObject = keyObject.type === 'key' ? new Key(keyObject) : new Switch(keyObject)
+      
+      const newKeyObjectBbox = new Box3().setFromObject(newKeyObject.meshGroup)
+      const size = new Vector3
+      newKeyObjectBbox.getSize(size)
       const newKeyObjectHitbox = new Mesh(
-        new BoxGeometry(0.1, 0.1, 0.1),
+        new BoxGeometry(size.x, size.y, size.z),
         new MeshBasicNodeMaterial({ wireframe: true, color: 0xFF0000 })
       )
       newKeyObjectHitbox.visible = false

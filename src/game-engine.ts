@@ -1,14 +1,12 @@
-import { Scene, PerspectiveCamera, Color, Clock, WebGPURenderer, uniform, Vector2, Raycaster } from 'three/webgpu'
+import { Scene, PerspectiveCamera, Color, Clock, WebGPURenderer, uniform, Vector2 } from 'three/webgpu'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import GameObject from '~/game-objects/game-object'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { GlobalUniforms } from '~/types'
 import Hub from '~/game-objects/hub'
 import CameraControls from '~/controls/camera-controls'
-import Room from '~/game-objects/room'
-import RoomInterior from '~/game-objects/room-interior'
 import { RaycasterHandler } from '~/controls/raycaster-handler'
-import Key from '~/game-objects/key-objects/key'
+import { gameState } from '~/game-state'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -29,6 +27,7 @@ export default class GameEngine {
   cameraControls: CameraControls
   raycasterHandler: RaycasterHandler
   entities: GameObject[]
+  gameState = gameState
 
   // Root Game Objects
   hub: Hub

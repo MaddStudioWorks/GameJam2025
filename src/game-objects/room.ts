@@ -1,4 +1,4 @@
-import { Vector3, Mesh, SphereGeometry, MeshBasicMaterial, BoxGeometry, Box3 } from 'three'
+import { Vector3, Mesh, MeshBasicMaterial, BoxGeometry } from 'three'
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
 import RoomInterior from '~/game-objects/room-interior'

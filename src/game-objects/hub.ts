@@ -6,6 +6,7 @@ import HubFloor from '~/game-objects/hub-floor'
 import GameClock from '~/game-objects/clock'
 import { RoomProps } from '~/interfaces/room-props'
 import { InteractableObject, RaycastableCollection } from '~/controls/raycaster-handler'
+import { roomLayouts } from '~/room-layouts'
 
 export default class Hub extends GameObject {
   rooms: Room[] = []
@@ -24,29 +25,16 @@ export default class Hub extends GameObject {
     this.meshGroup.add(clock.meshGroup)
 
     // Rooms
-    for(let i = 0; i < 12; i++) {
-      const roomProps: RoomProps = {
-        index: i,
-        isLocked: () => false,
-        doorType: 'default',
-        content: {
-          roomType: 'default',
-          keyObjects: [
-            { type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
-          ],
-          props: [],
-          music: 'default'
-        }
-      }
+    roomLayouts.forEach(roomProps => {
       const room = new Room(roomProps)
       // Place each room on the clock
-      const angle = i * -Math.PI*2 / 12
+      const angle = roomProps.index * -Math.PI * 2 / 12
       room.meshGroup.rotateY(angle)
       const projectionVector = new Vector3(0, 0, -1).applyEuler(room.meshGroup.rotation)
       room.meshGroup.position.addScaledVector(projectionVector, radius)
       this.rooms.push(room)
       this.meshGroup.add(room.meshGroup)
-    }
+    })
 
     // Register the collection of clickable RoomDoors
     this.interactableDoors = gameEngine.raycasterHandler.addCollection({

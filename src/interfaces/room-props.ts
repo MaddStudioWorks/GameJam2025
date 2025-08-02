@@ -1,6 +1,7 @@
 import { Euler, Vector3 } from 'three'
 
 export interface KeyObject{
+  id: number
   type: 'key' | 'switch'
   position: Vector3
   rotation: Euler
