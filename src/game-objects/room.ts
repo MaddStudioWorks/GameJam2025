@@ -27,7 +27,7 @@ export default class Room extends GameObject {
     this.props = props
 
     // Calculate the room's angle around the hub
-    const roomAngle = this.props.index * Math.PI * 2 / 12
+    const roomAngle = this.props.index * -Math.PI * 2 / 12
 
     // Camera POIs
     //  - in front of the entrance
