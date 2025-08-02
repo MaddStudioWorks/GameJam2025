@@ -99,6 +99,12 @@ export const manageAll = () => {
   const buttonMusicMenu = document.querySelector("#menu");
   const buttonMusicRoom1 = document.querySelector("#room1");
   const buttonMusicRoom2 = document.querySelector("#room2");
+  const buttonMusicRoom3 = document.querySelector("#room3");
+  const buttonMusicRoom4 = document.querySelector("#room4");
+  const buttonMusicPattern1 = document.querySelector("#pattern1");
+  const buttonMusicPattern2 = document.querySelector("#pattern2");
+  const buttonMusicPattern3 = document.querySelector("#pattern3");
+  const buttonMusicPattern4 = document.querySelector("#pattern4");
 
   if (buttonImage) {
     buttonImage.addEventListener("click", () => {
@@ -152,22 +158,52 @@ export const manageAll = () => {
   }
   if (buttonMusicTheme) {
     buttonMusicTheme.addEventListener("click", () => {
-      soundManager.changeMusicBGM('theme', true)
+      soundManager.playBGM(soundManager.bgm.theme, true)
     });
   }
   if (buttonMusicMenu) {
     buttonMusicMenu.addEventListener("click", () => {
-      soundManager.changeMusicBGM('menu', true)
+      soundManager.playBGM(soundManager.bgm.menu, true)
     });
   }
   if (buttonMusicRoom1) {
     buttonMusicRoom1.addEventListener("click", () => {
-      soundManager.changeMusicBGM('room1', true)
+      soundManager.playBGM(soundManager.bgm.room1, true)
     });
   }
   if (buttonMusicRoom2) {
     buttonMusicRoom2.addEventListener("click", () => {
-      soundManager.changeMusicBGM('room2', true)
+      soundManager.playBGM(soundManager.bgm.room2, true)
+    });
+  }
+  if (buttonMusicRoom3) {
+    buttonMusicRoom3.addEventListener("click", () => {
+      soundManager.playBGM(soundManager.bgm.room3, true)
+    });
+  }
+  if (buttonMusicRoom4) {
+    buttonMusicRoom4.addEventListener("click", () => {
+      soundManager.playBGM(soundManager.bgm.room4, true)
+    });
+  }
+  if (buttonMusicPattern1) {
+    buttonMusicPattern1.addEventListener("click", () => {
+      soundManager.playBGM(soundManager.bgm.pattern1, true)
+    });
+  }
+  if (buttonMusicPattern2) {
+    buttonMusicPattern2.addEventListener("click", () => {
+      soundManager.playBGM(soundManager.bgm.pattern2, true)
+    });
+  }
+  if (buttonMusicPattern3) {
+    buttonMusicPattern3.addEventListener("click", () => {
+      soundManager.playBGM(soundManager.bgm.pattern3, true)
+    });
+  }
+  if (buttonMusicPattern4) {
+    buttonMusicPattern4.addEventListener("click", () => {
+      soundManager.playBGM(soundManager.bgm.pattern4, true)
     });
   }
 
