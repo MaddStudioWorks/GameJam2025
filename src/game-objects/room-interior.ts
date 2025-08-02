@@ -42,8 +42,10 @@ export default class RoomInterior extends GameObject {
         hitbox: newKeyObjectHitbox,
         hovered: false,
         onHover: (keyObject) => {
+          // Todo: hover effect
           console.log(keyObject)
-        }
+        },
+        onClick: (interactableObject, gameEngine) => keyObject.onClick(gameEngine)
       })
     })
 

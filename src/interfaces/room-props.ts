@@ -7,7 +7,7 @@ export interface KeyObject{
   type: 'key' | 'switch'
   position: Vector3
   rotation: Euler
-  onClick: (engine: GameEngine, room: Room) => void
+  onClick: (engine: GameEngine) => void
 }
 
 export interface Prop{

@@ -5,7 +5,7 @@ import Room from '~/game-objects/room'
 import HubFloor from '~/game-objects/hub-floor'
 import GameClock from '~/game-objects/clock'
 import { InteractableObject, RaycastableCollection } from '~/controls/raycaster-handler'
-import { roomLayouts } from '~/room-layouts'
+import { roomLayouts } from '~/room-layouts/room-layouts'
 
 export default class Hub extends GameObject {
   rooms: Room[] = []

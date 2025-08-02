@@ -1,5 +1,6 @@
 import { Euler, Vector3 } from 'three'
 import { RoomProps } from '~/interfaces/room-props'
+import { addKeyToUI, triggerDialog } from '~/ui/index.ui'
 
 /*
   - Les Room Index commence à 0 pour la 12ème heure, puis 1 pour l'heure 1, etc.
@@ -35,6 +36,10 @@ const roomLayouts: RoomProps[] = [
           rotation: new Euler,
           onClick: (gameEngine) => {
             gameEngine.gameState.inventory.key1 = true
+            addKeyToUI(1)
+            setTimeout(() => {
+              triggerDialog('close')
+            }, 3000)
           }
         }
       ],
@@ -56,6 +61,10 @@ const roomLayouts: RoomProps[] = [
           rotation: new Euler,
           onClick: (gameEngine) => {
             gameEngine.gameState.inventory.key2 = true
+            addKeyToUI(2)
+            setTimeout(() => {
+              triggerDialog('close')
+            }, 3000)
           }
         }
       ],
@@ -77,6 +86,10 @@ const roomLayouts: RoomProps[] = [
           rotation: new Euler,
           onClick: (gameEngine) => {
             gameEngine.gameState.inventory.key3 = true
+            addKeyToUI(3)
+            setTimeout(() => {
+              triggerDialog('close')
+            }, 3000)
           }
         }
       ],
@@ -98,6 +111,10 @@ const roomLayouts: RoomProps[] = [
           rotation: new Euler,
           onClick: (gameEngine) => {
             gameEngine.gameState.inventory.switch1 = true
+            triggerDialog('text', 'You have activated a switch. You hear a distant click.')
+            setTimeout(() => {
+              triggerDialog('close')
+            }, 3000)
           }
         }
       ],

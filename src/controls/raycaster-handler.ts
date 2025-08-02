@@ -1,13 +1,14 @@
-import { Raycaster, Vector2, PerspectiveCamera, Object3D } from 'three/webgpu'
+import { Raycaster, Object3D } from 'three/webgpu'
+import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
 
 export interface InteractableObject<T extends GameObject = GameObject> {
   gameObject: T
   hitbox: Object3D
   hovered: boolean
-  onClick?: (interactableObject: InteractableObject<T>) => void
-  onHover?: (interactableObject: InteractableObject<T>) => void
-  onBlur?: (interactableObject: InteractableObject<T>) => void
+  onClick?: (interactableObject: InteractableObject<T>, gameEngine: GameEngine) => void
+  onHover?: (interactableObject: InteractableObject<T>, gameEngine: GameEngine) => void
+  onBlur?: (interactableObject: InteractableObject<T>, gameEngine: GameEngine) => void
 }
 
 export interface RaycastableCollection<T extends GameObject = GameObject> {
@@ -25,14 +26,12 @@ interface InternalRaycastableCollection {
 
 export class RaycasterHandler {
   raycaster: Raycaster
-  cursor: Vector2
-  camera: PerspectiveCamera
   collections: InternalRaycastableCollection[] = []
+  gameEngine: GameEngine
 
-  constructor(cursor: Vector2, camera: PerspectiveCamera) {
+  constructor(gameEngine: GameEngine) {
+    this.gameEngine = gameEngine
     this.raycaster = new Raycaster
-    this.cursor = cursor
-    this.camera = camera
   }
 
   addCollection<T extends GameObject>(collection: RaycastableCollection<T>) {
@@ -41,7 +40,7 @@ export class RaycasterHandler {
   }
 
   handleHover() {
-    this.raycaster.setFromCamera(this.cursor, this.camera)
+    this.raycaster.setFromCamera(this.gameEngine.cursor, this.gameEngine.camera)
 
     this.collections.filter(collection => collection.enabled).forEach(collection => {
       const intersectableObjects = collection.list.map(item => item.hitbox)
@@ -61,13 +60,13 @@ export class RaycasterHandler {
           // This object should be hovered
           if (!item.hovered) {
             item.hovered = true
-            item.onHover?.(item)
+            item.onHover?.(item, this.gameEngine)
           }
         } else {
           // This object should not be hovered
           if (item.hovered) {
             item.hovered = false
-            item.onBlur?.(item)
+            item.onBlur?.(item, this.gameEngine)
           }
         }
       })
@@ -75,7 +74,7 @@ export class RaycasterHandler {
   }
 
   handleClick() {
-    this.raycaster.setFromCamera(this.cursor, this.camera)
+    this.raycaster.setFromCamera(this.gameEngine.cursor, this.gameEngine.camera)
 
     this.collections.filter(collection => collection.enabled).forEach(collection => {
       const intersectableObjects = collection.list.map(item => item.hitbox)
@@ -83,7 +82,7 @@ export class RaycasterHandler {
       if (results.length > 0) {
         const interactableObject = collection.list.find(item => item.hitbox === results[0].object)
         if (interactableObject) {
-          interactableObject.onClick?.(interactableObject)
+          interactableObject.onClick?.(interactableObject, this.gameEngine)
         }
       }
     })
