@@ -147,3 +147,8 @@ canvas {
   color: white;
   cursor: pointer;
 }
+
+.divider {
+  border: 3px saddlebrown solid;
+  margin: 10px 0;
+}

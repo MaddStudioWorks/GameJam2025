@@ -1,3 +1,4 @@
+import SoundManagement from "~/sound-design/index.sound-design";
 type Type = "url" | "text" | "close" | "both";
 
 const keys: string[] = [];
@@ -82,6 +83,8 @@ export const showClue = () => {
 };
 
 export const manageAll = () => {
+  const soundManager = new SoundManagement();
+
   const buttonImage = document.querySelector("#dImage");
   const buttonText = document.querySelector("#dText");
   const buttonTextImage = document.querySelector("#dImageText");
@@ -92,6 +95,10 @@ export const manageAll = () => {
   const buttonEscape = document.querySelector("#escape");
   const buttonEscapeHide = document.querySelector("#escapehide");
   const buttonTriggerEscape = document.querySelector(".escape");
+  const buttonMusicTheme = document.querySelector("#theme");
+  const buttonMusicMenu = document.querySelector("#menu");
+  const buttonMusicRoom1 = document.querySelector("#room1");
+  const buttonMusicRoom2 = document.querySelector("#room2");
 
   if (buttonImage) {
     buttonImage.addEventListener("click", () => {
@@ -141,6 +148,26 @@ export const manageAll = () => {
   if (buttonTriggerEscape) {
     buttonTriggerEscape.addEventListener("click", () => {
       triggerEscape();
+    });
+  }
+  if (buttonMusicTheme) {
+    buttonMusicTheme.addEventListener("click", () => {
+      soundManager.changeMusicBGM('theme', true)
+    });
+  }
+  if (buttonMusicMenu) {
+    buttonMusicMenu.addEventListener("click", () => {
+      soundManager.changeMusicBGM('menu', true)
+    });
+  }
+  if (buttonMusicRoom1) {
+    buttonMusicRoom1.addEventListener("click", () => {
+      soundManager.changeMusicBGM('room1', true)
+    });
+  }
+  if (buttonMusicRoom2) {
+    buttonMusicRoom2.addEventListener("click", () => {
+      soundManager.changeMusicBGM('room2', true)
     });
   }
 
