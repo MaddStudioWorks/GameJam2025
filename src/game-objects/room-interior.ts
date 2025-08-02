@@ -23,7 +23,6 @@ export default class RoomInterior extends GameObject {
       // TODO replace with a switch to spawn 
       // the corresponding keyObject of type `keyObject.type`
       // (instead of new Key)
-      console.log('Creating keyObject of type', keyObject.type)
       const newKeyObject = new Key(keyObject.type)
       // TODO compute the hitbox size based on the keyObject Boundingbox
       const newKeyObjectHitbox = new Mesh(

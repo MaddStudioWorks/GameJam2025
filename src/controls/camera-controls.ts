@@ -89,7 +89,6 @@ export default class CameraControls {
     this.gameEngine.orbitControls.update()
 
     // Disable interactions in the Hub
-    console.log('Disable interactions in the Hub')
     this.gameEngine.hub.interactableDoors!.enabled = false
     // Enable interactions inside the room 
     room.interactableObjects!.enabled = true
