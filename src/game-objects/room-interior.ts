@@ -1,31 +1,49 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { BackSide, Box3, BoxGeometry, color, DoubleSide, Fn, LinearSRGBColorSpace, Mesh, MeshBasicNodeMaterial, mix, PlaneGeometry, positionGeometry, Sprite, SpriteMaterial, SRGBColorSpace, texture, TextureLoader, uv, vec3, Vector3 } from 'three/webgpu'
+import { BackSide, Box3, BoxGeometry, color, DoubleSide, Fn, LinearSRGBColorSpace, Material, Mesh, MeshBasicNodeMaterial, mix, PlaneGeometry, positionGeometry, Sprite, SpriteMaterial, SRGBColorSpace, texture, TextureLoader, uv, vec3, Vector3 } from 'three/webgpu'
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import RoomInteriorModel from '~/assets/meshes/Room_Interior.glb?url'
-import KeyTexture from '~/assets/textures/key.png'
 import RoomTexture from '~/assets/textures/rooms/room-denial.png?url'
+import { RoomProps } from '~/interfaces/room-props'
+import { InteractableObject } from '~/controls/raycaster-handler'
+import Key from '~/game-objects/key-objects/key'
 
 export default class RoomInterior extends GameObject {
   material: MeshBasicNodeMaterial
   roomSize: number
+  interactableObjects: InteractableObject[] = []
 
-  constructor() {
+  constructor(props: RoomProps) {
     super()
 
     this.roomSize = 0.5
 
-    // Key Placeholder
-    const keyTextureMap = new TextureLoader().load(KeyTexture)
-    const keyMaterial = new MeshBasicNodeMaterial({
-      transparent: true,
-      map: keyTextureMap
+    props.content.keyObjects.forEach(keyObject => {
+      // Create the 3D object in the scene
+      // TODO replace with a switch to spawn 
+      // the corresponding keyObject of type `keyObject.type`
+      // (instead of new Key)
+      console.log('Creating keyObject of type', keyObject.type)
+      const newKeyObject = new Key(keyObject.type)
+      // TODO compute the hitbox size based on the keyObject Boundingbox
+      const newKeyObjectHitbox = new Mesh(
+        new BoxGeometry(0.1, 0.1, 0.1),
+        new MeshBasicNodeMaterial({ wireframe: true, color: 0xFF0000 })
+      )
+      newKeyObject.meshGroup.add(newKeyObjectHitbox)
+      newKeyObject.meshGroup.position.copy(keyObject.position)
+      this.meshGroup.add(newKeyObject.meshGroup)
+      
+      // Add a clickable definition to `this.keyObjects`
+      this.interactableObjects.push({
+        gameObject: newKeyObject,
+        hitbox: newKeyObjectHitbox,
+        hovered: false,
+        onHover: (keyObject) => {
+          console.log(keyObject)
+        }
+      })
     })
-    const keySize = 0.1
-    const keyGeometry = new PlaneGeometry(keySize, keySize)
-    const key = new Mesh(keyGeometry, keyMaterial)
-    key.position.set(0, keySize/2, -this.roomSize*0.45)
-    this.meshGroup.add(key)
 
     // Room Interior Material
     const roomTextureMap = new TextureLoader().load(RoomTexture)

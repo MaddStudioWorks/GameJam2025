@@ -51,7 +51,7 @@ export default class GameEngine {
     this.setView()
 
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
-    this.cameraControls = new CameraControls(this.camera, this.orbitControls)
+    this.cameraControls = new CameraControls(this)
     this.raycasterHandler = new RaycasterHandler(this.cursor, this.camera)
     this.registerEventListeners()
 

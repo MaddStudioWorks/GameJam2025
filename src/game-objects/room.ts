@@ -5,9 +5,11 @@ import RoomInterior from '~/game-objects/room-interior'
 import RoomDoor from '~/game-objects/room-door'
 import RoomDoorFrame from '~/game-objects/room-door-frame'
 import { PointOfInterest } from '~/interfaces/point-of-interest'
+import { RoomProps } from '~/interfaces/room-props'
+import { RaycastableCollection } from '~/controls/raycaster-handler'
 
 export default class Room extends GameObject {
-  index: number
+  props: RoomProps
   poi: {
     outside: PointOfInterest
     inside: PointOfInterest
@@ -17,18 +19,21 @@ export default class Room extends GameObject {
   doorRight: RoomDoor
   roomInterior: RoomInterior
   hitbox: Mesh
+  interactableObjects: RaycastableCollection<GameObject> | null = null
 
-  constructor(index: number) {
+  constructor(props: RoomProps) {
     super()
 
-    this.index = index
+    this.props = props
 
     // Calculate the room's angle around the hub
-    const roomAngle = index * Math.PI * 2 / 12
+    const roomAngle = this.props.index * Math.PI * 2 / 12
 
+    // Camera POIs
+    //  - in front of the entrance
+    //  - inside the room
     // Define the azimuth range (90 degrees total, 45 degrees each side)
     const azimuthRange = Math.PI / 4 // 45 degrees each side
-
     this.poi = {
       outside: {
         position: new Vector3(0, 0.25, 0),
@@ -51,8 +56,7 @@ export default class Room extends GameObject {
         }
       }
     }
-
-    // temp: debug spheres for the POIs
+    // Debug spheres for the POIs
     // const outsideSphere = new Mesh(new SphereGeometry(0.025), new MeshBasicMaterial({ color: 0xff0000 }))
     // outsideSphere.position.copy(this.poi.outside.position)
     // this.meshGroup.add(outsideSphere)
@@ -77,12 +81,12 @@ export default class Room extends GameObject {
     this.hitbox.translateY(hitboxHeight/2)
     this.hitbox.visible = false
     this.hitbox.userData = {
-      index: this.index
+      index: this.props.index
     }
     this.meshGroup.add(this.hitbox)
 
     // Room mesh
-    this.roomInterior = new RoomInterior
+    this.roomInterior = new RoomInterior(this.props)
     // Place the room behind the entrance
     this.roomInterior.meshGroup.position.z = -this.roomInterior.roomSize * 0.5
 

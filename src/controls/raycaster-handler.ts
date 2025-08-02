@@ -5,15 +5,15 @@ export interface InteractableObject<T extends GameObject = GameObject> {
   gameObject: T
   hitbox: Object3D
   hovered: boolean
+  onClick?: (interactableObject: InteractableObject<T>) => void
+  onHover?: (interactableObject: InteractableObject<T>) => void
+  onBlur?: (interactableObject: InteractableObject<T>) => void
 }
 
 export interface RaycastableCollection<T extends GameObject = GameObject> {
   id: string
   enabled: boolean
   list: InteractableObject<T>[]
-  onClick: (interactableObject: InteractableObject<T>) => void
-  onHover: (interactableObject: InteractableObject<T>) => void
-  onBlur: (interactableObject: InteractableObject<T>) => void
 }
 
 // Internal type-erased version for storage
@@ -21,17 +21,14 @@ interface InternalRaycastableCollection {
   id: string
   enabled: boolean
   list: InteractableObject<GameObject>[]
-  onClick: (interactableObject: InteractableObject<GameObject>) => void
-  onHover: (interactableObject: InteractableObject<GameObject>) => void
-  onBlur: (interactableObject: InteractableObject<GameObject>) => void
 }
 
-export class RaycasterHandler{
+export class RaycasterHandler {
   raycaster: Raycaster
   cursor: Vector2
   camera: PerspectiveCamera
   collections: InternalRaycastableCollection[] = []
-  
+
   constructor(cursor: Vector2, camera: PerspectiveCamera) {
     this.raycaster = new Raycaster
     this.cursor = cursor
@@ -40,11 +37,12 @@ export class RaycasterHandler{
 
   addCollection<T extends GameObject>(collection: RaycastableCollection<T>) {
     this.collections.push(collection as unknown as InternalRaycastableCollection)
+    return collection
   }
 
   handleHover() {
     this.raycaster.setFromCamera(this.cursor, this.camera)
-    
+
     this.collections.filter(collection => collection.enabled).forEach(collection => {
       const intersectableObjects = collection.list.map(item => item.hitbox)
       const results = this.raycaster.intersectObjects(intersectableObjects)
@@ -56,20 +54,20 @@ export class RaycasterHandler{
         // Find the interactable object that corresponds to the intersected hitbox
         hoveredObject = collection.list.find(item => item.hitbox === results[0].object) || null
       }
-      
+
       // Update hover states for all objects in this collection
       collection.list.forEach(item => {
         if (item === hoveredObject) {
           // This object should be hovered
           if (!item.hovered) {
             item.hovered = true
-            collection.onHover(item)
+            item.onHover?.(item)
           }
         } else {
           // This object should not be hovered
           if (item.hovered) {
             item.hovered = false
-            collection.onBlur(item)
+            item.onBlur?.(item)
           }
         }
       })
@@ -78,13 +76,15 @@ export class RaycasterHandler{
 
   handleClick() {
     this.raycaster.setFromCamera(this.cursor, this.camera)
-    
+
     this.collections.filter(collection => collection.enabled).forEach(collection => {
       const intersectableObjects = collection.list.map(item => item.hitbox)
       const results = this.raycaster.intersectObjects(intersectableObjects)
-      if(results.length > 0){
-        const interactableObject = collection.list[results[0].object.userData.index]
-        collection.onClick(interactableObject)
+      if (results.length > 0) {
+        const interactableObject = collection.list.find(item => item.hitbox === results[0].object)
+        if (interactableObject) {
+          interactableObject.onClick?.(interactableObject)
+        }
       }
     })
   }
