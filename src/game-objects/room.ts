@@ -66,8 +66,8 @@ export default class Room extends GameObject {
 
     // Room Entrance meshes
     this.doorFrame = new RoomDoorFrame
-    this.doorLeft = new RoomDoor('left')
-    this.doorRight = new RoomDoor('right')
+    this.doorLeft = new RoomDoor('left', this.props.doorType)
+    this.doorRight = new RoomDoor('right', this.props.doorType)
     this.meshGroup.add(this.doorFrame.meshGroup)
     this.meshGroup.add(this.doorLeft.meshGroup)
     this.meshGroup.add(this.doorRight.meshGroup)
@@ -89,6 +89,7 @@ export default class Room extends GameObject {
     this.roomInterior = new RoomInterior(this.props)
     // Place the room behind the entrance
     this.roomInterior.meshGroup.position.z = -this.roomInterior.roomSize * 0.5
+    this.roomInterior.meshGroup.translateY(0.001)
 
     this.meshGroup.add(this.roomInterior.meshGroup)
   }

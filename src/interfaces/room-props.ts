@@ -19,9 +19,9 @@ export interface Prop{
 export interface RoomProps{
   index: number
   isLocked: (gameEngine: GameEngine, room: Room) => boolean
-  doorType: 'default' | 'denial' | 'sadness' | 'anger' | 'acceptation'
+  doorType: 'default' | 'denial' | 'sadness' | 'anger' | 'acceptance'
   content: {
-    roomType: 'default' | 'denial' | 'sadness' | 'anger' | 'acceptation'
+    roomType: 'default' | 'denial' | 'sadness' | 'anger' | 'acceptance'
     keyObjects: KeyObject[]
     props: Prop[]
     music: string // replace with typeof musicBGM objects from Acker

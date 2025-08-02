@@ -4,33 +4,29 @@ import {
   CylinderGeometry,
   Mesh,
   MeshBasicNodeMaterial,
-  sin,
-  distance,
-  RingGeometry,
-  uv,
-  vec3,
-  vec2,
-  Fn,
   PlaneGeometry,
   Group,
-  DoubleSide,
+  CircleGeometry,
+  TextureLoader,
+  SRGBColorSpace,
+  Fn,
+  texture,
+  uv,
+  mx_noise_float,
 } from "three/webgpu"
-import ClockFaceTentacles from '~/game-objects/clock-face-tentacles'
+import ClockFaceGoldTexture from '~/assets/textures/clock/face-gold.png'
+import ClockFaceNebulaTexture from '~/assets/textures/clock/face-nebula.jpg'
+import ClockFaceStarsTexture from '~/assets/textures/clock/face-stars.jpg'
+import radialNoise from '~/shaders/util/radial-noise'
 
 export default class GameClock extends GameObject {
-  gearMesh: Mesh
-  smallGearMesh: Mesh
   needleGroup: Group
+  clockFaceStars: Mesh
 
   constructor(hubRadius: number) {
     super()
 
-    /*
-      Needle Structure
-      - Needle Pin
-      - Needle
-      - Golden Gears
-    */
+    const textureLoader = new TextureLoader()
 
     // Needle Pin
     const pinHeight = hubRadius * 0.05
@@ -49,42 +45,69 @@ export default class GameClock extends GameObject {
     needleMesh.translateZ(-needleLength / 2)
     needleMesh.rotation.x = -Math.PI / 2
 
-    // Gears
-    const gearRadius = hubRadius * 0.15
-    const gearGeometry = new RingGeometry(gearRadius * 0.5, gearRadius, 32)
-    const gearMaterial = new MeshBasicNodeMaterial({
-      wireframe: true,
-      color: 0xfcba03,
-    })
-    this.gearMesh = new Mesh(gearGeometry, gearMaterial)
-    this.gearMesh.rotation.x = -Math.PI / 2
-    this.gearMesh.position.y = pinHeight * 1.5
-
-    const smallGearRadius = gearRadius * 0.75
-    const smallGearGeometry = new RingGeometry(smallGearRadius * 0.5, smallGearRadius, 32)
-    this.smallGearMesh = new Mesh(smallGearGeometry, gearMaterial)
-    this.smallGearMesh.rotation.x = -Math.PI / 2
-    this.smallGearMesh.position.y = pinHeight * 2
-
     // Needle Structure
     this.needleGroup = new Group()
     this.needleGroup.add(needleMesh, pinMesh)
 
-    // ClockFaceTentacles
-    const tentacles = new ClockFaceTentacles(hubRadius, pinRadius)
-    this.meshGroup.add(tentacles.meshGroup)
-    
+    // Clock Face Layers
+    const clockFaceNebulaTextureMap = textureLoader.load(ClockFaceNebulaTexture)
+    clockFaceNebulaTextureMap.anisotropy = 16
+    clockFaceNebulaTextureMap.colorSpace = SRGBColorSpace
+    const clockFaceNebulaGeometry = new CircleGeometry(hubRadius * 0.90, 32)
+    clockFaceNebulaGeometry.rotateX(-Math.PI / 2)
+    const nebulaMaterial = new MeshBasicNodeMaterial
+    nebulaMaterial.colorNode = Fn(() => {
+      const displacement = radialNoise(uv())
+      const displacedUVs = uv().add(displacement.mul(0.09))
+      const texel = texture(clockFaceNebulaTextureMap, displacedUVs)
+      return texel
+    })()
+
+    const clockFaceNebula = new Mesh(
+      clockFaceNebulaGeometry,
+      nebulaMaterial
+    )
+    clockFaceNebula.position.y = 0.001
+
+    const clockFaceStarsTextureMap = textureLoader.load(ClockFaceStarsTexture)
+    clockFaceStarsTextureMap.anisotropy = 16
+    clockFaceStarsTextureMap.colorSpace = SRGBColorSpace
+    const clockFaceStarsGeometry = new CircleGeometry(hubRadius * 0.85, 32)
+    clockFaceStarsGeometry.rotateX(-Math.PI / 2)
+    this.clockFaceStars = new Mesh(
+      clockFaceStarsGeometry,
+      new MeshBasicNodeMaterial({
+        map: clockFaceStarsTextureMap
+      })
+    )
+    this.clockFaceStars.scale.setScalar(0.45)
+    this.clockFaceStars.position.z = 0.39
+    this.clockFaceStars.position.y = 0.002
+
+    const clockFaceGoldTextureMap = textureLoader.load(ClockFaceGoldTexture)
+    clockFaceGoldTextureMap.anisotropy = 16
+    clockFaceGoldTextureMap.colorSpace = SRGBColorSpace
+    const clockFaceGoldGeometry = new CircleGeometry(hubRadius * 0.95, 32)
+    clockFaceGoldGeometry.rotateX(-Math.PI / 2)
+    const clockFaceGold = new Mesh(
+      clockFaceGoldGeometry,
+      new MeshBasicNodeMaterial({
+        map: clockFaceGoldTextureMap,
+        transparent: true
+      })
+    )
+    clockFaceGold.position.y = 0.003
+
     this.meshGroup.add(
-      this.gearMesh,
-      this.smallGearMesh,
       this.needleGroup,
-      tentacles.meshGroup
+      clockFaceNebula,
+      this.clockFaceStars,
+      clockFaceGold,
     )
   }
 
   tick(engine: GameEngine) {
-    this.gearMesh.rotateZ(0.0025)
-    this.smallGearMesh.rotateZ(-0.001)
     this.needleGroup.rotateY(-0.0002)
+    this.clockFaceStars.rotateY(0.000125)
   }
 }

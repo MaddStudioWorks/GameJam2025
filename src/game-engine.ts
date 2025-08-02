@@ -43,7 +43,7 @@ export default class GameEngine {
     this.scene
     this.scene.background = new Color(0x00404f)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(0, 0.5, 1)
+    this.camera.position.set(0, 1.5, 1)
     this.entities = []
 
     this.renderer = new WebGPURenderer

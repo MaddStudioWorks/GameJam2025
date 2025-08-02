@@ -65,10 +65,10 @@ export default class Hub extends GameObject {
           }
         },
         onHover: (interactableObject: InteractableObject<Room>) => {
-          interactableObject.gameObject.hitbox.visible = interactableObject.hovered
+          // interactableObject.gameObject.hitbox.visible = interactableObject.hovered
         },
         onBlur: (interactableObject: InteractableObject<Room>) => {
-          interactableObject.gameObject.hitbox.visible = interactableObject.hovered
+          // interactableObject.gameObject.hitbox.visible = interactableObject.hovered
         },
       }))
     })

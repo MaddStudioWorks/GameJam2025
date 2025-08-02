@@ -14,7 +14,7 @@ const roomLayouts: RoomProps[] = [
   {
     index: 0,
     isLocked: (gameEngine, room) => false,
-    doorType: 'default',
+    doorType: 'acceptance',
     content: {
       roomType: 'default',
       keyObjects: [],
@@ -75,9 +75,9 @@ const roomLayouts: RoomProps[] = [
   {
     index: 3,
     isLocked: (gameEngine, room) => false,
-    doorType: 'default',
+    doorType: 'denial',
     content: {
-      roomType: 'default',
+      roomType: 'denial',
       keyObjects: [
         {
           id: 3,
@@ -138,9 +138,9 @@ const roomLayouts: RoomProps[] = [
   {
     index: 6,
     isLocked: (gameEngine, room) => gameEngine.gameState.time > 1/12,
-    doorType: 'default',
+    doorType: 'anger',
     content: {
-      roomType: 'default',
+      roomType: 'anger',
       keyObjects: [],
       props: [],
       music: 'default'
@@ -171,9 +171,9 @@ const roomLayouts: RoomProps[] = [
   {
     index: 9,
     isLocked: (gameEngine, room) => false,
-    doorType: 'default',
+    doorType: 'sadness',
     content: {
-      roomType: 'default',
+      roomType: 'sadness',
       keyObjects: [],
       props: [],
       music: 'default'
