@@ -6,6 +6,7 @@ import HubFloor from '~/game-objects/hub-floor'
 import GameClock from '~/game-objects/clock'
 import { InteractableObject, RaycastableCollection } from '~/controls/raycaster-handler'
 import { roomLayouts } from '~/room-layouts/room-layouts'
+import { triggerDialog } from '~/ui/index.ui'
 
 export default class Hub extends GameObject {
   rooms: Room[] = []
@@ -45,12 +46,19 @@ export default class Hub extends GameObject {
         hovered: false,
         onClick: (interactableObject: InteractableObject<Room>) => {
           if (gameEngine.activeMode === 'doorstep') {
-            interactableObject.gameObject.doorLeft.meshGroup.visible = false
-            interactableObject.gameObject.doorRight.meshGroup.visible = false
-            setTimeout(() => {
-              gameEngine.cameraControls.enterRoomInspectionMode(interactableObject.gameObject)
-              gameEngine.activeMode = 'roomInspection'
-            }, 500);
+            if(room.props.isLocked(gameEngine, room)){
+              triggerDialog('text', 'The door is locked.')
+              setTimeout(() => {
+                triggerDialog('close')
+              }, 3000)
+            }else{
+              interactableObject.gameObject.doorLeft.meshGroup.visible = false
+              interactableObject.gameObject.doorRight.meshGroup.visible = false
+              setTimeout(() => {
+                gameEngine.cameraControls.enterRoomInspectionMode(interactableObject.gameObject)
+                gameEngine.activeMode = 'roomInspection'
+              }, 500)
+            }
           } else {
             gameEngine.cameraControls.enterDoorstepMode(interactableObject.gameObject)
             gameEngine.activeMode = 'doorstep'
