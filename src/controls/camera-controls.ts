@@ -5,10 +5,18 @@ import Room from '~/game-objects/room'
 export default class CameraControls {
   camera: PerspectiveCamera
   orbitControls: OrbitControls
+  orbitingStart = 0
+  isOrbiting = false
 
   constructor(camera: PerspectiveCamera, orbitControls: OrbitControls) {
     this.camera = camera
     this.orbitControls = orbitControls
+  }
+
+  wasOrbiting() {
+    const orbitDuration = Date.now() - this.orbitingStart
+    const wasOrbiting = orbitDuration > 300
+    return wasOrbiting
   }
 
   /** Camera Constraints in Hub mode */

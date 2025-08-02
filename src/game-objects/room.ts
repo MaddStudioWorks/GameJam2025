@@ -75,6 +75,7 @@ export default class Room extends GameObject {
       new MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.5 })
     )
     this.hitbox.translateY(hitboxHeight/2)
+    this.hitbox.visible = false
     this.hitbox.userData = {
       index: this.index
     }

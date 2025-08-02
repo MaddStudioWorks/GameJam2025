@@ -47,7 +47,6 @@ export default class RoomInterior extends GameObject {
       object.traverse((child) => {
         if (child.type === "Mesh") {
           const mesh = (child as Mesh)
-          console.log(mesh.userData.name)
           mesh.material = this.material
         }
       })
