@@ -107,7 +107,7 @@ export default class GameClock extends GameObject {
   }
 
   tick(engine: GameEngine) {
-    this.needleGroup.rotateY(-0.0002)
+    this.needleGroup.rotation.y = -Math.PI * 2 * engine.gameState.time
     this.clockFaceStars.rotateY(0.000125)
   }
 }

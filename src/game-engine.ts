@@ -5,8 +5,9 @@ import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { GlobalUniforms } from '~/types'
 import Hub from '~/game-objects/hub'
 import CameraControls from '~/controls/camera-controls'
-import { RaycasterHandler } from '~/controls/raycaster-handler'
-import { gameState } from '~/game-state'
+import RaycasterHandler from '~/controls/raycaster-handler'
+import gameState from '~/game-state'
+import ClockHandler from '~/controls/clock-handler'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -26,6 +27,7 @@ export default class GameEngine {
   orbitControls: OrbitControls
   cameraControls: CameraControls
   raycasterHandler: RaycasterHandler
+  musicHandler = new ClockHandler(this)
   entities: GameObject[]
   gameState = gameState
 
@@ -40,7 +42,6 @@ export default class GameEngine {
 
   constructor() {
     this.uniforms.time.onFrameUpdate(() => this.clock.getElapsedTime())
-    this.scene
     this.scene.background = new Color(0x00404f)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
     this.camera.position.set(0, 1.5, 1)
@@ -130,11 +131,16 @@ export default class GameEngine {
   }
 
   tick() {
+    // Time updates
+    this.deltaTime = this.clock.getDelta()
+    const timeProgress = this.clock.getElapsedTime() / this.gameState.endOfTime
+    this.gameState.time = timeProgress > 1 ? 1 : timeProgress
+
+    // Game state updates
+    this.musicHandler.tick()
     if(!this.cameraControls.isOrbiting){
       this.raycasterHandler.handleHover()
     }
-
-    this.deltaTime = this.clock.getDelta()
     this.entities.forEach(entry => entry.tick(this))
     this.orbitControls.update()
     this.renderer.render(this.scene, this.camera)

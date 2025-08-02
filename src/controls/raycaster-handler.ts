@@ -24,7 +24,7 @@ interface InternalRaycastableCollection {
   list: InteractableObject<GameObject>[]
 }
 
-export class RaycasterHandler {
+export default class RaycasterHandler {
   raycaster: Raycaster
   collections: InternalRaycastableCollection[] = []
   gameEngine: GameEngine

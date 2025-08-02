@@ -1,5 +1,6 @@
 const gameState = {
   time: 0,
+  endOfTime: 12,
   inventory: {
     key1: false,
     key2: false,
@@ -8,6 +9,4 @@ const gameState = {
   }
 }
 
-export {
-  gameState
-}
+export default gameState
