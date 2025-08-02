@@ -20,39 +20,41 @@ export const toggleEscape = (type: string) => {
 
 export const triggerDialog = (type: Type, text?: string, url?: string) => {
   const dialog = document.querySelector(".dialog");
+  const dialogContent = document.querySelector(".dialogContent");
+
   if (type === "close") {
-    if (dialog) {
+    if (dialog && dialogContent) {
       dialog.classList.remove("dialog-displayed");
-      dialog.innerHTML = "";
+      dialogContent.innerHTML = "";
     }
   }
   if (type === "url") {
-    if (dialog && text) {
-      dialog.innerHTML = "";
+    if (dialog && text && dialogContent) {
+      dialogContent.innerHTML = "";
       dialog.classList.add("dialog-displayed");
       const image = document.createElement("img");
       image.src = text;
-      dialog.appendChild(image);
+      dialogContent.appendChild(image);
     }
   }
   if (type === "text") {
-    if (dialog && text) {
-      dialog.innerHTML = "";
+    if (dialog && text && dialogContent) {
+      dialogContent.innerHTML = "";
       dialog.classList.add("dialog-displayed");
-      dialog.innerHTML = text;
+      dialogContent.innerHTML = text;
     }
   }
   if (type === "both") {
-    if (dialog && text && url) {
-      dialog.innerHTML = "";
+    if (dialog && text && url && dialogContent) {
+      dialogContent.innerHTML = "";
       dialog.classList.add("dialog-displayed");
       const image = document.createElement("img");
       image.src = url;
-      dialog.appendChild(image);
+      dialogContent.appendChild(image);
       console.log(url);
       const paragraph = document.createElement("div");
       paragraph.innerHTML = text;
-      dialog.appendChild(paragraph);
+      dialogContent.appendChild(paragraph);
     }
   }
 };
@@ -89,6 +91,7 @@ export const manageAll = () => {
   const buttonText = document.querySelector("#dText");
   const buttonTextImage = document.querySelector("#dImageText");
   const buttonClose = document.querySelector("#dClose");
+  const buttonCloseDialog = document.querySelector(".dialog-close");
   const buttonKeyOne = document.querySelector("#Key1");
   const buttonKeyTwo = document.querySelector("#Key2");
   const buttonKeyThree = document.querySelector("#Key3");
@@ -102,9 +105,9 @@ export const manageAll = () => {
   const buttonMusicRoom3 = document.querySelector("#room3");
   const buttonMusicRoom4 = document.querySelector("#room4");
   const buttonMusicPattern1 = document.querySelector("#pattern1");
-  const buttonMusicPattern2 = document.querySelector("#pattern2");
-  const buttonMusicPattern3 = document.querySelector("#pattern3");
-  const buttonMusicPattern4 = document.querySelector("#pattern4");
+  const buttonMuteHub = document.querySelector("#mutehub");
+  const buttonUnmuteHub = document.querySelector("#unmutehub");
+  const buttonMuteBGM = document.querySelector("#mutebgm");
 
   if (buttonImage) {
     buttonImage.addEventListener("click", () => {
@@ -113,6 +116,11 @@ export const manageAll = () => {
   }
   if (buttonClose) {
     buttonClose.addEventListener("click", () => {
+      triggerDialog("close");
+    });
+  }
+  if (buttonCloseDialog) {
+    buttonCloseDialog.addEventListener("click", () => {
       triggerDialog("close");
     });
   }
@@ -188,22 +196,22 @@ export const manageAll = () => {
   }
   if (buttonMusicPattern1) {
     buttonMusicPattern1.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.pattern1, true)
+      soundManager.instanciateAllPatterns()
     });
   }
-  if (buttonMusicPattern2) {
-    buttonMusicPattern2.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.pattern2, true)
+  if (buttonMuteHub) {
+    buttonMuteHub.addEventListener("click", () => {
+      soundManager.fadeOutHubMusic()
     });
   }
-  if (buttonMusicPattern3) {
-    buttonMusicPattern3.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.pattern3, true)
+  if (buttonUnmuteHub) {
+    buttonUnmuteHub.addEventListener("click", () => {
+      soundManager.fadeInHubMusic()
     });
   }
-  if (buttonMusicPattern4) {
-    buttonMusicPattern4.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.pattern4, true)
+  if (buttonMuteBGM) {
+    buttonMuteBGM.addEventListener("click", () => {
+      soundManager.fadeOutBGMMusic()
     });
   }
 
