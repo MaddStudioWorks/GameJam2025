@@ -1,10 +1,9 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { Euler, Vector3 } from 'three/webgpu'
+import { Vector3 } from 'three/webgpu'
 import Room from '~/game-objects/room'
 import HubFloor from '~/game-objects/hub-floor'
 import GameClock from '~/game-objects/clock'
-import { RoomProps } from '~/interfaces/room-props'
 import { InteractableObject, RaycastableCollection } from '~/controls/raycaster-handler'
 import { roomLayouts } from '~/room-layouts'
 

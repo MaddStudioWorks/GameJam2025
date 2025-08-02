@@ -3,7 +3,8 @@ const gameState = {
   inventory: {
     key1: false,
     key2: false,
-    key3: false
+    key3: false,
+    switch1: false,
   }
 }
 

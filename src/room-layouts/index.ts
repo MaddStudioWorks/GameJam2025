@@ -2,9 +2,11 @@ import { Euler, Vector3 } from 'three'
 import { RoomProps } from '~/interfaces/room-props'
 
 /*
-  - Les Room Index sont 0-indexed (soit de 0 à 11)
-  - Les keyObjects peuvent avoir le chiffre que tu veux 
-    et peuvent être de type 'key' ou 'switch'
+  - Les Room Index commence à 0 pour la 12ème heure, puis 1 pour l'heure 1, etc.
+  - Les keyObjects peuvent être 
+    - de type 'key' ou 'switch'
+    - un id de 1-3
+    - tu dois décrire ce que ça fait dans le onClick (voir les exemples pour les clés)
 */
 
 const roomLayouts: RoomProps[] = [
@@ -14,9 +16,7 @@ const roomLayouts: RoomProps[] = [
     doorType: 'default',
     content: {
       roomType: 'default',
-      keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
-      ],
+      keyObjects: [],
       props: [],
       music: 'default'
     }
@@ -28,7 +28,15 @@ const roomLayouts: RoomProps[] = [
     content: {
       roomType: 'default',
       keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
+        {
+          id: 1,
+          type: "key",
+          position: new Vector3(0, 0, -0.4),
+          rotation: new Euler,
+          onClick: (gameEngine) => {
+            gameEngine.gameState.inventory.key1 = true
+          }
+        }
       ],
       props: [],
       music: 'default'
@@ -41,7 +49,15 @@ const roomLayouts: RoomProps[] = [
     content: {
       roomType: 'default',
       keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
+        {
+          id: 2,
+          type: "key",
+          position: new Vector3(0, 0, -0.4),
+          rotation: new Euler,
+          onClick: (gameEngine) => {
+            gameEngine.gameState.inventory.key2 = true
+          }
+        }
       ],
       props: [],
       music: 'default'
@@ -54,7 +70,15 @@ const roomLayouts: RoomProps[] = [
     content: {
       roomType: 'default',
       keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
+        {
+          id: 3,
+          type: "key",
+          position: new Vector3(0, 0, -0.4),
+          rotation: new Euler,
+          onClick: (gameEngine) => {
+            gameEngine.gameState.inventory.key3 = true
+          }
+        }
       ],
       props: [],
       music: 'default'
@@ -67,7 +91,15 @@ const roomLayouts: RoomProps[] = [
     content: {
       roomType: 'default',
       keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
+        {
+          id: 1,
+          type: "switch",
+          position: new Vector3(0, 0, -0.4),
+          rotation: new Euler,
+          onClick: (gameEngine) => {
+            gameEngine.gameState.inventory.switch1 = true
+          }
+        }
       ],
       props: [],
       music: 'default'
@@ -75,26 +107,24 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 5,
-    isLocked: (gameEngine, room) => false,
+    isLocked: (gameEngine, room) => {
+      return !gameEngine.gameState.inventory.switch1
+    },
     doorType: 'default',
     content: {
       roomType: 'default',
-      keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
-      ],
+      keyObjects: [],
       props: [],
       music: 'default'
     }
   },
   {
     index: 6,
-    isLocked: (gameEngine, room) => false,
+    isLocked: (gameEngine, room) => gameEngine.gameState.time > 1/12,
     doorType: 'default',
     content: {
       roomType: 'default',
-      keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
-      ],
+      keyObjects: [],
       props: [],
       music: 'default'
     }
@@ -105,9 +135,7 @@ const roomLayouts: RoomProps[] = [
     doorType: 'default',
     content: {
       roomType: 'default',
-      keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
-      ],
+      keyObjects: [],
       props: [],
       music: 'default'
     }
@@ -118,9 +146,7 @@ const roomLayouts: RoomProps[] = [
     doorType: 'default',
     content: {
       roomType: 'default',
-      keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
-      ],
+      keyObjects: [],
       props: [],
       music: 'default'
     }
@@ -131,9 +157,7 @@ const roomLayouts: RoomProps[] = [
     doorType: 'default',
     content: {
       roomType: 'default',
-      keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
-      ],
+      keyObjects: [],
       props: [],
       music: 'default'
     }
@@ -144,9 +168,7 @@ const roomLayouts: RoomProps[] = [
     doorType: 'default',
     content: {
       roomType: 'default',
-      keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
-      ],
+      keyObjects: [],
       props: [],
       music: 'default'
     }
@@ -157,9 +179,7 @@ const roomLayouts: RoomProps[] = [
     doorType: 'default',
     content: {
       roomType: 'default',
-      keyObjects: [
-        { id: 1, type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
-      ],
+      keyObjects: [],
       props: [],
       music: 'default'
     }
