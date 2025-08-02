@@ -1,6 +1,6 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { BackSide, Box3, BoxGeometry, color, DoubleSide, Fn, LinearSRGBColorSpace, Material, Mesh, MeshBasicNodeMaterial, mix, PlaneGeometry, positionGeometry, Sprite, SpriteMaterial, SRGBColorSpace, texture, TextureLoader, uv, vec3, Vector3 } from 'three/webgpu'
+import { BoxGeometry, color, Fn, Mesh, MeshBasicNodeMaterial, mix, SRGBColorSpace, texture, TextureLoader, uv } from 'three/webgpu'
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import RoomInteriorModel from '~/assets/meshes/Room_Interior.glb?url'
 import RoomTexture from '~/assets/textures/rooms/room-denial.png?url'
@@ -29,8 +29,11 @@ export default class RoomInterior extends GameObject {
         new BoxGeometry(0.1, 0.1, 0.1),
         new MeshBasicNodeMaterial({ wireframe: true, color: 0xFF0000 })
       )
+      newKeyObjectHitbox.visible = false
       newKeyObject.meshGroup.add(newKeyObjectHitbox)
-      newKeyObject.meshGroup.position.copy(keyObject.position)
+      const normalizedPosition = keyObject.position.multiplyScalar(this.roomSize)
+      newKeyObject.meshGroup.position.copy(normalizedPosition)
+      newKeyObject.meshGroup.translateY(0.05)
       this.meshGroup.add(newKeyObject.meshGroup)
       
       // Add a clickable definition to `this.keyObjects`

@@ -8,6 +8,7 @@ import CameraControls from '~/controls/camera-controls'
 import Room from '~/game-objects/room'
 import RoomInterior from '~/game-objects/room-interior'
 import { RaycasterHandler } from '~/controls/raycaster-handler'
+import Key from '~/game-objects/key-objects/key'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)

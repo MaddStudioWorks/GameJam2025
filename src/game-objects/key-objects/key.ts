@@ -1,6 +1,6 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { Mesh, MeshBasicNodeMaterial, PlaneGeometry, TextureLoader } from 'three/webgpu'
+import { Mesh, MeshBasicNodeMaterial, PlaneGeometry, SRGBColorSpace, TextureLoader } from 'three/webgpu'
 import KeyTexture from '~/assets/textures/key.png'
 import { KeyObject } from '~/interfaces/room-props'
 
@@ -10,6 +10,8 @@ export default class Key extends GameObject {
 
     // Key Placeholder
     const keyTextureMap = new TextureLoader().load(KeyTexture)
+    keyTextureMap.anisotropy = 16
+    keyTextureMap.colorSpace = SRGBColorSpace
     const keyMaterial = new MeshBasicNodeMaterial({
       transparent: true,
       map: keyTextureMap
@@ -18,6 +20,8 @@ export default class Key extends GameObject {
     const keyGeometry = new PlaneGeometry(keySize, keySize)
     const key = new Mesh(keyGeometry, keyMaterial)
     key.name = type
+
+    this.meshGroup.add(key)
   }
 
   tick(engine: GameEngine) {

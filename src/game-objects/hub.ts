@@ -32,7 +32,7 @@ export default class Hub extends GameObject {
         content: {
           roomType: 'default',
           keyObjects: [
-            { type: "key", position: new Vector3(0, 0.05, 0), rotation: new Euler }
+            { type: "key", position: new Vector3(0, 0, -0.4), rotation: new Euler }
           ],
           props: [],
           music: 'default'
