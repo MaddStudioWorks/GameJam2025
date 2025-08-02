@@ -27,7 +27,7 @@ export default class GameEngine {
   orbitControls: OrbitControls
   cameraControls: CameraControls
   raycasterHandler: RaycasterHandler
-  musicHandler = new ClockHandler(this)
+  clockHandler = new ClockHandler(this)
   entities: GameObject[]
   gameState = gameState
 
@@ -137,7 +137,7 @@ export default class GameEngine {
     this.gameState.time = timeProgress > 1 ? 1 : timeProgress
 
     // Game state updates
-    this.musicHandler.tick()
+    this.clockHandler.tick()
     if(!this.cameraControls.isOrbiting){
       this.raycasterHandler.handleHover()
     }
