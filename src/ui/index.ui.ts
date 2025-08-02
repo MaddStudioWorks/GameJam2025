@@ -83,6 +83,11 @@ export const showClue = () => {
 };
 
 export const manageAll = () => {
+  // Hide debug mode unless `#debug` is present in the URL
+  if (window.location.hash !== "#debug"){
+    (document.querySelector(".debug-ui") as HTMLDivElement).style.display = "none"
+  }
+
   const soundManager = new SoundManagement();
 
   const buttonImage = document.querySelector("#dImage");
