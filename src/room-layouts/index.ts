@@ -10,7 +10,7 @@ import { RoomProps } from '~/interfaces/room-props'
 const roomLayouts: RoomProps[] = [
   {
     index: 0,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -23,7 +23,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 1,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -36,7 +36,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 2,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -49,7 +49,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 3,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -62,7 +62,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 4,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -75,7 +75,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 5,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -88,7 +88,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 6,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -101,7 +101,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 7,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -114,7 +114,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 8,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -127,7 +127,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 9,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -140,7 +140,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 10,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',
@@ -153,7 +153,7 @@ const roomLayouts: RoomProps[] = [
   },
   {
     index: 11,
-    isLocked: () => false,
+    isLocked: (gameEngine, room) => false,
     doorType: 'default',
     content: {
       roomType: 'default',

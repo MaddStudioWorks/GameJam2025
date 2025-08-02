@@ -1,4 +1,6 @@
 import { Euler, Vector3 } from 'three'
+import GameEngine from '~/game-engine'
+import Room from '~/game-objects/room'
 
 export interface KeyObject{
   id: number
@@ -15,7 +17,7 @@ export interface Prop{
 
 export interface RoomProps{
   index: number
-  isLocked: () => boolean
+  isLocked: (gameEngine: GameEngine, room: Room) => boolean
   doorType: 'default' | 'denial' | 'sadness' | 'anger' | 'acceptation'
   content: {
     roomType: 'default' | 'denial' | 'sadness' | 'anger' | 'acceptation'
