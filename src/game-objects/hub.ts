@@ -38,25 +38,27 @@ export default class Hub extends GameObject {
       enabled: true,
       list: this.rooms.map((room) => ({
         gameObject: room,
-        hitbox: room.hitbox
+        hitbox: room.hitbox,
+        hovered: false
       })),
       onClick: (room) => {
         if (gameEngine.activeMode === 'doorstep') {
-          room.doorLeft.meshGroup.visible = false
-          room.doorRight.meshGroup.visible = false
+          room.gameObject.doorLeft.meshGroup.visible = false
+          room.gameObject.doorRight.meshGroup.visible = false
           setTimeout(() => {
-            gameEngine.cameraControls.enterRoomInspectionMode(room)
+            gameEngine.cameraControls.enterRoomInspectionMode(room.gameObject)
             gameEngine.activeMode = 'roomInspection'
           }, 500);
         } else {
-          gameEngine.cameraControls.enterDoorstepMode(room)
+          gameEngine.cameraControls.enterDoorstepMode(room.gameObject)
           gameEngine.activeMode = 'doorstep'
         }
       },
-      onHover: (hoveredRoom) => {
-        this.rooms.forEach((room) => {
-          room.hitbox.visible = hoveredRoom === room
-        })
+      onHover: (interactableObject) => {
+        interactableObject.gameObject.hitbox.visible = interactableObject.hovered
+      },
+      onBlur: (interactableObject) => {
+        interactableObject.gameObject.hitbox.visible = interactableObject.hovered
       },
     })
   }
