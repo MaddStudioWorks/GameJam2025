@@ -6,6 +6,8 @@ import { GlobalUniforms } from '~/types'
 import Hub from '~/game-objects/hub'
 import CameraControls from '~/controls/camera-controls'
 import Room from '~/game-objects/room'
+import RoomInterior from '~/game-objects/room-interior'
+import { RaycasterHandler } from '~/controls/raycaster-handler'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -19,11 +21,12 @@ export default class GameEngine {
   cursor: Vector2 = new Vector2(0, 0)
 
   // Engine components
+  renderer: WebGPURenderer
   scene = new Scene
   camera: PerspectiveCamera
-  cameraControls: CameraControls
-  renderer: WebGPURenderer
   orbitControls: OrbitControls
+  cameraControls: CameraControls
+  raycasterHandler: RaycasterHandler
   entities: GameObject[]
 
   // Root Game Objects
@@ -33,7 +36,7 @@ export default class GameEngine {
   stats: Stats
 
   // Temp
-  raycaster = new Raycaster
+  activeMode: 'hub' | 'doorstep' | 'roomInspection' = 'hub'
 
   constructor() {
     this.uniforms.time.onFrameUpdate(() => this.clock.getElapsedTime())
@@ -48,13 +51,18 @@ export default class GameEngine {
     this.setView()
 
     this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
-    this.cameraControls = new CameraControls(this.camera, this.orbitControls)
+    this.cameraControls = new CameraControls(this)
+    this.raycasterHandler = new RaycasterHandler(this.cursor, this.camera)
     this.registerEventListeners()
 
     // Initialize world
     // The Hub spawns everything else as children
-    this.hub = new Hub
+    this.hub = new Hub(this)
     this.addEntity(this.hub)
+    
+    // this.camera.position.set(0, 0.25, 1)
+    // this.orbitControls.target.set(0, 0.25, 0)
+    // this.addEntity(new RoomInterior)
 
     // On game start, trigger enterHubMode
     // this.cameraControls.enterHubMode()
@@ -63,16 +71,6 @@ export default class GameEngine {
     document.body.appendChild(this.stats.dom)
 
     this.renderer.setAnimationLoop(() => { this.tick() })
-  }
-
-  getHoveredRoom(){
-    this.raycaster.setFromCamera(this.cursor, this.camera)
-    const results = this.raycaster.intersectObjects(this.hub.rooms.map(room => room.hitbox), false)
-    return results.length > 0 ? this.hub.rooms[results[0].object.userData.index] : null
-  }
-
-  highlightRoom(room: Room){
-    room.hitbox.visible = true
   }
 
   addEntity(entity: GameObject) {
@@ -89,9 +87,20 @@ export default class GameEngine {
   registerEventListeners() {
     window.addEventListener('resize', () => { this.setView() })
     window.addEventListener('pointermove', (event) => { this.onPointerMove(event) })
-    window.addEventListener('click', (event) => { this.onClick(event) })
+    window.addEventListener('pointerup', (event) => { this.onPointerUp(event) })
     window.addEventListener('keydown', (event) => { this.onKeyDown(event) })
     window.addEventListener('keyup', (event) => { this.onKeyUp(event) })
+    this.orbitControls.addEventListener('start', () => this.onOrbitStart())
+    this.orbitControls.addEventListener('end', () => this.onOrbitEnd())
+  }
+
+  onOrbitStart() {
+    this.cameraControls.orbitingStart = Date.now()
+    this.cameraControls.isOrbiting = true
+  }
+
+  onOrbitEnd() {
+    this.cameraControls.isOrbiting = false
   }
 
   onPointerMove(event: PointerEvent) {
@@ -99,13 +108,21 @@ export default class GameEngine {
     this.cursor.y = -(event.clientY / window.innerHeight) * 2 + 1
   }
 
-  onClick(event: MouseEvent) {
-    const room = this.getHoveredRoom()
-    if(room) this.cameraControls.enterDoorstepMode(room)
+  onPointerUp(event: MouseEvent) {
+    if (!this.cameraControls.wasOrbiting()){
+      this.raycasterHandler.handleClick()
+    }
   }
 
   onKeyUp(event: KeyboardEvent) {
-    if(event.key === 'Escape') this.cameraControls.enterHubMode()
+    if(event.key === 'Escape'){
+      this.hub.rooms.forEach(room => {
+        room.doorLeft.meshGroup.visible = true
+        room.doorRight.meshGroup.visible = true
+      })
+      this.cameraControls.enterHubMode()
+      this.activeMode = 'hub'
+    }
   }
 
   onKeyDown(event: KeyboardEvent) {
@@ -113,11 +130,9 @@ export default class GameEngine {
   }
 
   tick() {
-    // Move to Room or Hub class
-    const hoveredRoom = this.getHoveredRoom()
-    this.hub.rooms.forEach(room => {
-      room.hitbox.visible = room.index === hoveredRoom?.index
-    })
+    if(!this.cameraControls.isOrbiting){
+      this.raycasterHandler.handleHover()
+    }
 
     this.deltaTime = this.clock.getDelta()
     this.entities.forEach(entry => entry.tick(this))

@@ -15,7 +15,7 @@ export default class RoomDoorFrame extends GameObject {
     const loader = new GLTFLoader()
     loader.load(DoorModel, (gltf) => {
       const object = gltf.scene
-      object.rotateY(Math.PI/2)
+      object.rotateY(-Math.PI/2)
       
       object.traverse((child) => {
         if (child.type === "Mesh") {
