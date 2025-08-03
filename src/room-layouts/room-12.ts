@@ -3,7 +3,7 @@ import GameEngine from '~/game-engine'
 import { RoomProps } from '~/interfaces/room-props'
 import { bgm } from '~/sound-design/index.sound-design'
 import { addKeyToUI, triggerDialog } from '~/ui/index.ui'
-import final4 from '~/assets/textures/final/final4.png'
+import final4 from '~/assets/textures/final/final4.jpg'
 
 const checkStarsCombination = (gameEngine: GameEngine) => {
   const stars = gameEngine.gameState.stars
