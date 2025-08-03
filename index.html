@@ -7,7 +7,36 @@
     <link rel="stylesheet" href="style.css" />
     <title>GAMEJAM</title>
   </head>
+  <script type="module">
+    const menu = document.querySelector('.menu')
+    const play = document.querySelector('#play');
+    const hideMenu = () => {
+      if(menu) menu.classList.add('menu-hide')
+    }
+    if(play) play.onclick = hideMenu;
+  </script>
   <body>
+    <section class="menu">
+    <div class="menu-container">
+      <div class="logo">
+        <img src="/menu/logomid.png"/>
+        <button id="play">JOUER</button>
+        <button>CREDITS</button>
+      </div>
+      <img class="top-left rotateHoraire" src="/menu/Rouage1.png"/>
+
+      <img class="bottom-left-one rotateAntiHoraire" src="/menu/Rouage1.png"/>
+      <img class="bottom-left-two rotateHoraire" src="/menu/Rouage2.png"/>
+
+      <img class="top-right-two rotateAntiHoraire" src="/menu/Rouage2.png"/>
+      <img class="top-right-one rotateHoraire" src="/menu/Rouage1.png"/>
+
+      <img class="bottom-right-one rotateAntiHoraire" src="/menu/Rouage1.png"/>
+      <img class="bottom-right-three rotateHoraire" src="/menu/Rouage1.png"/>
+      <img class="bottom-right-two rotateAntiHoraire" src="/menu/Rouage2.png"/>
+
+    </div>
+    </section>
     <section id="keys" class="containerKeys">
       <div
         style="background-image: url('/key1.png')"
