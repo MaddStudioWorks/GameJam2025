@@ -8,34 +8,75 @@
     <title>GAMEJAM</title>
   </head>
   <script type="module">
-    const menu = document.querySelector('.menu')
-    const play = document.querySelector('#play');
+    const menu = document.querySelector(".menu");
+    const play = document.querySelector("#play");
     const hideMenu = () => {
-      if(menu) menu.classList.add('menu-hide')
-    }
-    if(play) play.onclick = hideMenu;
+      if (menu) menu.classList.add("menu-hide");
+    };
+    if (play) play.onclick = hideMenu;
+    const finalScene = document.querySelector(".finalScene")
+    const finalOne = document.querySelector(".finalOne")
+    const finalTwo = document.querySelector(".finalTwo")
+    const finalThree = document.querySelector(".finalThree")
+    const finalFour = document.querySelector(".finalFour")
+
+    window.addEventListener("final", () => {
+      console.log('final test')
+      setTimeout(() => {
+        finalScene.classList.add('finalScene-show')
+      }, 200)
+      setTimeout(() => {
+        finalOne.classList.add('finalOne-opacity')
+      }, 11000)
+      setTimeout(() => {
+        finalTwo.classList.add('finalTwo-opacity')
+      }, 22000)
+      setTimeout(() => {
+        finalThree.classList.add('finalThree-opacity')
+      }, 33000)
+      setTimeout(() => {
+        finalFour.classList.add('finalFour-opacity')
+        window.location.reload()
+      }, 44000)
+    });
   </script>
   <body>
     <section class="menu">
-    <div class="menu-container">
-      <div class="logo">
-        <img src="/menu/logomid.png"/>
-        <button id="play">JOUER</button>
-        <button>CREDITS</button>
+      <div class="menu-container">
+        <div class="logo">
+          <img src="/menu/logomid.png" />
+          <button id="play">JOUER</button>
+          <button>CREDITS</button>
+        </div>
+        <img class="top-left rotateHoraire" src="/menu/Rouage1.png" />
+
+        <img
+          class="bottom-left-one rotateAntiHoraire"
+          src="/menu/Rouage1.png"
+        />
+        <img class="bottom-left-two rotateHoraire" src="/menu/Rouage2.png" />
+
+        <img class="top-right-two rotateAntiHoraire" src="/menu/Rouage2.png" />
+        <img class="top-right-one rotateHoraire" src="/menu/Rouage1.png" />
+
+        <img
+          class="bottom-right-one rotateAntiHoraire"
+          src="/menu/Rouage1.png"
+        />
+        <img class="bottom-right-three rotateHoraire" src="/menu/Rouage1.png" />
+        <img
+          class="bottom-right-two rotateAntiHoraire"
+          src="/menu/Rouage2.png"
+        />
       </div>
-      <img class="top-left rotateHoraire" src="/menu/Rouage1.png"/>
-
-      <img class="bottom-left-one rotateAntiHoraire" src="/menu/Rouage1.png"/>
-      <img class="bottom-left-two rotateHoraire" src="/menu/Rouage2.png"/>
-
-      <img class="top-right-two rotateAntiHoraire" src="/menu/Rouage2.png"/>
-      <img class="top-right-one rotateHoraire" src="/menu/Rouage1.png"/>
-
-      <img class="bottom-right-one rotateAntiHoraire" src="/menu/Rouage1.png"/>
-      <img class="bottom-right-three rotateHoraire" src="/menu/Rouage1.png"/>
-      <img class="bottom-right-two rotateAntiHoraire" src="/menu/Rouage2.png"/>
-
-    </div>
+    </section>
+    <section class="finalScene">
+      <div class="finalSceneContainer">
+        <div class="finalOne"></div>
+        <div class="finalTwo"></div>
+        <div class="finalThree"></div>
+        <div class="finalFour"></div>
+      </div>
     </section>
     <section id="keys" class="containerKeys">
       <div
@@ -60,29 +101,5 @@
     </div>
 
     <button class="escape">ESCAPE</button>
-
-    <div class="debug-ui">
-      <button id="mutehub">mute hub</button>
-      <button id="unmutehub">unmute hub</button>
-      <button id="mutebgm">mute bgm</button>
-      <button id="theme">theme</button>
-      <button id="menu">menu</button>
-      <button id="room1">room1</button>
-      <button id="room2">room2</button>
-      <button id="room3">room3</button>
-      <button id="room4">room4</button>
-      <button id="roomSecondary">secondary room</button>
-      <button id="pattern1">play all patterns</button>
-      <div class="divider"></div>
-      <button id="dText">dialog text</button>
-      <button id="dImage">dialog image</button>
-      <button id="dImageText">dialog image/text</button>
-      <button id="dClose">close dialog</button>
-      <button id="Key1">add key 1</button>
-      <button id="Key2">add key 2</button>
-      <button id="Key3">add key 3</button>
-      <button id="escape">show escape</button>
-      <button id="escapehide">hide escape</button>
-    </div>
   </body>
 </html>
