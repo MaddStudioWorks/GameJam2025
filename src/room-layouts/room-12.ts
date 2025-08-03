@@ -11,15 +11,11 @@ const checkStarsCombination = (gameEngine: GameEngine) => {
   const invalidStarsToggled = stars.star5 || stars.star6 || stars.star7 || stars.star8
 
   if (validCombination && !invalidStarsToggled) {
-    //triggerDialog('both', 'The loop has been broken', final4)
-    const finalEvent = new CustomEvent('final');
+    gameEngine.gameState.hasWon = true
+    const finalEvent = new CustomEvent('final')
     dispatchEvent(finalEvent)
     gameEngine.musicHandler.cleanAllMusic()
     gameEngine.musicHandler.playBGM(bgm.secondary, false)
-    /*setTimeout(() => {
-      window.location.reload()
-
-    }, 15000);*/
   }
 }
 
