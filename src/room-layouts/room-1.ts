@@ -41,11 +41,6 @@ const roomLayout: RoomProps = {
         rotation: new Euler(0, Math.PI/2, 0),
       },
       {
-        type: 'windowGold',
-        position: new Vector3(0.49, 0, -0.25),
-        rotation: new Euler(0, -Math.PI/2, 0),
-      },
-      {
         type: 'drapesAnger',
         position: new Vector3(0, 0, -0.49),
         rotation: new Euler,

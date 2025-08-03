@@ -5,7 +5,7 @@ import { addKeyToUI, triggerDialog } from "~/ui/index.ui";
 
 const roomLayout: RoomProps = {
   index: 5,
-  isLocked: (gameEngine, room) => !gameEngine.gameState.inventory.switch3,
+  isLocked: (gameEngine, room) => !gameEngine.gameState.inventory.switch2,
   doorType: "default",
   content: {
     roomType: "default",
