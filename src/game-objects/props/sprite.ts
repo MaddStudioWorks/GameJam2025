@@ -37,23 +37,23 @@ import pillarSadness from '~/assets/textures/props/pillarSadness.png'
 const textures: Record<string, { src: string, size: number }> = {
   amphora: {
     src: amphora,
-    size: 1
+    size: 0.35
   },
   bookshelfDenial: {
     src: bookshelfDenial,
-    size: 1
+    size: 0.75
   },
   canvasDenial: {
     src: canvasDenial,
-    size: 1
+    size: 0.35
   },
   drapesSadness: {
     src: drapesSadness,
-    size: 1
+    size: 0.25
   },
   mirrorAnger: {
     src: mirrorAnger,
-    size: 1
+    size: 0.75
   },
   pillarAltDenial: {
     src: pillarAltDenial,
@@ -65,27 +65,27 @@ const textures: Record<string, { src: string, size: number }> = {
   },
   windowGold: {
     src: windowGold,
-    size: 1
+    size: 0.5
   },
   amphoraWithPlant1: {
     src: amphoraWithPlant1,
-    size: 1
+    size: 0.35
   },
   bookshelfSadness: {
     src: bookshelfSadness,
-    size: 1
+    size: 0.75
   },
   canvasSadness: {
     src: canvasSadness,
-    size: 1
+    size: 0.35
   },
   hearthAnger: {
     src: hearthAnger,
-    size: 1
+    size: 0.5
   },
   mirrorDenial: {
     src: mirrorDenial,
-    size: 1
+    size: 0.75
   },
   pillarAltSadness: {
     src: pillarAltSadness,
@@ -97,27 +97,27 @@ const textures: Record<string, { src: string, size: number }> = {
   },
   windowSilver: {
     src: windowSilver,
-    size: 1
+    size: 0.5
   },
   amphoraWithPlant2: {
     src: amphoraWithPlant2,
-    size: 1
+    size: 0.35
   },
   canvasAcceptance: {
     src: canvasAcceptance,
-    size: 1
+    size: 0.35
   },
   drapesAnger: {
     src: drapesAnger,
-    size: 1
+    size: 0.25
   },
   hearthDenial: {
     src: hearthDenial,
-    size: 1
+    size: 0.5
   },
   mirrorSadness: {
     src: mirrorSadness,
-    size: 1
+    size: 0.75
   },
   pillarAnger: {
     src: pillarAnger,
@@ -129,19 +129,19 @@ const textures: Record<string, { src: string, size: number }> = {
   },
   bookshelfAnger: {
     src: bookshelfAnger,
-    size: 1
+    size: 0.75
   },
   canvasAnger: {
     src: canvasAnger,
-    size: 1
+    size: 0.35
   },
   drapesDenial: {
     src: drapesDenial,
-    size: 1
+    size: 0.25
   },
   hearthSadness: {
     src: hearthSadness,
-    size: 1
+    size: 0.5
   },
   pillarAltAnger: {
     src: pillarAltAnger,
