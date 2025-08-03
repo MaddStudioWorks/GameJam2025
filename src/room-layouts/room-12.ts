@@ -14,7 +14,7 @@ const checkStarsCombination = (gameEngine: GameEngine) => {
     triggerDialog('both', 'The loop has been broken', final4)
     setTimeout(() => {
       window.location.reload()
-    }, 3000);
+    }, 15000);
   }
 }
 
