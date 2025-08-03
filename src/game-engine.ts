@@ -72,7 +72,7 @@ export default class GameEngine {
     // this.cameraControls.enterHubMode()
 
     // Debug : show room 1
-    this.cameraControls.enterRoomInspectionMode(this.hub.rooms[1])
+    // this.cameraControls.enterRoomInspectionMode(this.hub.rooms[1])
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
