@@ -5,6 +5,7 @@ import BGMroom1 from "/room1.mp3";
 import BGMroom2 from "/room2.mp3";
 import BGMroom3 from "/room3.mp3";
 import BGMroom4 from "/room4.mp3";
+import BGMroomsecondary from "/secondaryRoom.ogg";
 import BGMpattern1 from "/pattern.ogg";
 import BGMpattern2 from "/pattern2.ogg";
 import BGMpattern3 from "/pattern3.ogg";
@@ -20,6 +21,7 @@ export const bgm = {
   pattern2: BGMpattern2,
   pattern3: BGMpattern3,
   pattern4: BGMpattern4,
+  secondary: BGMroomsecondary,
   menu: BGMmenu,
 };
 

@@ -121,6 +121,7 @@ export const manageAll = () => {
   const buttonMuteHub = document.querySelector("#mutehub");
   const buttonUnmuteHub = document.querySelector("#unmutehub");
   const buttonMuteBGM = document.querySelector("#mutebgm");
+  const buttonSecondary = document.querySelector("#roomSecondary");
 
   if (buttonImage) {
     buttonImage.addEventListener("click", () => {
@@ -189,6 +190,14 @@ export const manageAll = () => {
     buttonMusicMenu.addEventListener("click", () => {
       soundManager.playBGM(
         soundManager.bgm.menu as keyof typeof soundManager.bgm,
+        true
+      );
+    });
+  }
+  if (buttonSecondary) {
+    buttonSecondary.addEventListener("click", () => {
+      soundManager.playBGM(
+        soundManager.bgm.secondary as keyof typeof soundManager.bgm,
         true
       );
     });
