@@ -10,8 +10,22 @@ export interface KeyObject{
   onClick: (engine: GameEngine) => void
 }
 
+/*
+  Denial=brown
+  Anger=red
+  Sadness=blue
+*/
+
 export interface Prop{
-  type: 'bookshelf' | 'pillar' | 'mirror' | 'canvas' | 'hearth'
+  type: 
+    'bookshelfDenial' | 'bookshelfSadness' | 'bookshelfAnger' | 
+    'pillarDenial' | 'pillarSadness' |  'pillarAnger' | 
+    'mirrorDenial' | 'mirrorSadness' |  'mirrorAnger' | 
+    'canvasDenial' | 'canvasSadness' | 'canvasAnger' | 'canvasAcceptance' | 
+    'hearthDenial' | 'hearthSadness' | 'hearthAnger' | 
+    'amphora' | 'amphoraWithPlant1' | 'amphoraWithPlant2' | 
+    'drapesDenial' | 'drapesSadness' | 'drapesAnger' | 
+    'windowSilver' | 'windowGold'
   position: Vector3
   rotation: Euler
 }
