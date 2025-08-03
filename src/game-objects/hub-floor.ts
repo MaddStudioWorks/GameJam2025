@@ -13,6 +13,10 @@ export default class HubFloor extends GameObject {
       color: 0x000000,
     })
     const mesh = new Mesh(geometry, this.material)
+    const roofMesh = new Mesh(geometry, this.material)
+    roofMesh.position.y = 0.75
+    roofMesh.rotateX(Math.PI)
     this.meshGroup.add(mesh)
+    this.meshGroup.add(roofMesh)
   }
 }
