@@ -7,6 +7,7 @@ import RoomTextureDefault from '~/assets/textures/rooms/room-default.png?url'
 import RoomTextureDenial from '~/assets/textures/rooms/room-denial.png?url'
 import RoomTextureAnger from '~/assets/textures/rooms/room-anger.png?url'
 import RoomTextureSadness from '~/assets/textures/rooms/room-sadness.png?url'
+import RoomTextureAcceptance from '~/assets/textures/rooms/room-acceptance.png?url'
 import { RoomProps } from '~/interfaces/room-props'
 import { InteractableObject } from '~/controls/raycaster-handler'
 import InteractiveObject from '~/game-objects/key-objects/interactive-object'
@@ -73,6 +74,7 @@ export default class RoomInterior extends GameObject {
     if (props.content.roomType === "denial") textureName = RoomTextureDenial
     if (props.content.roomType === "anger") textureName = RoomTextureAnger
     if (props.content.roomType === "sadness") textureName = RoomTextureSadness
+    if (props.content.roomType === "acceptance") textureName = RoomTextureAcceptance
     const roomTextureMap = new TextureLoader().load(textureName)
     roomTextureMap.flipY = false
     roomTextureMap.colorSpace = SRGBColorSpace

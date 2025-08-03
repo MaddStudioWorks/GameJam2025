@@ -8,7 +8,7 @@ const roomLayout: RoomProps = {
   isLocked: (gameEngine, room) => false,
   doorType: 'acceptance',
   content: {
-    roomType: 'default',
+    roomType: 'acceptance',
     keyObjects: [],
     props: [],
     music: bgm.theme
