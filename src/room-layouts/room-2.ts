@@ -5,27 +5,31 @@ import { addKeyToUI, triggerDialog } from '~/ui/index.ui'
 
 const roomLayout: RoomProps = {
   index: 2,
-  isLocked: (gameEngine, room) => false,
+  isLocked: (gameEngine, room) => true,
   doorType: 'default',
   content: {
     roomType: 'default',
     keyObjects: [
-      {
-        id: 2,
-        type: "key",
-        position: new Vector3(0, 0, -0.4),
-        rotation: new Euler,
-        onClick: (gameEngine) => {
-          gameEngine.gameState.inventory.key2 = true
-          addKeyToUI(2)
-          setTimeout(() => {
-            triggerDialog('close')
-          }, 3000)
-        }
-      }
+
     ],
-    props: [],
-    music: bgm.room1
+    props: [
+      {
+        type: 'pillarAltAnger',
+        position: new Vector3(-0.49, 0, -0.25),
+        rotation: new Euler(0, Math.PI/2, 0),
+      },
+      {
+        type: 'windowGold',
+        position: new Vector3(0, 0.2, -0.25),
+        rotation: new Euler(0, 0, 0),
+      },
+      /*{
+        type: 'drapesAnger',
+        position: new Vector3(0, 0, -0.49),
+        rotation: new Euler,
+      }*/
+    ],
+    music: bgm.secondary
   }
 }
 

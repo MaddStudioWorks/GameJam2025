@@ -25,7 +25,7 @@ const roomLayout: RoomProps = {
       }
     ],
     props: [],
-    music: bgm.room1
+    music: bgm.secondary
   }
 }
 

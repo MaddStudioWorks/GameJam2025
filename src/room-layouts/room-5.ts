@@ -13,7 +13,7 @@ const roomLayout: RoomProps = {
     roomType: 'default',
     keyObjects: [],
     props: [],
-    music: bgm.room1
+    music: bgm.secondary
   }
 }
 
