@@ -15,11 +15,13 @@ export default class ClockHandler {
   }
 
   onGameOver() {
-    this.hasReachedGameOver = true;
-    triggerDialog("text", "The loop has not been broken, wait for the loop to restart");
-    setTimeout(() => {
-      window.location.reload()
-    }, 5000);
+    if(!this.gameEngine.gameState.hasWon){
+      this.hasReachedGameOver = true;
+      triggerDialog("text", "The loop has not been broken, wait for the loop to restart");
+      setTimeout(() => {
+        window.location.reload()
+      }, 5000);
+    }
   }
 
   checkTimeForMusicTrigger() {
