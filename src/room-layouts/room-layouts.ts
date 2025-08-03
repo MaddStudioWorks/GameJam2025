@@ -1,7 +1,16 @@
-import { Euler, Vector3 } from 'three'
 import { RoomProps } from '~/interfaces/room-props'
-import { bgm } from '~/sound-design/index.sound-design'
-import { addKeyToUI, triggerDialog } from '~/ui/index.ui'
+import room1 from '~/room-layouts/room-1'
+import room2 from '~/room-layouts/room-2'
+import room3 from '~/room-layouts/room-3'
+import room4 from '~/room-layouts/room-4'
+import room5 from '~/room-layouts/room-5'
+import room6 from '~/room-layouts/room-6'
+import room7 from '~/room-layouts/room-7'
+import room8 from '~/room-layouts/room-8'
+import room9 from '~/room-layouts/room-9'
+import room10 from '~/room-layouts/room-10'
+import room11 from '~/room-layouts/room-11'
+import room12 from '~/room-layouts/room-12'
 
 /*
   - Les Room Index commence à 0 pour la 12ème heure, puis 1 pour l'heure 1, etc.
@@ -12,196 +21,18 @@ import { addKeyToUI, triggerDialog } from '~/ui/index.ui'
 */
 
 const roomLayouts: RoomProps[] = [
-  {
-    index: 0,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'acceptance',
-    content: {
-      roomType: 'default',
-      keyObjects: [],
-      props: [],
-      music: bgm.theme
-    }
-  },
-  {
-    index: 1,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'default',
-    content: {
-      roomType: 'default',
-      keyObjects: [
-        {
-          id: 1,
-          type: "key",
-          position: new Vector3(0, 0, -0.4),
-          rotation: new Euler,
-          onClick: (gameEngine) => {
-            gameEngine.gameState.inventory.key1 = true
-            addKeyToUI(1)
-            setTimeout(() => {
-              triggerDialog('close')
-            }, 3000)
-          }
-        }
-      ],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 2,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'default',
-    content: {
-      roomType: 'default',
-      keyObjects: [
-        {
-          id: 2,
-          type: "key",
-          position: new Vector3(0, 0, -0.4),
-          rotation: new Euler,
-          onClick: (gameEngine) => {
-            gameEngine.gameState.inventory.key2 = true
-            addKeyToUI(2)
-            setTimeout(() => {
-              triggerDialog('close')
-            }, 3000)
-          }
-        }
-      ],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 3,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'denial',
-    content: {
-      roomType: 'denial',
-      keyObjects: [
-        {
-          id: 3,
-          type: "key",
-          position: new Vector3(0, 0, -0.4),
-          rotation: new Euler,
-          onClick: (gameEngine) => {
-            gameEngine.gameState.inventory.key3 = true
-            addKeyToUI(3)
-            setTimeout(() => {
-              triggerDialog('close')
-            }, 3000)
-          }
-        }
-      ],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 4,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'default',
-    content: {
-      roomType: 'default',
-      keyObjects: [
-        {
-          id: 1,
-          type: "switch",
-          position: new Vector3(0, 0, -0.4),
-          rotation: new Euler,
-          onClick: (gameEngine) => {
-            gameEngine.gameState.inventory.switch1 = true
-            triggerDialog('text', 'You have activated a switch. You hear a distant click.')
-            setTimeout(() => {
-              triggerDialog('close')
-            }, 3000)
-          }
-        }
-      ],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 5,
-    isLocked: (gameEngine, room) => {
-      return !gameEngine.gameState.inventory.switch1
-    },
-    doorType: 'default',
-    content: {
-      roomType: 'default',
-      keyObjects: [],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 6,
-    isLocked: (gameEngine, room) => gameEngine.gameState.time > 1/12,
-    doorType: 'anger',
-    content: {
-      roomType: 'anger',
-      keyObjects: [],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 7,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'default',
-    content: {
-      roomType: 'default',
-      keyObjects: [],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 8,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'default',
-    content: {
-      roomType: 'default',
-      keyObjects: [],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 9,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'sadness',
-    content: {
-      roomType: 'sadness',
-      keyObjects: [],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 10,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'default',
-    content: {
-      roomType: 'default',
-      keyObjects: [],
-      props: [],
-      music: bgm.room1
-    }
-  },
-  {
-    index: 11,
-    isLocked: (gameEngine, room) => false,
-    doorType: 'default',
-    content: {
-      roomType: 'default',
-      keyObjects: [],
-      props: [],
-      music: bgm.room1
-    }
-  },
+  room12,
+  room1,
+  room2,
+  room3,
+  room4,
+  room5,
+  room6,
+  room7,
+  room8,
+  room9,
+  room10,
+  room11,
 ]
 
 export {
