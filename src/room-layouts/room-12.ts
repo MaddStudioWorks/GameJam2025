@@ -3,6 +3,7 @@ import GameEngine from '~/game-engine'
 import { RoomProps } from '~/interfaces/room-props'
 import { bgm } from '~/sound-design/index.sound-design'
 import { addKeyToUI, triggerDialog } from '~/ui/index.ui'
+import final4 from '~/assets/textures/final/final4.png'
 
 const checkStarsCombination = (gameEngine: GameEngine) => {
   const stars = gameEngine.gameState.stars
@@ -10,7 +11,7 @@ const checkStarsCombination = (gameEngine: GameEngine) => {
   const invalidStarsToggled = stars.star5 || stars.star6 || stars.star7 || stars.star8
 
   if (validCombination && !invalidStarsToggled) {
-    triggerDialog('text', 'You won the game!')
+    triggerDialog('url', final4)
   }
 }
 
