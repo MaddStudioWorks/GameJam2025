@@ -24,6 +24,6 @@ export interface RoomProps{
     roomType: 'default' | 'denial' | 'sadness' | 'anger' | 'acceptance'
     keyObjects: KeyObject[]
     props: Prop[]
-    music: string // replace with typeof musicBGM objects from Acker
+    music: string
   }
 }

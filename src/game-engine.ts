@@ -8,6 +8,7 @@ import CameraControls from '~/controls/camera-controls'
 import RaycasterHandler from '~/controls/raycaster-handler'
 import gameState from '~/game-state'
 import ClockHandler from '~/controls/clock-handler'
+import SoundManagement from '~/sound-design/index.sound-design'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -27,6 +28,7 @@ export default class GameEngine {
   orbitControls: OrbitControls
   cameraControls: CameraControls
   raycasterHandler: RaycasterHandler
+  musicHandler = new SoundManagement
   clockHandler = new ClockHandler(this)
   entities: GameObject[]
   gameState = gameState

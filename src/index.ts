@@ -1,5 +1,5 @@
 import GameEngine from '~/game-engine'
 import {manageAll} from '~/ui/index.ui'
 
-new GameEngine
-manageAll()
+const gameEngine = new GameEngine
+manageAll(gameEngine.musicHandler)

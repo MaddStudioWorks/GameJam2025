@@ -23,7 +23,7 @@ export const bgm = {
   pattern4: BGMpattern4,
   secondary: BGMroomsecondary,
   menu: BGMmenu,
-};
+} as const;
 
 export default class SoundManagement {
   bgm = bgm;
@@ -40,7 +40,7 @@ export default class SoundManagement {
     };
   }
 
-  playBGM(music: keyof typeof bgm, loop: boolean): void {
+  playBGM(music: string, loop: boolean): void {
     this.playBGMmusic = new Howl({
       src: [music],
       loop,
@@ -48,9 +48,10 @@ export default class SoundManagement {
     });
     this.playBGMmusic.play();
     this.playBGMmusic.fade(0, 1, 2000);
+    console.log('playBGM', music)
   }
 
-  playBGMHub(music: keyof typeof bgm, loop: boolean): void {
+  playBGMHub(music: string, loop: boolean): void {
     let pattern = new Howl({
       src: [music],
       loop,
@@ -72,17 +73,17 @@ export default class SoundManagement {
     patterns.map((e, i) => {
       if (i > 0) {
         setTimeout(() => {
-          this.playBGMHub((e as keyof typeof bgm), true);
+          this.playBGMHub((e as string), true);
           this.playBGMmusicHub[i].fade(0, 1, 1000);
         }, 14800 * i);
       } else {
-        this.playBGMHub((e as keyof typeof bgm), true);
+        this.playBGMHub((e as string), true);
         this.playBGMmusicHub[0].fade(0, 1, 1000);
       }
     });
   }
 
-  playSFX(music: keyof typeof bgm): void {
+  playSFX(music: string): void {
     this.playSFXsound = new Howl({
       src: [music],
     });
@@ -106,6 +107,13 @@ export default class SoundManagement {
 
   fadeInHubMusic() {
     this.isHubMute = false;
+
+    // Ensure we have patterns loaded
+    if (this.playBGMmusicHub.length === 0) {
+      this.instanciateAllPatterns();
+      return;
+    }
+
     this.playBGMmusicHub.map((e) => e.fade(0, 1, 2000));
   }
 
@@ -116,10 +124,11 @@ export default class SoundManagement {
     }, 1000);
   }
 
-  transitionFromHubToRoom(music: keyof typeof bgm) {
+  transitionFromHubToRoom(music: string) {
     this.fadeOutHubMusic();
     this.playBGM(music, true);
   }
+
   transitionFromRoomToHub() {
     this.fadeOutBGMMusic();
     this.fadeInHubMusic();
