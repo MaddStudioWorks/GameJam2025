@@ -2,7 +2,7 @@ import { Euler, Vector3 } from "three";
 import { RoomProps } from "~/interfaces/room-props";
 import { bgm } from "~/sound-design/index.sound-design";
 import { addKeyToUI, triggerDialog } from "~/ui/index.ui";
-import constellationPoster from '~/assets/textures/interactive-objects/constellationPoster3.png'
+import constellationPoster from "~/assets/textures/interactive-objects/constellationPoster3.png";
 
 const roomLayout: RoomProps = {
   index: 9,
