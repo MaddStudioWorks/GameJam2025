@@ -53,7 +53,7 @@ export default class RoomInterior extends GameObject {
 
     // Spawn prop objects
     props.content.props.forEach(prop => {
-      const newProp = prop.type === 'bookshelf' ? new Bookshelf(prop) : new Bookshelf(prop)
+      const newProp = prop.type === 'bookshelfAnger' ? new Bookshelf(prop) : new Bookshelf(prop)
       // normalizedPosition: places the object relative to the room size
       const normalizedPosition = prop.position.multiplyScalar(this.roomSize)
       // setScalar: we assume the objects are based on a 1 unit in size grid
