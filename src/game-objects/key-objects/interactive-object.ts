@@ -84,7 +84,10 @@ export default class InteractiveObject extends GameObject {
       this.material.map = this.clicked ? this.toggledStarTexture : this.starTexture
     }else{
       if (!this.clicked){
-        this.clicked = !this.clicked
+        this.clicked = true
+        if (this.type === 'key') {
+          this.mesh.visible = false
+        }
       }
     }
   }
