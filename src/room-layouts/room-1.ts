@@ -26,7 +26,7 @@ const roomLayout: RoomProps = {
     ],
     props: [
       {
-        type: 'bookshelf',
+        type: 'bookshelfAnger',
         position: new Vector3(0, 0, -0.4),
         rotation: new Euler,
       }
