@@ -24,7 +24,13 @@ const roomLayout: RoomProps = {
         }
       }
     ],
-    props: [],
+    props: [
+      {
+        type: 'bookshelf',
+        position: new Vector3(0, 0, -0.4),
+        rotation: new Euler,
+      }
+    ],
     music: bgm.room1
   }
 }

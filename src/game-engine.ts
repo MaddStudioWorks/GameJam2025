@@ -62,13 +62,12 @@ export default class GameEngine {
     // The Hub spawns everything else as children
     this.hub = new Hub(this)
     this.addEntity(this.hub)
-    
-    // this.camera.position.set(0, 0.25, 1)
-    // this.orbitControls.target.set(0, 0.25, 0)
-    // this.addEntity(new RoomInterior)
 
     // On game start, trigger enterHubMode
     // this.cameraControls.enterHubMode()
+    
+    // Debug : show room 1
+    this.cameraControls.enterRoomInspectionMode(this.hub.rooms[1])
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
