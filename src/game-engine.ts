@@ -69,7 +69,7 @@ export default class GameEngine {
 
     // On game start, trigger enterHubMode
     // this.hub.rooms[1].setDoorOpen(true)
-    this.cameraControls.enterDoorstepMode(this.hub.rooms[1])
+    this.cameraControls.enterRoomInspectionMode(this.hub.rooms[11])
 
     // Debug : show room 1
     // this.cameraControls.enterRoomInspectionMode(this.hub.rooms[1])

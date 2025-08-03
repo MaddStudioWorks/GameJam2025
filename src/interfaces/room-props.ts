@@ -1,13 +1,14 @@
 import { Euler, Vector3 } from 'three'
 import GameEngine from '~/game-engine'
+import GameObject from '~/game-objects/game-object'
 import Room from '~/game-objects/room'
 
 export interface KeyObject{
   id: number
-  type: 'key' | 'switch'
+  type: 'key' | 'switch' | 'constellationPoster' | 'note'
   position: Vector3
   rotation: Euler
-  onClick: (engine: GameEngine) => void
+  onClick: (engine: GameEngine, gameObject: GameObject) => void
 }
 
 /*

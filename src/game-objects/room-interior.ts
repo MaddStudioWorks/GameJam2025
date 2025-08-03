@@ -6,8 +6,7 @@ import RoomInteriorModel from '~/assets/meshes/Room_Interior.glb?url'
 import RoomTexture from '~/assets/textures/rooms/room-denial.png?url'
 import { RoomProps } from '~/interfaces/room-props'
 import { InteractableObject } from '~/controls/raycaster-handler'
-import Key from '~/game-objects/key-objects/key'
-import Switch from '~/game-objects/key-objects/switch'
+import InteractiveObject from '~/game-objects/key-objects/interactive-object'
 import SpriteProp from '~/game-objects/props/sprite'
 
 export default class RoomInterior extends GameObject {
@@ -22,7 +21,7 @@ export default class RoomInterior extends GameObject {
 
     // Spawn interactive objects
     props.content.keyObjects.forEach(keyObject => {
-      const newKeyObject = keyObject.type === 'key' ? new Key(keyObject) : new Switch(keyObject)
+      const newKeyObject = new InteractiveObject(keyObject)
       
       const newKeyObjectBbox = new Box3().setFromObject(newKeyObject.meshGroup)
       const size = new Vector3
@@ -36,6 +35,7 @@ export default class RoomInterior extends GameObject {
       const normalizedPosition = keyObject.position.multiplyScalar(this.roomSize)
       newKeyObject.meshGroup.position.copy(normalizedPosition)
       newKeyObject.meshGroup.translateY(0.05)
+      newKeyObject.meshGroup.rotation.copy(keyObject.rotation)
       this.meshGroup.add(newKeyObject.meshGroup)
       
       // Add a clickable definition to `this.keyObjects`
@@ -47,7 +47,9 @@ export default class RoomInterior extends GameObject {
           // Todo: hover effect
           console.log(keyObject)
         },
-        onClick: (interactableObject, gameEngine) => keyObject.onClick(gameEngine)
+        onClick: (interactableObject, gameEngine) => {
+          keyObject.onClick(gameEngine, interactableObject.gameObject)
+        }
       })
     })
 
