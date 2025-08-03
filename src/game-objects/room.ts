@@ -7,6 +7,7 @@ import RoomDoorFrame from '~/game-objects/room-door-frame'
 import { PointOfInterest } from '~/interfaces/point-of-interest'
 import { RoomProps } from '~/interfaces/room-props'
 import { RaycastableCollection } from '~/controls/raycaster-handler'
+import RoomNumber from '~/game-objects/room-number'
 
 export default class Room extends GameObject {
   props: RoomProps
@@ -18,6 +19,7 @@ export default class Room extends GameObject {
   doorLeft: RoomDoor
   doorRight: RoomDoor
   roomInterior: RoomInterior
+  doorNumber: RoomNumber
   hitbox: Mesh
   interactableObjects: RaycastableCollection<GameObject> | null = null
 
@@ -68,9 +70,11 @@ export default class Room extends GameObject {
     this.doorFrame = new RoomDoorFrame
     this.doorLeft = new RoomDoor('left', this.props.doorType)
     this.doorRight = new RoomDoor('right', this.props.doorType)
+    this.doorNumber = new RoomNumber(this.props.index)
     this.meshGroup.add(this.doorFrame.meshGroup)
     this.meshGroup.add(this.doorLeft.meshGroup)
     this.meshGroup.add(this.doorRight.meshGroup)
+    this.meshGroup.add(this.doorNumber.meshGroup)
 
     // Entrance Hitbox
     const hitboxHeight = 0.75

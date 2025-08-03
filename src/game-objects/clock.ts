@@ -17,6 +17,7 @@ import {
 import ClockFaceGoldTexture from '~/assets/textures/clock/face-gold.png'
 import ClockFaceNebulaTexture from '~/assets/textures/clock/face-nebula.jpg'
 import ClockFaceStarsTexture from '~/assets/textures/clock/face-stars.jpg'
+import ClockNeedleTexture from '~/assets/textures/clock/needle.png'
 import radialNoise from '~/shaders/util/radial-noise'
 
 export default class GameClock extends GameObject {
@@ -38,16 +39,19 @@ export default class GameClock extends GameObject {
 
     // Needle
     const needleLength = hubRadius * 0.75
-    const needleGeometry = new PlaneGeometry(pinRadius, needleLength)
-    const needleMaterial = new MeshBasicNodeMaterial({ color: 0xfcba03 })
+    const needleGeometry = new PlaneGeometry(needleLength, needleLength)
+    const needleMap = textureLoader.load(ClockNeedleTexture)
+    needleMap.anisotropy = 16
+    needleMap.colorSpace = SRGBColorSpace
+    const needleMaterial = new MeshBasicNodeMaterial({ map: needleMap, transparent: true })
     const needleMesh = new Mesh(needleGeometry, needleMaterial)
-    needleMesh.translateY(pinHeight / 2)
     needleMesh.translateZ(-needleLength / 2)
     needleMesh.rotation.x = -Math.PI / 2
 
     // Needle Structure
     this.needleGroup = new Group()
-    this.needleGroup.add(needleMesh, pinMesh)
+    this.needleGroup.add(needleMesh)
+    this.needleGroup.position.y = 0.003
 
     // Clock Face Layers
     const clockFaceNebulaTextureMap = textureLoader.load(ClockFaceNebulaTexture)
@@ -96,7 +100,7 @@ export default class GameClock extends GameObject {
         transparent: true
       })
     )
-    clockFaceGold.position.y = 0.003
+    clockFaceGold.position.y = 0.004
 
     this.meshGroup.add(
       this.needleGroup,

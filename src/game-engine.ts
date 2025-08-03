@@ -64,7 +64,7 @@ export default class GameEngine {
     this.addEntity(this.hub)
 
     // On game start, trigger enterHubMode
-    // this.cameraControls.enterHubMode()
+    this.cameraControls.enterHubMode()
 
     this.stats = new Stats()
     document.body.appendChild(this.stats.dom)
