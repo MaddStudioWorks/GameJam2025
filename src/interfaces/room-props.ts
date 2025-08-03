@@ -5,7 +5,7 @@ import Room from '~/game-objects/room'
 
 export interface KeyObject{
   id: number
-  type: 'key' | 'switch' | 'constellationPoster' | 'note'
+  type: 'key' | 'switch' | 'constellationPoster' | 'note' | 'star'
   position: Vector3
   rotation: Euler
   onClick: (engine: GameEngine, gameObject: GameObject) => void

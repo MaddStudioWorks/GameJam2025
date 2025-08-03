@@ -6,6 +6,12 @@ const gameState = {
     key2: false,
     key3: false,
     switch1: false,
+  },
+  stars: {
+    star1: false,
+    star2: false,
+    star3: false,
+    star4: false,
   }
 }
 

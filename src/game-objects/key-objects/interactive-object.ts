@@ -11,6 +11,7 @@ import constellationPoster3 from '~/assets/textures/interactive-objects/constell
 import note1 from '~/assets/textures/interactive-objects/note1.png'
 import note2 from '~/assets/textures/interactive-objects/note2.png'
 import note3 from '~/assets/textures/interactive-objects/note3.png'
+import star from '~/assets/textures/interactive-objects/star.png'
 import { KeyObject } from '~/interfaces/room-props'
 
 const textureName = {
@@ -31,6 +32,9 @@ const textureName = {
     1: note1,
     2: note2,
     3: note3,
+  },
+  star: {
+    1: star
   }
 }
 
@@ -62,6 +66,7 @@ export default class InteractiveObject extends GameObject {
     if(this.type === 'switch') this.mesh.scale.setScalar(0.1)
     if(this.type === 'constellationPoster') this.mesh.scale.setScalar(0.25)
     if(this.type === 'note') this.mesh.scale.setScalar(0.1)
+    if(this.type === 'star') this.mesh.scale.setScalar(0.1)
 
     this.mesh.name = 'InteractiveObject' + id
 

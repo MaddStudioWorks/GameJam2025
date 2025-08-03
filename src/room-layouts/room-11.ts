@@ -30,8 +30,8 @@ const roomLayout: RoomProps = {
         }
       },
       {
-        id: 1,
-        type: "note",
+        id: 2,
+        type: "constellationPoster",
         position: new Vector3(-0.25, 0.25, -0.49),
         rotation: new Euler,
         onClick: (gameEngine) => {
