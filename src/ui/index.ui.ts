@@ -64,7 +64,13 @@ export const addKeyToUI = (number: number) => {
   if (key) {
     key.classList.add(`key-${number}`);
     keys.push(`key-${number}`);
-    triggerDialog("both", `<p>Key ${number} fetched ! ${keys.length === 3 ? '<br> <br> You\'ve got the final clue !' : ''}</p>`, `/key${number}.png`);
+    triggerDialog(
+      "both",
+      `<p>Key ${number} fetched ! ${
+        keys.length === 3 ? "<br> <br> You've got the final clue !" : ""
+      }</p>`,
+      `/key${number}.png`
+    );
     console.log(keys);
     checkKeys(keys);
   }
@@ -86,8 +92,9 @@ export const showClue = () => {
 
 export const manageAll = () => {
   // Hide debug mode unless `#debug` is present in the URL
-  if (window.location.hash !== "#debug"){
-    (document.querySelector(".debug-ui") as HTMLDivElement).style.display = "none";
+  if (window.location.hash !== "#debug") {
+    (document.querySelector(".debug-ui") as HTMLDivElement).style.display =
+      "none";
     (document.querySelector("#keys") as HTMLDivElement).style.display = "none";
   }
 
@@ -172,52 +179,70 @@ export const manageAll = () => {
   }
   if (buttonMusicTheme) {
     buttonMusicTheme.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.theme, true)
+      soundManager.playBGM(
+        soundManager.bgm.theme as keyof typeof soundManager.bgm,
+        true
+      );
     });
   }
   if (buttonMusicMenu) {
     buttonMusicMenu.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.menu, true)
+      soundManager.playBGM(
+        soundManager.bgm.menu as keyof typeof soundManager.bgm,
+        true
+      );
     });
   }
   if (buttonMusicRoom1) {
     buttonMusicRoom1.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.room1, true)
+      soundManager.playBGM(
+        soundManager.bgm.room1 as keyof typeof soundManager.bgm,
+        true
+      );
     });
   }
   if (buttonMusicRoom2) {
     buttonMusicRoom2.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.room2, true)
+      soundManager.playBGM(
+        soundManager.bgm.room2 as keyof typeof soundManager.bgm,
+        true
+      );
     });
   }
   if (buttonMusicRoom3) {
     buttonMusicRoom3.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.room3, true)
+      soundManager.playBGM(
+        soundManager.bgm.room3 as keyof typeof soundManager.bgm,
+        true
+      );
     });
   }
   if (buttonMusicRoom4) {
     buttonMusicRoom4.addEventListener("click", () => {
-      soundManager.playBGM(soundManager.bgm.room4, true)
+      soundManager.playBGM(
+        soundManager.bgm.room4 as keyof typeof soundManager.bgm,
+        true
+      );
     });
   }
   if (buttonMusicPattern1) {
     buttonMusicPattern1.addEventListener("click", () => {
-      soundManager.instanciateAllPatterns()
+      soundManager.instanciateAllPatterns();
     });
   }
   if (buttonMuteHub) {
     buttonMuteHub.addEventListener("click", () => {
-      soundManager.fadeOutHubMusic()
+      soundManager.fadeOutHubMusic();
     });
   }
   if (buttonUnmuteHub) {
     buttonUnmuteHub.addEventListener("click", () => {
-      soundManager.fadeInHubMusic()
+      soundManager.fadeInHubMusic();
     });
   }
   if (buttonMuteBGM) {
     buttonMuteBGM.addEventListener("click", () => {
-      soundManager.fadeOutBGMMusic()
+      soundManager.fadeOutBGMMusic();
     });
   }
 

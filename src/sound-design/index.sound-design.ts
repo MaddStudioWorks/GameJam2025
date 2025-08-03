@@ -38,17 +38,17 @@ export default class SoundManagement {
     };
   }
 
-  playBGM(music: any, loop: boolean): void {
+  playBGM(music: keyof typeof bgm, loop: boolean): void {
     this.playBGMmusic = new Howl({
       src: [music],
       loop,
       volume: 0.4,
     });
     this.playBGMmusic.play();
-    this.playBGMmusic.fade(0, 1, 2000)
+    this.playBGMmusic.fade(0, 1, 2000);
   }
 
-  playBGMHub(music: any, loop: boolean, i: number): void {
+  playBGMHub(music: keyof typeof bgm, loop: boolean): void {
     let pattern = new Howl({
       src: [music],
       loop,
@@ -70,17 +70,17 @@ export default class SoundManagement {
     patterns.map((e, i) => {
       if (i > 0) {
         setTimeout(() => {
-          this.playBGMHub(e, true, i);
+          this.playBGMHub((e as keyof typeof bgm), true);
           this.playBGMmusicHub[i].fade(0, 1, 1000);
         }, 14800 * i);
       } else {
-        this.playBGMHub(e, true, i);
+        this.playBGMHub((e as keyof typeof bgm), true);
         this.playBGMmusicHub[0].fade(0, 1, 1000);
       }
     });
   }
 
-  playSFX(music: any): void {
+  playSFX(music: keyof typeof bgm): void {
     this.playSFXsound = new Howl({
       src: [music],
     });
@@ -96,8 +96,10 @@ export default class SoundManagement {
   }
 
   fadeOutHubMusic() {
-    this.isHubMute = true;
-    this.playBGMmusicHub.map((e) => e.fade(1, 0, 1000));
+    if(!this.isHubMute) {
+      this.playBGMmusicHub.map((e) => e.fade(1, 0, 1000));
+      this.isHubMute = true;
+    }
   }
 
   fadeInHubMusic() {
@@ -106,9 +108,18 @@ export default class SoundManagement {
   }
 
   fadeOutBGMMusic() {
-    this.playBGMmusic.fade(1, 0, 1000)
+    this.playBGMmusic.fade(1, 0, 1000);
     setTimeout(() => {
-      this.playBGMmusic.unload()
-    }, 1000)
+      this.playBGMmusic.unload();
+    }, 1000);
+  }
+
+  transitionFromHubToRoom(music: keyof typeof bgm) {
+    this.fadeOutHubMusic();
+    this.playBGM(music, true);
+  }
+  transitionFromRoomToHub() {
+    this.fadeOutBGMMusic();
+    this.fadeInHubMusic();
   }
 }
