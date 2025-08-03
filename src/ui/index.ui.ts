@@ -1,4 +1,5 @@
 import SoundManagement from "~/sound-design/index.sound-design";
+
 type Type = "url" | "text" | "close" | "both";
 
 const keys: string[] = [];
@@ -59,7 +60,7 @@ export const triggerDialog = (type: Type, text?: string, url?: string) => {
   }
 };
 
-export const addKeyToUI = (number: number) => {
+export const addKeyToUI = (number: number, inventory: any) => {
   const key = document.querySelector(`#key-${number}`);
   if (key) {
     key.classList.add(`key-${number}`);
@@ -67,17 +68,27 @@ export const addKeyToUI = (number: number) => {
     triggerDialog(
       "both",
       `<p>Key ${number} fetched ! ${
-        keys.length === 3 ? "<br> <br> You've got the final clue !" : ""
+        inventory.key1 === true &&
+        inventory.key2 === true &&
+        inventory.key3 === true
+          ? "<br> <br> You've got the final clue !"
+          : ""
       }</p>`,
       `/key${number}.png`
     );
-    console.log(keys);
-    checkKeys(keys);
+    console.log(inventory);
+    checkKeys(inventory);
   }
 };
 
-export const checkKeys = (keys: string[]) => {
-  keys.length === 3 ? showClue() : "";
+export const checkKeys = (inventory: any) => {
+  if (
+    inventory.key1 === true &&
+    inventory.key2 === true &&
+    inventory.key3 === true
+  ) {
+    showClue();
+  }
 };
 
 export const showClue = () => {
@@ -85,7 +96,7 @@ export const showClue = () => {
   if (keysContainer) {
     setTimeout(() => {
       keysContainer.innerHTML = "";
-      keysContainer.textContent = "INDICE";
+      keysContainer.textContent = "ACCEPTATION";
     }, 800);
   }
 };
@@ -145,7 +156,7 @@ export const manageAll = (soundManager: SoundManagement) => {
       triggerDialog("both", "Vous avez récupéré un indice", "/key2.png");
     });
   }
-  if (buttonKeyOne) {
+  /*if (buttonKeyOne) {
     buttonKeyOne.addEventListener("click", () => {
       addKeyToUI(1);
     });
@@ -159,7 +170,7 @@ export const manageAll = (soundManager: SoundManagement) => {
     buttonKeyThree.addEventListener("click", () => {
       addKeyToUI(3);
     });
-  }
+  }*/
   if (buttonEscape) {
     buttonEscape.addEventListener("click", () => {
       toggleEscape("open");

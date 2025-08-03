@@ -17,8 +17,8 @@ const roomLayout: RoomProps = {
         position: new Vector3(0, 0, -0.4),
         rotation: new Euler(),
         onClick: (gameEngine) => {
-          gameEngine.gameState.inventory.key3 = true;
-          addKeyToUI(2);
+          gameEngine.gameState.inventory.key2 = true;
+          addKeyToUI(2, gameEngine.gameState.inventory);
         },
       },
       {
