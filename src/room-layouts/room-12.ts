@@ -11,7 +11,7 @@ const checkStarsCombination = (gameEngine: GameEngine) => {
   const invalidStarsToggled = stars.star5 || stars.star6 || stars.star7 || stars.star8
 
   if (validCombination && !invalidStarsToggled) {
-    triggerDialog('url', final4)
+    triggerDialog('both', 'The loop has been broken', final4)
     setTimeout(() => {
       window.location.reload()
     }, 3000);
