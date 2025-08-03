@@ -1,6 +1,6 @@
 const gameState = {
   time: 0,
-  endOfTime: 60 * 5,
+  endOfTime: 60 * 2,
   inventory: {
     key1: false,
     key2: false,

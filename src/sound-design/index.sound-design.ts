@@ -71,13 +71,11 @@ export default class SoundManagement {
 
     patterns.map((e, i) => {
       if (i > 0) {
-        setTimeout(() => {
-          this.playBGMHub((e as keyof typeof bgm), true);
-          this.playBGMmusicHub[i].fade(0, 1, 1000);
-        }, 14800 * i);
+        this.playBGMHub(e as keyof typeof bgm, true);
       } else {
-        this.playBGMHub((e as keyof typeof bgm), true);
+        this.playBGMHub(e as keyof typeof bgm, true);
         this.playBGMmusicHub[0].fade(0, 1, 1000);
+        this.isHubMute = true;
       }
     });
   }
@@ -98,7 +96,7 @@ export default class SoundManagement {
   }
 
   fadeOutHubMusic() {
-    if(!this.isHubMute) {
+    if (!this.isHubMute) {
       this.playBGMmusicHub.map((e) => e.fade(1, 0, 1000));
       this.isHubMute = true;
     }
@@ -114,6 +112,12 @@ export default class SoundManagement {
     setTimeout(() => {
       this.playBGMmusic.unload();
     }, 1000);
+  }
+
+  fadeInTime(index: number) {
+    this.playBGMmusicHub.map((e, i) => {
+      if (index === i) e.fade(0, 1, 2000);
+    });
   }
 
   transitionFromHubToRoom(music: keyof typeof bgm) {
