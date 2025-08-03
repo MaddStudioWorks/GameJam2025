@@ -33,6 +33,11 @@ const roomLayout: RoomProps = {
     ],
     props: [
       {
+        type: 'pillarAltDenial',
+        position: new Vector3(-0.45, 0, -0.33),
+        rotation: new Euler(0, Math.PI * 0.33, 0),
+      },
+      {
         type: 'canvasDenial',
         position: new Vector3(0.49, 0.33, -0.15),
         rotation: new Euler(0, -Math.PI / 2, 0),

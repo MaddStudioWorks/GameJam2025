@@ -30,14 +30,30 @@ const roomLayout: RoomProps = {
       {
         id: 2,
         type: "note",
-        position: new Vector3(0, 0.25, -0.49),
+        position: new Vector3(-0.1, 0.25, -0.49),
         rotation: new Euler,
         onClick: (gameEngine) => {
           triggerDialog('url', note2)
         }
       },
     ],
-    props: [],
+    props: [
+      {
+        type: 'pillarAltDenial',
+        position: new Vector3(-0.45, 0, -0.33),
+        rotation: new Euler(0, Math.PI * 0.33, 0),
+      },
+      {
+        type: 'bookshelfDenial',
+        position: new Vector3(0.25, 0, -0.49),
+        rotation: new Euler,
+      },
+      {
+        type: 'drapesAnger',
+        position: new Vector3(0.25, 0.25, -0.49),
+        rotation: new Euler,
+      }
+    ],
     music: bgm.secondary,
   },
 };

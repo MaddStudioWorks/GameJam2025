@@ -24,7 +24,13 @@ const roomLayout: RoomProps = {
         }
       },
     ],
-    props: [],
+    props: [
+      {
+        type: 'mirrorDenial',
+        position: new Vector3(0, 0, -0.49),
+        rotation: new Euler,
+      }
+    ],
     music: bgm.secondary
   }
 }
