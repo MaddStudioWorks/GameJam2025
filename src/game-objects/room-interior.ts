@@ -48,10 +48,10 @@ export default class RoomInterior extends GameObject {
         hitbox: newKeyObjectHitbox,
         hovered: false,
         onHover: (keyObject) => {
-          // Todo: hover effect
-          console.log(keyObject)
+          (keyObject.gameObject as InteractiveObject).onHover()
         },
         onClick: (interactableObject, gameEngine) => {
+          (interactableObject.gameObject as InteractiveObject).onClick()
           keyObject.onClick(gameEngine, interactableObject.gameObject)
         }
       })
@@ -79,7 +79,7 @@ export default class RoomInterior extends GameObject {
     roomTextureMap.flipY = false
     roomTextureMap.colorSpace = SRGBColorSpace
     roomTextureMap.anisotropy = 16
-    this.material = new MeshBasicNodeMaterial()
+    this.material = new MeshBasicNodeMaterial
     this.material.colorNode = Fn(() => {
       const texel = texture(roomTextureMap, uv())
       const finalColor = mix(color("#000000"), texel, texel.a)

@@ -69,8 +69,8 @@ export default class Room extends GameObject {
     this.doorLeft = new RoomDoor('left', this.props.doorType)
     this.doorRight = new RoomDoor('right', this.props.doorType)
     this.meshGroup.add(this.doorFrame.meshGroup)
-    // this.meshGroup.add(this.doorLeft.meshGroup)
-    // this.meshGroup.add(this.doorRight.meshGroup)
+    this.meshGroup.add(this.doorLeft.meshGroup)
+    this.meshGroup.add(this.doorRight.meshGroup)
 
     // Entrance Hitbox
     const hitboxHeight = 0.75
