@@ -28,6 +28,9 @@ export default class CameraControls {
     this.gameEngine.orbitControls.enablePan = false
     this.gameEngine.orbitControls.enableZoom = false
 
+    // Play the Hub music
+    this.gameEngine.musicHandler.transitionFromRoomToHub()
+
     // Enable interactions in the Hub
     this.gameEngine.hub.interactableDoors!.enabled = true
     // Disable interactions inside the Rooms
@@ -87,6 +90,11 @@ export default class CameraControls {
 
     // Force controls to update to apply the new constraints
     this.gameEngine.orbitControls.update()
+
+    // Play the Room music
+    this.gameEngine.musicHandler.transitionFromHubToRoom(room.props.content.music)
+
+    console.log("transitionFromHubToRoom")
 
     // Disable interactions in the Hub
     this.gameEngine.hub.interactableDoors!.enabled = false

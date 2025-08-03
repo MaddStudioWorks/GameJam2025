@@ -1,20 +1,17 @@
 import GameEngine from "~/game-engine";
 import { triggerDialog } from "~/ui/index.ui";
-import SoundManagement from "~/sound-design/index.sound-design";
 
 export default class ClockHandler {
   gameEngine: GameEngine;
   hasReachedGameOver = false;
-  soundInstance: SoundManagement;
   stopCheckTime: boolean = false;
   hubPatternChecker: boolean[] = [];
 
   constructor(gameEngine: GameEngine) {
     this.gameEngine = gameEngine;
-    this.soundInstance = new SoundManagement();
 
     this.hubPatternChecker = [false, false, false];
-    this.soundInstance.instanciateAllPatterns();
+    this.gameEngine.musicHandler.instanciateAllPatterns();
   }
 
   onGameOver() {
@@ -26,16 +23,28 @@ export default class ClockHandler {
   }
 
   checkTimeForMusicTrigger() {
-    if (this.gameEngine.gameState.time >= 0.25 && !this.hubPatternChecker[0]) {
-      this.soundInstance.fadeInTime(1);
+    if (
+      this.gameEngine.gameState.time >= 0.25 &&
+      !this.hubPatternChecker[0] &&
+      !this.gameEngine.musicHandler.isHubMute
+    ) {
+      this.gameEngine.musicHandler.fadeInTime(1);
       this.hubPatternChecker[0] = true;
     }
-    if (this.gameEngine.gameState.time >= 0.5 && !this.hubPatternChecker[1]) {
-      this.soundInstance.fadeInTime(2);
+    if (
+      this.gameEngine.gameState.time >= 0.5 &&
+      !this.hubPatternChecker[1] &&
+      !this.gameEngine.musicHandler.isHubMute
+    ) {
+      this.gameEngine.musicHandler.fadeInTime(2);
       this.hubPatternChecker[1] = true;
     }
-    if (this.gameEngine.gameState.time >= 0.75 && !this.hubPatternChecker[2]) {
-      this.soundInstance.fadeInTime(3);
+    if (
+      this.gameEngine.gameState.time >= 0.75 &&
+      !this.hubPatternChecker[2] &&
+      !this.gameEngine.musicHandler.isHubMute
+    ) {
+      this.gameEngine.musicHandler.fadeInTime(3);
       this.hubPatternChecker[2] = true;
       this.stopCheckTime = true;
     }

@@ -90,15 +90,12 @@ export const showClue = () => {
   }
 };
 
-export const manageAll = () => {
+export const manageAll = (soundManager: SoundManagement) => {
   // Hide debug mode unless `#debug` is present in the URL
   if (window.location.hash !== "#debug") {
     (document.querySelector(".debug-ui") as HTMLDivElement).style.display =
       "none";
-    (document.querySelector("#keys") as HTMLDivElement).style.display = "none";
   }
-
-  const soundManager = new SoundManagement();
 
   const buttonImage = document.querySelector("#dImage");
   const buttonText = document.querySelector("#dText");

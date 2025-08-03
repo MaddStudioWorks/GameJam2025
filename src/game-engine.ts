@@ -8,6 +8,7 @@ import CameraControls from '~/controls/camera-controls'
 import RaycasterHandler from '~/controls/raycaster-handler'
 import gameState from '~/game-state'
 import ClockHandler from '~/controls/clock-handler'
+import SoundManagement from '~/sound-design/index.sound-design'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -27,6 +28,7 @@ export default class GameEngine {
   orbitControls: OrbitControls
   cameraControls: CameraControls
   raycasterHandler: RaycasterHandler
+  musicHandler = new SoundManagement(this)
   clockHandler = new ClockHandler(this)
   entities: GameObject[]
   gameState = gameState
@@ -60,7 +62,7 @@ export default class GameEngine {
     // The Hub spawns everything else as children
     this.hub = new Hub(this)
     this.addEntity(this.hub)
-    
+
     // this.camera.position.set(0, 0.25, 1)
     // this.orbitControls.target.set(0, 0.25, 0)
     // this.addEntity(new RoomInterior)
@@ -127,7 +129,7 @@ export default class GameEngine {
   }
 
   onKeyDown(event: KeyboardEvent) {
-    
+
   }
 
   tick() {

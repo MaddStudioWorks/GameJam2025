@@ -1,4 +1,5 @@
 import { Howl, Howler } from "howler";
+import GameEngine from "~/game-engine";
 import BGMtheme from "/theme.mp3";
 import BGMmenu from "/menu.mp3";
 import BGMroom1 from "/room1.mp3";
@@ -23,7 +24,7 @@ export const bgm = {
   pattern4: BGMpattern4,
   secondary: BGMroomsecondary,
   menu: BGMmenu,
-};
+} as const;
 
 export default class SoundManagement {
   bgm = bgm;
@@ -32,15 +33,17 @@ export default class SoundManagement {
   playBGMmusicHub: Howl[] = [];
   playSFXsound: Howl;
   isHubMute: boolean = false;
+  gameEngine: GameEngine;
 
-  constructor() {
+  constructor(gameEngine: GameEngine) {
     this.sfx = {
       theme: BGMtheme,
       room1: BGMroom1,
     };
+    this.gameEngine = gameEngine;
   }
 
-  playBGM(music: keyof typeof bgm, loop: boolean): void {
+  playBGM(music: string, loop: boolean): void {
     this.playBGMmusic = new Howl({
       src: [music],
       loop,
@@ -48,16 +51,17 @@ export default class SoundManagement {
     });
     this.playBGMmusic.play();
     this.playBGMmusic.fade(0, 1, 2000);
+    console.log("playBGM", music);
   }
 
-  playBGMHub(music: keyof typeof bgm, loop: boolean): void {
+  playBGMHub(music: string, loop: boolean, isFade: boolean): void {
     let pattern = new Howl({
       src: [music],
       loop,
       volume: 0.5,
     });
     pattern.play();
-    this.isHubMute === true ? pattern.fade(1, 0, 0) : "";
+    if (isFade) pattern.fade(1, 0, 0);
     this.playBGMmusicHub.push(pattern);
   }
 
@@ -71,16 +75,15 @@ export default class SoundManagement {
 
     patterns.map((e, i) => {
       if (i > 0) {
-        this.playBGMHub(e as keyof typeof bgm, true);
+        this.playBGMHub(e as string, true, true);
       } else {
-        this.playBGMHub(e as keyof typeof bgm, true);
-        this.playBGMmusicHub[0].fade(0, 1, 1000);
-        this.isHubMute = true;
+        this.playBGMHub(e as string, true, false);
+        this.playBGMmusicHub[0].fade(0, 1, 3000);
       }
     });
   }
 
-  playSFX(music: keyof typeof bgm): void {
+  playSFX(music: string): void {
     this.playSFXsound = new Howl({
       src: [music],
     });
@@ -97,14 +100,48 @@ export default class SoundManagement {
 
   fadeOutHubMusic() {
     if (!this.isHubMute) {
-      this.playBGMmusicHub.map((e) => e.fade(1, 0, 1000));
+      this.playBGMmusicHub.map((e, i) => {
+        if (i === 0) {
+          this.playBGMmusicHub[i].fade(1, 0, 1000);
+        }
+
+        if (this.gameEngine.gameState.time >= 0.25 && i === 1) {
+          this.playBGMmusicHub[i].fade(1, 0, 1000);
+        }
+        if (this.gameEngine.gameState.time >= 0.5 && i === 2) {
+          this.playBGMmusicHub[i].fade(1, 0, 1000);
+        }
+        if (this.gameEngine.gameState.time >= 0.75 && i === 3) {
+          this.playBGMmusicHub[i].fade(1, 0, 1000);
+        }
+      });
       this.isHubMute = true;
     }
   }
 
   fadeInHubMusic() {
     this.isHubMute = false;
-    this.playBGMmusicHub.map((e) => e.fade(0, 1, 2000));
+
+    // Ensure we have patterns loaded
+    if (this.playBGMmusicHub.length === 0) {
+      this.instanciateAllPatterns();
+      return;
+    }
+
+    this.playBGMmusicHub.map((e, i) => {
+      if (i === 0) {
+        this.playBGMmusicHub[i].fade(0, 1, 2000);
+      }
+      if (this.gameEngine.gameState.time >= 0.25 && i === 1) {
+        this.playBGMmusicHub[i].fade(0, 1, 2000);
+      }
+      if (this.gameEngine.gameState.time >= 0.5 && i === 2) {
+        this.playBGMmusicHub[i].fade(0, 1, 2000);
+      }
+      if (this.gameEngine.gameState.time >= 0.75 && i === 3) {
+        this.playBGMmusicHub[i].fade(0, 1, 2000);
+      }
+    });
   }
 
   fadeOutBGMMusic() {
@@ -120,10 +157,11 @@ export default class SoundManagement {
     });
   }
 
-  transitionFromHubToRoom(music: keyof typeof bgm) {
+  transitionFromHubToRoom(music: string) {
     this.fadeOutHubMusic();
     this.playBGM(music, true);
   }
+
   transitionFromRoomToHub() {
     this.fadeOutBGMMusic();
     this.fadeInHubMusic();
