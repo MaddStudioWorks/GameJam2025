@@ -3,7 +3,10 @@ import GameObject from '~/game-objects/game-object'
 import { Box3, BoxGeometry, color, Fn, Mesh, MeshBasicNodeMaterial, mix, SRGBColorSpace, texture, TextureLoader, uv, Vector3 } from 'three/webgpu'
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import RoomInteriorModel from '~/assets/meshes/Room_Interior.glb?url'
-import RoomTexture from '~/assets/textures/rooms/room-denial.png?url'
+import RoomTextureDefault from '~/assets/textures/rooms/room-default.png?url'
+import RoomTextureDenial from '~/assets/textures/rooms/room-denial.png?url'
+import RoomTextureAnger from '~/assets/textures/rooms/room-anger.png?url'
+import RoomTextureSadness from '~/assets/textures/rooms/room-sadness.png?url'
 import { RoomProps } from '~/interfaces/room-props'
 import { InteractableObject } from '~/controls/raycaster-handler'
 import InteractiveObject from '~/game-objects/key-objects/interactive-object'
@@ -66,7 +69,11 @@ export default class RoomInterior extends GameObject {
     })
 
     // Room Interior Material
-    const roomTextureMap = new TextureLoader().load(RoomTexture)
+    let textureName = RoomTextureDefault
+    if (props.content.roomType === "denial") textureName = RoomTextureDenial
+    if (props.content.roomType === "anger") textureName = RoomTextureAnger
+    if (props.content.roomType === "sadness") textureName = RoomTextureSadness
+    const roomTextureMap = new TextureLoader().load(textureName)
     roomTextureMap.flipY = false
     roomTextureMap.colorSpace = SRGBColorSpace
     roomTextureMap.anisotropy = 16
