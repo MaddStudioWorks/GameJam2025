@@ -12,6 +12,9 @@ const checkStarsCombination = (gameEngine: GameEngine) => {
 
   if (validCombination && !invalidStarsToggled) {
     triggerDialog('url', final4)
+    setTimeout(() => {
+      window.location.reload()
+    }, 3000);
   }
 }
 

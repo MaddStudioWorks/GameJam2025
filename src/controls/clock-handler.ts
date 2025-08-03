@@ -16,10 +16,10 @@ export default class ClockHandler {
 
   onGameOver() {
     this.hasReachedGameOver = true;
-    triggerDialog("text", "Game Over");
+    triggerDialog("text", "The loop has not been broken, wait for the loop to restart");
     setTimeout(() => {
-      triggerDialog("close");
-    }, 3000);
+      window.location.reload()
+    }, 5000);
   }
 
   checkTimeForMusicTrigger() {
