@@ -29,9 +29,9 @@ export const bgm = {
 export default class SoundManagement {
   bgm = bgm;
   sfx: any;
-  playBGMmusic: Howl;
+  playBGMmusic?: Howl;
   playBGMmusicHub: Howl[] = [];
-  playSFXsound: Howl;
+  playSFXsound?: Howl;
   isHubMute: boolean = false;
   gameEngine: GameEngine;
 
@@ -95,7 +95,7 @@ export default class SoundManagement {
   }
 
   cleanSecondaryMusic() {
-    this.playBGMmusic.unload();
+    this.playBGMmusic?.unload();
   }
 
   fadeOutHubMusic() {
@@ -145,9 +145,9 @@ export default class SoundManagement {
   }
 
   fadeOutBGMMusic() {
-    this.playBGMmusic.fade(1, 0, 1000);
+    this.playBGMmusic?.fade(1, 0, 1000);
     setTimeout(() => {
-      this.playBGMmusic.unload();
+      this.playBGMmusic?.unload();
     }, 1000);
   }
 
