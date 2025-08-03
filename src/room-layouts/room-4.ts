@@ -10,22 +10,10 @@ const roomLayout: RoomProps = {
   content: {
     roomType: 'default',
     keyObjects: [
-      {
-        id: 1,
-        type: "switch",
-        position: new Vector3(0, 0, -0.4),
-        rotation: new Euler,
-        onClick: (gameEngine) => {
-          gameEngine.gameState.inventory.switch1 = true
-          triggerDialog('text', 'You have activated a switch. You hear a distant click.')
-          setTimeout(() => {
-            triggerDialog('close')
-          }, 3000)
-        }
-      }
+
     ],
     props: [],
-    music: bgm.room1
+    music: bgm.secondary
   }
 }
 

@@ -5,27 +5,27 @@ import { addKeyToUI, triggerDialog } from '~/ui/index.ui'
 
 const roomLayout: RoomProps = {
   index: 2,
-  isLocked: (gameEngine, room) => false,
+  isLocked: (gameEngine, room) => !gameEngine.gameState.inventory.switch4,
   doorType: 'default',
   content: {
     roomType: 'default',
     keyObjects: [
       {
-        id: 2,
-        type: "key",
-        position: new Vector3(0, 0, -0.4),
-        rotation: new Euler,
-        onClick: (gameEngine) => {
-          gameEngine.gameState.inventory.key2 = true
-          addKeyToUI(2)
-          setTimeout(() => {
-            triggerDialog('close')
-          }, 3000)
+        id: 1,
+        type: "switch",
+        position: new Vector3(0.49, 0.25, -0.25),
+        rotation: new Euler(0, -Math.PI / 2, 0),
+        onClick: (gameEngine, switchObject) => {
+          if(!gameEngine.gameState.inventory.switch2){
+            switchObject.meshGroup.rotateZ(Math.PI)
+            gameEngine.gameState.inventory.switch2 = true
+            triggerDialog('text', 'You have activated a switch. You hear a distant click.')
+          }
         }
-      }
+      },
     ],
     props: [],
-    music: bgm.room1
+    music: bgm.secondary
   }
 }
 
