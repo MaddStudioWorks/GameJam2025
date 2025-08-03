@@ -31,7 +31,13 @@ const roomLayout: RoomProps = {
         },
       },
     ],
-    props: [],
+    props: [
+      {
+        type: 'canvasAnger',
+        position: new Vector3(0.49, 0.33, -0.15),
+        rotation: new Euler(0, -Math.PI / 2, 0),
+      }
+    ],
     music: bgm.room2,
   },
 };

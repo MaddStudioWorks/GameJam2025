@@ -127,7 +127,18 @@ const roomLayout: RoomProps = {
         }
       },
     ],
-    props: [],
+    props: [
+      {
+        type: 'amphoraWithPlant1',
+        position: new Vector3(-0.45, 0, -0.15),
+        rotation: new Euler(0, Math.PI*0.4, 0),
+      },
+      {
+        type: 'amphoraWithPlant2',
+        position: new Vector3(0.45, 0, -0.15),
+        rotation: new Euler(0, -Math.PI*0.4, 0),
+      },
+    ],
     music: bgm.room4
   }
 }
