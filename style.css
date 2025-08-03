@@ -18,12 +18,116 @@ canvas {
   height: 100vh;
 }
 
-.menu {
+.finalScene-show {
+  display: flex !important;
+}
+
+.finalScene {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.finalSceneContainer {
+  position: relative;
+}
+
+.finalOne {
+  background: url("/final/final1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 90vw;
+  height: 90vh;
+  border-radius: 16px;
+  border: 6px rgb(0, 0, 0) solid;
+  box-shadow: 0 14px 28px rgba(255, 0, 191, 0.25),
+    0 10px 10px rgba(126, 15, 120, 0.22);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  transition: all 1s;
+  opacity: 1;
+}
+.finalOne-opacity {
+  opacity: 0;
+}
+.finalTwo {
+  background: url("/final/final2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 90vw;
+  height: 90vh;
+  border-radius: 16px;
+  border: 6px rgb(0, 0, 0) solid;
+  box-shadow: 0 14px 28px rgba(255, 0, 191, 0.25),
+    0 10px 10px rgba(126, 15, 120, 0.22);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  transition: all 1s;
+  opacity: 1;
+}
+.finalTwo-opacity {
+  opacity: 0;
+}
+.finalThree {
+  background: url("/final/final3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 90vw;
+  height: 90vh;
+  border-radius: 16px;
+  border: 6px rgb(0, 0, 0) solid;
+  box-shadow: 0 14px 28px rgba(255, 0, 191, 0.25),
+    0 10px 10px rgba(126, 15, 120, 0.22);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+  transition: all 1s;
+  opacity: 1;
+}
+.finalThree-opacity {
+  opacity: 0;
+}
+.finalFour {
+  background: url("/final/final4.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 90vw;
+  height: 90vh;
+  border-radius: 16px;
+  border: 6px rgb(0, 0, 0) solid;
+  box-shadow: 0 14px 28px rgba(255, 0, 191, 0.25),
+    0 10px 10px rgba(126, 15, 120, 0.22);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 7;
+  transition: all 1s;
+  opacity: 1;
+}
+.finalFour-opacity {
+  opacity: 0;
+}
+
+.menu,
+.finalScene {
   width: 100vw;
   height: 100vh;
   background: wheat;
   position: absolute;
-  z-index: 1000;
+  z-index: 999;
   transition: all 1s;
   background-color: hsla(281, 78%, 14%, 1);
   background-image: radial-gradient(
@@ -147,7 +251,8 @@ canvas {
 }
 
 .logo button:hover {
-  box-shadow: 0 14px 28px rgba(255, 0, 191, 0.25), 0 10px 10px rgba(126, 15, 120, 0.22);
+  box-shadow: 0 14px 28px rgba(255, 0, 191, 0.25),
+    0 10px 10px rgba(126, 15, 120, 0.22);
 }
 
 .containerKeys {
@@ -306,26 +411,25 @@ canvas {
   margin: 10px 0;
 }
 
-
 @keyframes rotateHoraire {
   0% {
-    transform: rotateZ(0deg)
+    transform: rotateZ(0deg);
   }
   70% {
-    transform: rotateZ(350deg)
+    transform: rotateZ(350deg);
   }
   100% {
-    transform: rotateZ(0deg)
+    transform: rotateZ(0deg);
   }
 }
 @keyframes rotateAntiHoraire {
   0% {
-    transform: rotateZ(0deg)
+    transform: rotateZ(0deg);
   }
   50% {
-    transform: rotateZ(-340deg)
+    transform: rotateZ(-340deg);
   }
   100% {
-    transform: rotateZ(0deg)
+    transform: rotateZ(0deg);
   }
 }
