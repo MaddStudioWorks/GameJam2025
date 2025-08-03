@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, Color, Clock, WebGPURenderer, uniform, Vector2 } from 'three/webgpu'
+import { Scene, PerspectiveCamera, Color, Clock, WebGPURenderer, uniform, Vector2, Vector3 } from 'three/webgpu'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import GameObject from '~/game-objects/game-object'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
@@ -46,7 +46,7 @@ export default class GameEngine {
     this.uniforms.time.onFrameUpdate(() => this.clock.getElapsedTime())
     this.scene.background = new Color(0x00404f)
     this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight)
-    this.camera.position.set(0, 1.5, 1)
+    this.camera.position.set(0, 0.5, 1)
     this.entities = []
 
     this.renderer = new WebGPURenderer
@@ -67,9 +67,9 @@ export default class GameEngine {
     // this.orbitControls.target.set(0, 0.25, 0)
     // this.addEntity(new RoomInterior)
 
-
     // On game start, trigger enterHubMode
-    // this.cameraControls.enterHubMode()
+    // this.hub.rooms[1].setDoorOpen(true)
+    this.cameraControls.enterDoorstepMode(this.hub.rooms[1])
 
     // Debug : show room 1
     // this.cameraControls.enterRoomInspectionMode(this.hub.rooms[1])

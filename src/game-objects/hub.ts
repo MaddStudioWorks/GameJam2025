@@ -52,8 +52,8 @@ export default class Hub extends GameObject {
                 triggerDialog('close')
               }, 3000)
             }else{
-              interactableObject.gameObject.doorLeft.meshGroup.visible = false
-              interactableObject.gameObject.doorRight.meshGroup.visible = false
+              interactableObject.gameObject.doorLeft.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), -Math.PI/2)
+              interactableObject.gameObject.doorRight.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), Math.PI/2)
               setTimeout(() => {
                 gameEngine.cameraControls.enterRoomInspectionMode(interactableObject.gameObject)
                 gameEngine.activeMode = 'roomInspection'

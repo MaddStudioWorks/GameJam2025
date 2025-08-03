@@ -94,8 +94,6 @@ export default class CameraControls {
     // Play the Room music
     this.gameEngine.musicHandler.transitionFromHubToRoom(room.props.content.music)
 
-    console.log("transitionFromHubToRoom")
-
     // Disable interactions in the Hub
     this.gameEngine.hub.interactableDoors!.enabled = false
     // Enable interactions inside the room 

@@ -1,6 +1,6 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { Color, Mesh, MeshBasicNodeMaterial, RepeatWrapping, SRGBColorSpace, TextureLoader } from 'three/webgpu'
+import { color, Color, distance, Fn, length, Mesh, MeshBasicNodeMaterial, mix, pow, RepeatWrapping, saturate, smoothstep, SRGBColorSpace, step, texture, TextureLoader, uv, vec2 } from 'three/webgpu'
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import DoorModelL from '~/assets/meshes/Room_Door_L.glb?url'
 import DoorModelR from '~/assets/meshes/Room_Door_R.glb?url'
@@ -21,6 +21,7 @@ const doorTextures: Record<RoomProps["doorType"], string> = {
 
 export default class RoomDoor extends GameObject {
   material: MeshBasicNodeMaterial
+  open = false
 
   constructor(side: "left" | "right", doorType: RoomProps["doorType"]) {
     super()
@@ -31,9 +32,16 @@ export default class RoomDoor extends GameObject {
     roomTextureMap.colorSpace = SRGBColorSpace
     roomTextureMap.anisotropy = 16
     roomTextureMap.wrapS = roomTextureMap.wrapT = RepeatWrapping
-    this.material = new MeshBasicNodeMaterial({
-      map: roomTextureMap
-    })
+    this.material = new MeshBasicNodeMaterial
+    this.material.colorNode = Fn(() => {
+      const texel = texture(roomTextureMap, uv())
+      const x = uv().x.sub(0.5).abs().mul(2)
+      const y = uv().y.sub(0.6).abs().add(0.25)
+      const distanceFromCenter = x.add(y)
+      const shadow = smoothstep(0.25, 1, distanceFromCenter)
+      const shadow2 = saturate(pow(shadow, 2))
+      return mix(texel, color(0x000000), shadow2)
+    })()
 
     const loader = new GLTFLoader()
     const model = side === "left" ? DoorModelL : DoorModelR
@@ -49,9 +57,10 @@ export default class RoomDoor extends GameObject {
       })
 
       this.meshGroup.add(object)
+      this.meshGroup.translateX(side === "left" ? -0.11 : 0.11)
     })    
   }
-
+  
   tick(engine: GameEngine) {
   }
 }
