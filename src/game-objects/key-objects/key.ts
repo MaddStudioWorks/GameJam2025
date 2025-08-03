@@ -13,7 +13,8 @@ export default class Key extends GameObject {
     keyTextureMap.colorSpace = SRGBColorSpace
     const keyMaterial = new MeshBasicNodeMaterial({
       transparent: true,
-      map: keyTextureMap
+      map: keyTextureMap,
+      depthWrite: false
     })
     const keySize = 0.1
     const keyGeometry = new PlaneGeometry(keySize, keySize)

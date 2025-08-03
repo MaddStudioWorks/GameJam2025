@@ -20,6 +20,8 @@ export interface Prop{
   type: 
     'bookshelfDenial' | 'bookshelfSadness' | 'bookshelfAnger' | 
     'pillarDenial' | 'pillarSadness' |  'pillarAnger' | 
+    'pillarAltDenial' | 'pillarAltSadness' |  'pillarAltAnger' | 
+    'pillarBrokenDenial' | 'pillarBrokenSadness' |  'pillarBrokenAnger' | 
     'mirrorDenial' | 'mirrorSadness' |  'mirrorAnger' | 
     'canvasDenial' | 'canvasSadness' | 'canvasAnger' | 'canvasAcceptance' | 
     'hearthDenial' | 'hearthSadness' | 'hearthAnger' | 

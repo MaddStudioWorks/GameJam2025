@@ -8,7 +8,7 @@ import { RoomProps } from '~/interfaces/room-props'
 import { InteractableObject } from '~/controls/raycaster-handler'
 import Key from '~/game-objects/key-objects/key'
 import Switch from '~/game-objects/key-objects/switch'
-import Bookshelf from '~/game-objects/props/bookshelf'
+import SpriteProp from '~/game-objects/props/sprite'
 
 export default class RoomInterior extends GameObject {
   material: MeshBasicNodeMaterial
@@ -53,13 +53,13 @@ export default class RoomInterior extends GameObject {
 
     // Spawn prop objects
     props.content.props.forEach(prop => {
-      const newProp = prop.type === 'bookshelfAnger' ? new Bookshelf(prop) : new Bookshelf(prop)
+      const newProp = new SpriteProp(prop)
       // normalizedPosition: places the object relative to the room size
       const normalizedPosition = prop.position.multiplyScalar(this.roomSize)
       // setScalar: we assume the objects are based on a 1 unit in size grid
       newProp.meshGroup.scale.setScalar(this.roomSize)
       newProp.meshGroup.position.copy(normalizedPosition)
-      newProp.meshGroup.translateY(0.05)
+      newProp.meshGroup.rotation.copy(prop.rotation)
       this.meshGroup.add(newProp.meshGroup)
     })
 

@@ -26,8 +26,18 @@ const roomLayout: RoomProps = {
     ],
     props: [
       {
+        type: 'mirrorDenial',
+        position: new Vector3(-0.49, 0, -0.25),
+        rotation: new Euler(0, Math.PI/2, 0),
+      },
+      {
         type: 'bookshelfAnger',
-        position: new Vector3(0, 0, -0.4),
+        position: new Vector3(0.49, 0, -0.25),
+        rotation: new Euler(0, -Math.PI/2, 0),
+      },
+      {
+        type: 'hearthDenial',
+        position: new Vector3(0, 0, -0.49),
         rotation: new Euler,
       }
     ],
