@@ -36,9 +36,6 @@ export default class GameEngine {
   // Root Game Objects
   hub: Hub
 
-  // Debug
-  stats: Stats
-
   // Temp
   activeMode: 'hub' | 'doorstep' | 'roomInspection' = 'hub'
 
@@ -65,9 +62,6 @@ export default class GameEngine {
 
     // On game start, trigger enterHubMode
     this.cameraControls.enterHubMode()
-
-    this.stats = new Stats()
-    document.body.appendChild(this.stats.dom)
 
     this.renderer.setAnimationLoop(() => { this.tick() })
   }
@@ -142,6 +136,5 @@ export default class GameEngine {
     this.entities.forEach(entry => entry.tick(this))
     this.orbitControls.update()
     this.renderer.render(this.scene, this.camera)
-    this.stats.update()
   }
 }
