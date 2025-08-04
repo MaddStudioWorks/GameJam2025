@@ -22,7 +22,6 @@ const roomLayout: RoomProps = {
               "text",
               gameEngine.translate().game.switchActivated
             );
-            gameEngine.uiHandler.addKeyToUI(1)
           }
         },
       },

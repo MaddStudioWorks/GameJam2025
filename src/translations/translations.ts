@@ -26,6 +26,38 @@ export class TranslationHandler {
   translate() {
     return languages[this.lang].dictionary
   }
+
+  // New method to translate UI elements
+  translateUI() {
+    const translations = this.translate().ui || {}
+    
+    // Translate elements with data-translate attribute
+    document.querySelectorAll('[data-translate]').forEach(element => {
+      const key = element.getAttribute('data-translate')
+      if (key && translations[key]) {
+        if (element.tagName === 'INPUT' || element.tagName === 'BUTTON') {
+          element.textContent = translations[key]
+        } else {
+          element.textContent = translations[key]
+        }
+      }
+    })
+
+    // Translate elements with data-translate-placeholder attribute
+    document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+      const key = element.getAttribute('data-translate-placeholder')
+      if (key && translations[key]) {
+        element.setAttribute('placeholder', translations[key])
+      }
+    })
+  }
+
+  // Method to change language and re-translate
+  setLanguage(lang: keyof typeof languages) {
+    this.lang = lang
+    this.dictionnary = languages[lang].dictionary
+    this.translateUI()
+  }
 }
 
 export {

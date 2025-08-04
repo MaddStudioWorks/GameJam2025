@@ -57,26 +57,27 @@
   <body>
     <div class="controls">
       <div class="overlay">
-        <h2>CONTROLES</h2>
+        <h2 data-translate="controls">CONTROLES</h2>
         <div class="controls-command">
           <div>
-            <h3>OUVRIR/SÉLECTIONNER</h3>
-            <p>Clic Gauche</p>
+            <h3 data-translate="openSelect">OUVRIR/SÉLECTIONNER</h3>
+            <p data-translate="leftClick">Clic Gauche</p>
           </div>
           <div>
-            <h3>SORTIR</h3>
-            <p>Échap ou Clic Droit</p>
+            <h3 data-translate="exit">SORTIR</h3>
+            <p data-translate="escapeOrRightClick">Échap ou Clic Droit</p>
           </div>
         </div>
-        <button class="close-controls">FERMER</button>
+        <button class="close-controls" data-translate="close">FERMER</button>
       </div>
     </div>
     <section class="menu">
       <div class="menu-container">
         <div class="logo">
           <img src="/menu/logomid.png" />
-          <button id="play">JOUER</button>
-          <button id="controls">CONTROLS</button>
+          <button id="play" data-translate="play">JOUER</button>
+          <button id="controls" data-translate="controls">CONTROLS</button>
+          <!-- Language selector will be inserted here by UIHandler -->
         </div>
         <img class="top-left rotateHoraire" src="/menu/Rouage1.png" />
 
@@ -127,10 +128,10 @@
     </section>
     <div class="dialog">
       <div class="dialogContent"></div>
-      <button class="dialog-close">CLOSE</button>
+      <button class="dialog-close" data-translate="close">CLOSE</button>
     </div>
 
-    <button class="escape">ESCAPE</button>
+    <button class="escape" data-translate="escape">ESCAPE</button>
 
     <div class="debug-ui" style="display: none;">
       <button id="mutehub">mute hub</button>

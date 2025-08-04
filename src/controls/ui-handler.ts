@@ -2,7 +2,7 @@ import GameEngine from "~/game-engine"
 import key1 from '~/assets/textures/interactive-objects/key1.png'
 import key2 from '~/assets/textures/interactive-objects/key2.png'
 import key3 from '~/assets/textures/interactive-objects/key3.png'
-import { GameState } from '~/game-state'
+import { languages } from '~/translations/translations'
 
 const keysTextures = {
   1: key1,
@@ -21,6 +21,9 @@ export default class UIHandler {
 
   initializeUI() {
     this.setupUIButtons()
+    this.setupLanguageSelector()
+    // Translate UI on initialization
+    this.gameEngine.translationHandler.translateUI()
   }
 
   setupUIButtons() {
@@ -40,6 +43,37 @@ export default class UIHandler {
 
     this.setupButton(".escape", () => {
       this.triggerEscape()
+    })
+  }
+
+  setupLanguageSelector() {
+    // Create language selector if it doesn't exist
+    let langSelector = document.querySelector('#language-selector') as HTMLSelectElement
+    if (!langSelector) {
+      langSelector = document.createElement('select')
+      langSelector.id = 'language-selector'
+      langSelector.className = 'language-selector'
+
+      // Add options for each language
+      Object.entries(languages).forEach(([code, lang]) => {
+        const option = document.createElement('option')
+        option.value = code
+        option.textContent = lang.label
+        option.selected = code === this.gameEngine.translationHandler.lang
+        langSelector.appendChild(option)
+      })
+
+      // Insert into menu
+      const menuContainer = document.querySelector('.menu-container .logo')
+      if (menuContainer) {
+        menuContainer.appendChild(langSelector)
+      }
+    }
+
+    // Add event listener for language change
+    langSelector.addEventListener('change', (event) => {
+      const target = event.target as HTMLSelectElement
+      this.gameEngine.translationHandler.setLanguage(target.value as keyof typeof languages)
     })
   }
 
@@ -68,7 +102,6 @@ export default class UIHandler {
   triggerDialog(type: "url" | "text" | "close" | "both", text?: string, url?: string) {
     const dialog = document.querySelector(".dialog")
     const dialogContent = document.querySelector(".dialogContent")
-
     if (type === "close") {
       if (dialog && dialogContent) {
         dialog.classList.remove("dialog-displayed")

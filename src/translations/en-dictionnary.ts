@@ -1,16 +1,15 @@
 import { variables } from '~/translations/utils'
 
 const enDictionnary = {
-  title: {
-    play: "Play",
+  ui: {
     controls: "Controls",
-    credits: "Credits",
-    controlsPanel: {
-      open: "Open/Select",
-      openControl: "Left Click",
-      exit: "Exit",
-      exitControl: "Escape or Right Click"
-    }
+    openSelect: "Open/Select",
+    leftClick: "Left Click",
+    exit: "Exit",
+    escapeOrRightClick: "Escape or Right Click",
+    close: "Close",
+    play: "Play",
+    escape: "Escape"
   },
   game: {
     close: "Close",

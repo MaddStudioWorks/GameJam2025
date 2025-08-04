@@ -1,16 +1,15 @@
 import { variables } from '~/translations/utils'
 
 const frDictionnary = {
-  title: {
-    play: "Jouer",
+  ui: {
     controls: "Contrôles",
-    credits: "Crédits",
-    controlsPanel: {
-      open: "Ouvrir/Sélectionner",
-      openControl: "Clic gauche",
-      exit: "Sortir",
-      exitControl: "Échap ou Clic droit"
-    }
+    openSelect: "Ouvrir/Sélectionner",
+    leftClick: "Clic gauche",
+    exit: "Sortir",
+    escapeOrRightClick: "Échap ou clic droit",
+    close: "Fermer",
+    play: "Jouer",
+    escape: "Escape"
   },
   game: {
     close: "Fermer",
