@@ -1,9 +1,7 @@
 import { Euler, Vector3 } from 'three'
 import GameEngine from '~/game-engine'
 import { RoomProps } from '~/interfaces/room-props'
-import { bgm } from '~/sound-design/index.sound-design'
-import { addKeyToUI, triggerDialog } from '~/ui/index.ui'
-import final4 from '~/assets/textures/final/final4.jpg'
+import { bgm } from '~/controls/sound-handler'
 
 const checkStarsCombination = (gameEngine: GameEngine) => {
   const stars = gameEngine.gameState.stars
@@ -35,7 +33,6 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.stars.star1 = !gameEngine.gameState.stars.star1
           checkStarsCombination(gameEngine)
-          console.log('star1')
         }
       },
       {
@@ -46,7 +43,6 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.stars.star2 = !gameEngine.gameState.stars.star2
           checkStarsCombination(gameEngine)
-          console.log('star2')
         }
       },
       {
@@ -57,7 +53,6 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.stars.star3 = !gameEngine.gameState.stars.star3
           checkStarsCombination(gameEngine)
-          console.log('star3')
         }
       },
       {
@@ -68,7 +63,6 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.stars.star4 = !gameEngine.gameState.stars.star4
           checkStarsCombination(gameEngine)
-          console.log('star4')
         }
       },
       // Clutter stars (interactive but don't contribute to solution)
@@ -80,7 +74,6 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.stars.star5 = !gameEngine.gameState.stars.star5
           checkStarsCombination(gameEngine)
-          console.log('star5')
         }
       },
       {
@@ -91,7 +84,6 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.stars.star6 = !gameEngine.gameState.stars.star6
           checkStarsCombination(gameEngine)
-          console.log('star6')
         }
       },
       {
@@ -102,7 +94,6 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.stars.star7 = !gameEngine.gameState.stars.star7
           checkStarsCombination(gameEngine)
-          console.log('star7')
         }
       },
       {
@@ -113,7 +104,6 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.stars.star8 = !gameEngine.gameState.stars.star8
           checkStarsCombination(gameEngine)
-          console.log('star8')
         }
       },
       {
@@ -124,7 +114,6 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.stars.star9 = !gameEngine.gameState.stars.star9
           checkStarsCombination(gameEngine)
-          console.log('star9')
         }
       },
     ],

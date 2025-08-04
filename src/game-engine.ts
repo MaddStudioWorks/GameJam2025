@@ -4,13 +4,15 @@ import GameObject from '~/game-objects/game-object'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { GlobalUniforms } from '~/types'
 import Hub from '~/game-objects/hub'
-import CameraControls from '~/controls/camera-controls'
+import CameraControls from '~/controls/camera-handler'
 import RaycasterHandler from '~/controls/raycaster-handler'
 import gameState from '~/game-state'
 import ClockHandler from '~/controls/clock-handler'
-import SoundManagement from '~/sound-design/index.sound-design'
+import SoundManagement from '~/controls/sound-handler'
 import { TranslationHandler } from '~/translations/translations'
-import { triggerDialog } from '~/ui/index.ui'
+import SoundHandler from '~/controls/sound-handler'
+import UIHandler from '~/controls/ui-handler'
+import DebugHandler from '~/controls/debug-handler'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -22,6 +24,7 @@ export default class GameEngine {
   uniforms = globalUniforms
   deltaTime: number = 0
   cursor: Vector2 = new Vector2(0, 0)
+  gameState = gameState
 
   // Engine components
   renderer: WebGPURenderer
@@ -32,10 +35,11 @@ export default class GameEngine {
   raycasterHandler: RaycasterHandler
   translationHandler = new TranslationHandler
   translate = () => this.translationHandler.translate() // Shortcut method for translation
-  musicHandler = new SoundManagement(this)
+  musicHandler = new SoundHandler(this)
   clockHandler = new ClockHandler(this)
+  uiHandler = new UIHandler(this)
+  debugHandler = new DebugHandler(this)
   entities: GameObject[]
-  gameState = gameState
 
   // Root Game Objects
   hub: Hub

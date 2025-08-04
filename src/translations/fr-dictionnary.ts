@@ -1,3 +1,5 @@
+import { variables } from '~/translations/utils'
+
 const frDictionnary = {
   title: {
     play: "Jouer",
@@ -19,6 +21,8 @@ const frDictionnary = {
     note: "Note",
     doorLocked: "La porte est verrouillée",
     gameOver: "La boucle n'a pas été brisée, et le cycle recommence",
+    keyGet: variables("Vous avez obtenu la clé {keyNumber}"),
+    finalClueReached: "Vous avez atteint l'indice final",
     finalClue: "Acceptation"
   }
 }

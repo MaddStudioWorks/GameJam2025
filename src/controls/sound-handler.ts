@@ -26,7 +26,7 @@ export const bgm = {
   menu: BGMmenu,
 } as const;
 
-export default class SoundManagement {
+export default class SoundHandler {
   bgm = bgm;
   sfx: any;
   playBGMmusic?: Howl;
@@ -43,7 +43,7 @@ export default class SoundManagement {
     this.gameEngine = gameEngine;
   }
 
-  playBGM(music: string, loop: boolean): void {
+  playBGM(music: string, loop=true): void {
     this.playBGMmusic = new Howl({
       src: [music],
       loop,

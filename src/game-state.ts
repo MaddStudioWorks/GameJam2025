@@ -40,4 +40,6 @@ const gameState = {
   }
 }
 
+export type GameState = typeof gameState
+
 export default gameState

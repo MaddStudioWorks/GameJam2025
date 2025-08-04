@@ -1,7 +1,6 @@
 import { Euler, Vector3 } from "three";
 import { RoomProps } from "~/interfaces/room-props";
-import { bgm } from "~/sound-design/index.sound-design";
-import { addKeyToUI, triggerDialog } from "~/ui/index.ui";
+import { bgm } from "~/controls/sound-handler";
 
 const roomLayout: RoomProps = {
   index: 10,
@@ -19,10 +18,11 @@ const roomLayout: RoomProps = {
           if (!gameEngine.gameState.inventory.switch5) {
             switchObject.meshGroup.rotateZ(Math.PI);
             gameEngine.gameState.inventory.switch5 = true;
-            triggerDialog(
+            gameEngine.uiHandler.triggerDialog(
               "text",
               gameEngine.translate().game.switchActivated
             );
+            gameEngine.uiHandler.addKeyToUI(1)
           }
         },
       },

@@ -1,7 +1,6 @@
 import { Euler, Vector3 } from 'three'
 import { RoomProps } from '~/interfaces/room-props'
-import { bgm } from '~/sound-design/index.sound-design'
-import { addKeyToUI, triggerDialog } from '~/ui/index.ui'
+import { bgm } from '~/controls/sound-handler'
 import note1 from '~/assets/textures/interactive-objects/note1.png'
 
 const roomLayout: RoomProps = {
@@ -20,7 +19,7 @@ const roomLayout: RoomProps = {
           if(!gameEngine.gameState.inventory.switch1){
             switchObject.meshGroup.rotateZ(Math.PI)
             gameEngine.gameState.inventory.switch1 = true
-            triggerDialog('text', gameEngine.translate().game.switchActivated)
+            gameEngine.uiHandler.triggerDialog('text', gameEngine.translate().game.switchActivated)
           }
         }
       },
@@ -30,7 +29,7 @@ const roomLayout: RoomProps = {
         position: new Vector3(-0.25, 0.25, -0.49),
         rotation: new Euler,
         onClick: (gameEngine) => {
-          triggerDialog('url', note1)
+          gameEngine.uiHandler.triggerDialog('url', note1)
         }
       },
     ],

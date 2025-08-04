@@ -6,7 +6,6 @@ import HubFloor from '~/game-objects/hub-floor'
 import GameClock from '~/game-objects/clock'
 import { InteractableObject, RaycastableCollection } from '~/controls/raycaster-handler'
 import { roomLayouts } from '~/room-layouts/room-layouts'
-import { triggerDialog } from '~/ui/index.ui'
 
 export default class Hub extends GameObject {
   rooms: Room[] = []
@@ -47,7 +46,7 @@ export default class Hub extends GameObject {
         onClick: (interactableObject: InteractableObject<Room>) => {
           if (gameEngine.activeMode === 'doorstep') {
             if(room.props.isLocked(gameEngine, room)){
-              triggerDialog('text', gameEngine.translate().game.doorLocked)
+              gameEngine.uiHandler.triggerDialog('text', gameEngine.translate().game.doorLocked)
             }else{
               interactableObject.gameObject.doorLeft.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), -Math.PI/2)
               interactableObject.gameObject.doorRight.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), Math.PI/2)

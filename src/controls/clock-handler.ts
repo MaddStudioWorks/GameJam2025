@@ -1,5 +1,4 @@
 import GameEngine from "~/game-engine";
-import { triggerDialog } from "~/ui/index.ui";
 
 export default class ClockHandler {
   gameEngine: GameEngine;
@@ -17,7 +16,7 @@ export default class ClockHandler {
   onGameOver() {
     if(!this.gameEngine.gameState.hasWon){
       this.hasReachedGameOver = true;
-      triggerDialog("text", this.gameEngine.translate().game.gameOver);
+      this.gameEngine.uiHandler.triggerDialog("text", this.gameEngine.translate().game.gameOver)
       setTimeout(() => {
         window.location.reload()
       }, 5000);

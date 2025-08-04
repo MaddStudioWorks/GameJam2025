@@ -1,3 +1,5 @@
+import { variables } from '~/translations/utils'
+
 const enDictionnary = {
   title: {
     play: "Play",
@@ -19,8 +21,12 @@ const enDictionnary = {
     note: "Note",
     doorLocked: "Door is locked",
     gameOver: "The loop has not been broken, and the cycle begins anew",
+    keyGet: variables("You have obtained key {keyNumber}"),
+    finalClueReached: "You have reached the final clue",
     finalClue: "Acceptation"
   }
 }
+
+export type Dictionnary = typeof enDictionnary
 
 export default enDictionnary

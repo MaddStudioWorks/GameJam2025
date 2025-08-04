@@ -1,7 +1,7 @@
 import GameEngine from '~/game-engine'
 import Room from '~/game-objects/room'
 
-export default class CameraControls {
+export default class CameraHandler {
   gameEngine: GameEngine
   orbitingStart = 0
   isOrbiting = false
