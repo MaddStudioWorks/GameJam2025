@@ -10,43 +10,73 @@
   <script type="module">
     const menu = document.querySelector(".menu");
     const play = document.querySelector("#play");
+    const controls = document.querySelector("#controls");
+    const controlsHTML = document.querySelector(".controls");
+    const closeControls = document.querySelector(".close-controls");
     const hideMenu = () => {
       if (menu) menu.classList.add("menu-hide");
     };
     if (play) play.onclick = hideMenu;
-    const finalScene = document.querySelector(".finalScene")
-    const finalOne = document.querySelector(".finalOne")
-    const finalTwo = document.querySelector(".finalTwo")
-    const finalThree = document.querySelector(".finalThree")
-    const finalFour = document.querySelector(".finalFour")
+    const finalScene = document.querySelector(".finalScene");
+    const finalOne = document.querySelector(".finalOne");
+    const finalTwo = document.querySelector(".finalTwo");
+    const finalThree = document.querySelector(".finalThree");
+    const finalFour = document.querySelector(".finalFour");
+
+    const showControls = () => {
+      controlsHTML.classList.add("controls-show");
+    };
+    const hideControls = () => {
+      console.log("ccccc");
+      controlsHTML.classList.remove("controls-show");
+    };
+
+    controls.onclick = () => showControls();
+    closeControls.onclick = () => hideControls();
 
     window.addEventListener("final", () => {
-      console.log('final test')
+      console.log("final test");
       setTimeout(() => {
-        finalScene.classList.add('finalScene-show')
-      }, 200)
+        finalScene.classList.add("finalScene-show");
+      }, 200);
       setTimeout(() => {
-        finalOne.classList.add('finalOne-opacity')
-      }, 11000)
+        finalOne.classList.add("finalOne-opacity");
+      }, 11000);
       setTimeout(() => {
-        finalTwo.classList.add('finalTwo-opacity')
-      }, 22000)
+        finalTwo.classList.add("finalTwo-opacity");
+      }, 22000);
       setTimeout(() => {
-        finalThree.classList.add('finalThree-opacity')
-      }, 33000)
+        finalThree.classList.add("finalThree-opacity");
+      }, 33000);
       setTimeout(() => {
-        finalFour.classList.add('finalFour-opacity')
-        window.location.reload()
-      }, 44000)
+        finalFour.classList.add("finalFour-opacity");
+        window.location.reload();
+      }, 44000);
     });
   </script>
   <body>
+    <div class="controls">
+      <div class="overlay">
+        <h2>CONTROLES</h2>
+        <div class="controls-command">
+          <div>
+            <h3>OUVRIR/SÉLECTIONNER</h3>
+            <p>Clic Gauche</p>
+          </div>
+          <div>
+            <h3>SORTIR</h3>
+            <p>Échap</p>
+          </div>
+        </div>
+        <button class="close-controls">FERMER</button>
+      </div>
+    </div>
     <section class="menu">
       <div class="menu-container">
         <div class="logo">
           <img src="/menu/logomid.png" />
           <button id="play">JOUER</button>
-          <button>CREDITS</button>
+          <button id="controls">CONTROLS</button>
         </div>
         <img class="top-left rotateHoraire" src="/menu/Rouage1.png" />
 
