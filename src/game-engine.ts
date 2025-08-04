@@ -9,6 +9,8 @@ import RaycasterHandler from '~/controls/raycaster-handler'
 import gameState from '~/game-state'
 import ClockHandler from '~/controls/clock-handler'
 import SoundManagement from '~/sound-design/index.sound-design'
+import { TranslationHandler } from '~/translations/translations'
+import { triggerDialog } from '~/ui/index.ui'
 
 export const globalUniforms: GlobalUniforms = {
   time: uniform(0)
@@ -28,6 +30,8 @@ export default class GameEngine {
   orbitControls: OrbitControls
   cameraControls: CameraControls
   raycasterHandler: RaycasterHandler
+  translationHandler = new TranslationHandler
+  translate = () => this.translationHandler.translate() // Shortcut method for translation
   musicHandler = new SoundManagement(this)
   clockHandler = new ClockHandler(this)
   entities: GameObject[]
@@ -102,19 +106,20 @@ export default class GameEngine {
   }
 
   onPointerUp(event: MouseEvent) {
-    if (!this.cameraControls.wasOrbiting()){
-      this.raycasterHandler.handleClick()
+    // Right click: go to hub
+    if(event.button === 2){
+      this.cameraControls.enterHubMode()
+    // Left click: interact
+    }else{
+      if (!this.cameraControls.wasOrbiting()) {
+        this.raycasterHandler.handleClick()
+      }
     }
   }
 
   onKeyUp(event: KeyboardEvent) {
     if(event.key === 'Escape'){
-      this.hub.rooms.forEach(room => {
-        room.doorLeft.meshGroup.visible = true
-        room.doorRight.meshGroup.visible = true
-      })
       this.cameraControls.enterHubMode()
-      this.activeMode = 'hub'
     }
   }
 

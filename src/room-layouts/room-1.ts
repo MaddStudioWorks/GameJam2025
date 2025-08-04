@@ -20,7 +20,7 @@ const roomLayout: RoomProps = {
           if(!gameEngine.gameState.inventory.switch1){
             switchObject.meshGroup.rotateZ(Math.PI)
             gameEngine.gameState.inventory.switch1 = true
-            triggerDialog('text', 'You have activated a switch. You hear a distant click.')
+            triggerDialog('text', gameEngine.translate().game.switchActivated)
           }
         }
       },

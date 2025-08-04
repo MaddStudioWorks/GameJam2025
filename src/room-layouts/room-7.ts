@@ -22,7 +22,7 @@ const roomLayout: RoomProps = {
             gameEngine.gameState.inventory.switch4 = true;
             triggerDialog(
               "text",
-              "You have activated a switch. You hear a distant click."
+              gameEngine.translate().game.switchActivated
             );
           }
         },

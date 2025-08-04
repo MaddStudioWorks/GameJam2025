@@ -21,7 +21,7 @@ const roomLayout: RoomProps = {
             gameEngine.gameState.inventory.switch5 = true;
             triggerDialog(
               "text",
-              "You have activated a switch. You hear a distant click."
+              gameEngine.translate().game.switchActivated
             );
           }
         },

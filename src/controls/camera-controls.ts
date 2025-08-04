@@ -18,6 +18,7 @@ export default class CameraControls {
 
   /** Camera Constraints in Hub mode */
   enterHubMode(){
+    this.gameEngine.activeMode = 'hub'
     this.gameEngine.orbitControls.target.set(0, 0.15, 0)
     this.gameEngine.orbitControls.minDistance = 1
     this.gameEngine.orbitControls.maxDistance = 1
@@ -38,7 +39,9 @@ export default class CameraControls {
   }
 
   /** CameraConstraints when in Doorstep mode */
-  enterDoorstepMode(room: Room){
+  enterDoorstepMode(room: Room) {
+    this.gameEngine.activeMode = 'doorstep'
+
     // Get the POI position in world coordinates
     const poiWorldPosition = room.meshGroup.localToWorld(room.poi.outside.position.clone())
 
@@ -69,6 +72,8 @@ export default class CameraControls {
 
   /** CameraConstraints when in RoomInspection mode */
   enterRoomInspectionMode(room: Room){
+    this.gameEngine.activeMode = 'roomInspection'
+
     // Get the POI position in world coordinates
     const poiWorldPosition = room.meshGroup.localToWorld(room.poi.inside.position.clone())
 

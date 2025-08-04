@@ -47,10 +47,7 @@ export default class Hub extends GameObject {
         onClick: (interactableObject: InteractableObject<Room>) => {
           if (gameEngine.activeMode === 'doorstep') {
             if(room.props.isLocked(gameEngine, room)){
-              triggerDialog('text', 'The door is locked.')
-              setTimeout(() => {
-                triggerDialog('close')
-              }, 3000)
+              triggerDialog('text', gameEngine.translate().game.doorLocked)
             }else{
               interactableObject.gameObject.doorLeft.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), -Math.PI/2)
               interactableObject.gameObject.doorRight.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), Math.PI/2)

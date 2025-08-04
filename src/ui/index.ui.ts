@@ -105,7 +105,7 @@ export const manageAll = (soundManager: SoundManagement) => {
   // Hide debug mode unless `#debug` is present in the URL
   if (window.location.hash !== "#debug") {
     (document.querySelector(".debug-ui") as HTMLDivElement).style.display =
-      "none";
+      "block";
   }
 
   const buttonImage = document.querySelector("#dImage");

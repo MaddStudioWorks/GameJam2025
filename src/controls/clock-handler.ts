@@ -17,7 +17,7 @@ export default class ClockHandler {
   onGameOver() {
     if(!this.gameEngine.gameState.hasWon){
       this.hasReachedGameOver = true;
-      triggerDialog("text", "The loop has not been broken, wait for the loop to restart");
+      triggerDialog("text", this.gameEngine.translate().game.gameOver);
       setTimeout(() => {
         window.location.reload()
       }, 5000);
