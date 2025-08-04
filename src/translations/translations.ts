@@ -17,11 +17,13 @@ export class TranslationHandler {
   dictionnary: typeof languages[keyof typeof languages]['dictionary']
 
   constructor() {
-    this.lang = 'fr'
+    // Get browser language and extract the language code (e.g., 'en-US' -> 'en')
+    const browserLang = navigator.language.split('-')[0] as keyof typeof languages
+
+    this.lang = languages[browserLang] ? browserLang : 'en'
   }
 
   translate() {
-    console.log(languages[this.lang], languages, this.lang)
     return languages[this.lang].dictionary
   }
 }
