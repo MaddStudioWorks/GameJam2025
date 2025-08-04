@@ -1,0 +1,5 @@
+- Vertex lighting
+  - bleeding noise at the edge of the shadows
+- Redo the dial by 
+  - merging all 3 textures in 1 mesh
+  - creating a proper 3D model for the needle
