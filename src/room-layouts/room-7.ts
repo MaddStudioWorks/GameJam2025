@@ -1,7 +1,8 @@
 import { Euler, Vector3 } from "three";
 import { RoomProps } from "~/interfaces/room-props";
 import { bgm } from "~/controls/sound-handler";
-import note2 from '~/assets/textures/interactive-objects/note2.png'
+import note2EN from '~/assets/textures/interactive-objects/note2-en.png'
+import note2FR from '~/assets/textures/interactive-objects/note2-fr.png'
 
 const roomLayout: RoomProps = {
   index: 7,
@@ -32,6 +33,7 @@ const roomLayout: RoomProps = {
         position: new Vector3(-0.1, 0.25, -0.49),
         rotation: new Euler,
         onClick: (gameEngine) => {
+          const note2 = gameEngine.translationHandler.lang === 'en' ? note2EN : note2FR
           gameEngine.uiHandler.triggerDialog('url', note2)
         }
       },
