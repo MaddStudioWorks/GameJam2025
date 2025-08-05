@@ -9,7 +9,8 @@ const frDictionnary = {
     escapeOrRightClick: "Échap ou clic droit",
     close: "Fermer",
     play: "Jouer",
-    escape: "Escape"
+    escape: "Escape",
+    inventory: "Inventaire",
   },
   game: {
     close: "Fermer",
