@@ -81,7 +81,7 @@ export default class UIHandler {
       })
 
       // Insert into menu
-      const menuContainer = document.querySelector('.menu-container .logo')
+      const menuContainer = document.querySelector('.menu-container .menu-options')
       if (menuContainer) {
         menuContainer.appendChild(langSelector)
       }

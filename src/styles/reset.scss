@@ -17,3 +17,14 @@ canvas {
   width: 100vw;
   height: 100vh;
 }
+
+button{
+  display: block;
+  background: none;
+  border: none;
+  outline: none;
+
+  &:hover{
+    cursor: pointer;
+  }
+}

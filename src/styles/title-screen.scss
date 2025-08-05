@@ -59,7 +59,7 @@ h2 {
   height: 50px;
   width: 120px;
   background-image: url("/escapeButton.png");
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
   border: 2px solid rgb(112, 60, 18);
@@ -175,7 +175,7 @@ h2 {
   animation: 18s rotateAntiHoraire infinite;
 }
 
-.logo {
+.menu-title {
   position: absolute;
   top: 0px;
   left: 48%;
@@ -187,30 +187,64 @@ h2 {
   gap: 20px;
 }
 
-.logo img {
+.menu-title .menu-logo {
   max-width: 1000px;
   width: 60vw;
 }
 
-.logo button {
-  height: 65px;
-  width: 160px;
+.menu-options{
+  display: flex;
+  flex-direction: column;
+  gap: var(--font-small-button);
+}
+
+.menu-title button {
+  height: 7vh;
   background-image: url("/escapeButton.png");
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
-  border: 2px solid rgb(112, 60, 18);
-  border-radius: 2px;
-  color: white;
+  color: var(--button-text);
+  font-family: var(--font-secondary);
+  font-size: var(--font-medium-button);
+  font-weight: bold;
+  text-shadow: 0 0.1em 0 var(--button-900), 0.05em 0.1em 0 var(--button-900), -0.05em 0.1em 0 var(--button-900);
+  padding: 0.1em 1em 0 1em;
   cursor: pointer;
   transition: all 0.3s;
+
+  &:hover {
+    box-shadow: 0 14px 28px rgba(255, 0, 191, 0.25),
+      0 10px 10px rgba(126, 15, 120, 0.22);
+  }
 }
 
-.logo button:hover {
-  box-shadow: 0 14px 28px rgba(255, 0, 191, 0.25),
-    0 10px 10px rgba(126, 15, 120, 0.22);
-}
+.menu-title select {
+  height: 7vh;
+  background: 
+    url("/chevron-down.svg") right 0.66em center/1em 1em no-repeat,
+    url("/escapeButton.png") center/100% 100% no-repeat;
+  color: var(--button-text);
+  font-family: var(--font-secondary);
+  font-size: var(--font-medium-button);
+  font-weight: bold;
+  text-shadow: 0 0.1em 0 var(--button-900), 0.05em 0.1em 0 var(--button-900), -0.05em 0.1em 0 var(--button-900);
+  padding: 0.1em calc(1.25em + 0.66em) 0 1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  appearance: none;
+  background-color: transparent;
+  border: none;
 
+  &:hover {
+    box-shadow: 0 14px 28px rgba(255, 0, 191, 0.25),
+      0 10px 10px rgba(126, 15, 120, 0.22);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
 
 @keyframes rotateHoraire {
   0% {

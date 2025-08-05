@@ -1,7 +1,13 @@
-@import 'reset';
-@import 'debug';
-@import 'title-screen';
-@import 'volume';
-@import 'dialog-ui';
-@import 'dialog-item';
-@import 'ending';
+@use 'reset';
+@use 'variables';
+@use 'debug';
+@use 'title-screen';
+@use 'volume';
+@use 'dialog-ui';
+@use 'dialog-item';
+@use 'ending';
+
+body{
+  color: var(--ui-text);
+  font-family: var(--font-secondary);
+}
