@@ -44,12 +44,22 @@
 }
 
 .dialogContent {
-  text-align: center;
-  align-items: center;
-  justify-content: space-around;
   display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 2vh;
+  align-items: center;
+  text-align: center;
   width: 100%;
-  padding: 15px;
+  padding: 5vw;
+
+  font-size: var(--font-dialog-text);
+  font-family: var(--font-primary);
+  line-height: 95%;
+
+  p:first-child{
+    font-weight: bold;
+  }
 }
 
 .dialogContent img {

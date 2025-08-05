@@ -17,7 +17,7 @@ const frDictionnary = {
     escape: "Échapper",
     key: "Clé",
     switch: "Interrupteur",
-    switchActivated: "Vous avez activé un interrupteur. Vous entendez un clic au loin.",
+    switchActivated: "Vous avez activé un interrupteur. <br>Vous entendez un clic au loin.",
     note: "Note",
     doorLocked: "La porte est verrouillée",
     gameOver: "La boucle n'a pas été brisée, et le cycle recommence",

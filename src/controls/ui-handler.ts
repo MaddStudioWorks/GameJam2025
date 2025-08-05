@@ -137,7 +137,15 @@ export default class UIHandler {
       if (dialog && text && dialogContent) {
         dialogContent.innerHTML = ""
         dialog.classList.add("dialog-displayed")
-        dialogContent.innerHTML = text
+        // Split text by <br> tags and create separate p elements
+        const textParts = text.split('<br>')
+        textParts.forEach(part => {
+          if (part.trim()) { // Only create p tag if there's content
+            const paragraph = document.createElement("p")
+            paragraph.innerHTML = part.trim()
+            dialogContent.appendChild(paragraph)
+          }
+        })
       }
     }
     if (type === "both") {
