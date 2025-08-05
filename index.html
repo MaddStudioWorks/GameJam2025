@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GAMEJAM</title>
+    <script type="module" crossorigin src="./assets/index-BHW21LVU.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DHQeP0QZ.css">
+  </head>
+  <body>
+    <div class="volume">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        fill="gold"
+        viewBox="0 0 24 24"
+      >
+        <path d="M9 3v12.26A4 4 0 1 0 11 19V7h6V3H9z" />
+      </svg>
+      <input
+        type="range"
+        id="volume"
+        name="volume"
+        min="0"
+        max="10"
+        value="5"
+        step="0.5"
+      />
+    </div>
+    <div class="controls">
+      <div class="overlay">
+        <h2 data-translate="controls">CONTROLES</h2>
+        <div class="controls-command">
+          <div>
+            <h3 data-translate="openSelect">OUVRIR/SÉLECTIONNER</h3>
+            <p data-translate="leftClick">Clic Gauche</p>
+          </div>
+          <div>
+            <h3 data-translate="exit">SORTIR</h3>
+            <p data-translate="escapeOrRightClick">Échap ou Clic Droit</p>
+          </div>
+        </div>
+        <button class="close-controls" data-translate="close">FERMER</button>
+      </div>
+    </div>
+    <section class="menu">
+      <div class="menu-container">
+        <div class="logo">
+          <img src="./menu/logomid.png" />
+          <button id="play" data-translate="play">JOUER</button>
+          <button id="controls" data-translate="controls">CONTROLS</button>
+          <!-- Language selector will be inserted here by UIHandler -->
+        </div>
+        <img class="top-left rotateHoraire" src="./menu/Rouage1.png" />
+
+        <img
+          class="bottom-left-one rotateAntiHoraire"
+          src="./menu/Rouage1.png"
+        />
+        <img class="bottom-left-two rotateHoraire" src="./menu/Rouage2.png" />
+
+        <img class="top-right-two rotateAntiHoraire" src="./menu/Rouage2.png" />
+        <img class="top-right-one rotateHoraire" src="./menu/Rouage1.png" />
+
+        <img
+          class="bottom-right-one rotateAntiHoraire"
+          src="./menu/Rouage1.png"
+        />
+        <img class="bottom-right-three rotateHoraire" src="./menu/Rouage1.png" />
+        <img
+          class="bottom-right-two rotateAntiHoraire"
+          src="./menu/Rouage2.png"
+        />
+      </div>
+    </section>
+    <section class="finalScene">
+      <div class="finalSceneContainer">
+        <div class="finalOne"></div>
+        <div class="finalTwo"></div>
+        <div class="finalThree"></div>
+        <div class="finalFour"></div>
+      </div>
+    </section>
+    <section id="keys" class="containerKeys">
+      <div class="containerKeys-title" data-translate="inventory">
+        Inventory
+      </div>
+      <div
+        style="background-image: url('/key1.png')"
+        class="containerKeys-key"
+        id="key-1"
+      ></div>
+      <div
+        style="background-image: url('/key2.png')"
+        class="containerKeys-key"
+        id="key-2"
+      ></div>
+      <div
+        style="background-image: url('/key3.png')"
+        class="containerKeys-key"
+        id="key-3"
+      ></div>
+    </section>
+    <div class="dialog">
+      <div class="dialogContent"></div>
+      <button class="dialog-close" data-translate="close">CLOSE</button>
+    </div>
+
+    <button class="escape" data-translate="escape">ESCAPE</button>
+
+    <div class="debug-ui" style="display: none">
+      <button id="mutehub">mute hub</button>
+      <button id="unmutehub">unmute hub</button>
+      <button id="mutebgm">mute bgm</button>
+      <button id="theme">theme</button>
+      <button id="menu">menu</button>
+      <button id="room1">room1</button>
+      <button id="room2">room2</button>
+      <button id="room3">room3</button>
+      <button id="room4">room4</button>
+      <button id="roomSecondary">secondary room</button>
+      <button id="pattern1">play all patterns</button>
+      <div class="divider"></div>
+      <button id="dText">dialog text</button>
+      <button id="dImage">dialog image</button>
+      <button id="dImageText">dialog image/text</button>
+      <button id="dClose">close dialog</button>
+      <button id="Key1">add key 1</button>
+      <button id="Key2">add key 2</button>
+      <button id="Key3">add key 3</button>
+      <button id="escape">show escape</button>
+      <button id="escapehide">hide escape</button>
+    </div>
+  </body>
+</html>
