@@ -27,12 +27,7 @@ export default class RoomNumber extends GameObject {
     super()
 
     const uvCoord = UVCoords[number as keyof typeof UVCoords]
-    console.log("Created Room Number", number, uvCoord)
-    
     const numberTextureMap = new TextureLoader().load(DoorNumbers)
-    numberTextureMap.onUpdate = () => {
-      console.log("Loaded Room Number texture", number, uvCoord, numberTextureMap)
-    }
     numberTextureMap.colorSpace = SRGBColorSpace
     numberTextureMap.anisotropy = 16
     
