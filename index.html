@@ -53,8 +53,32 @@
         window.location.reload();
       }, 44000);
     });
+
+
+    const volumeEvent = (value) => new CustomEvent('volumeTrack', {
+      detail: value
+    })
+
+    const range = document.querySelector(".volume");
+    range.addEventListener("input", (e) => {
+      dispatchEvent(volumeEvent(e.target.value))
+    });
   </script>
   <body>
+    <div class="volume">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="gold" viewBox="0 0 24 24">
+        <path d="M9 3v12.26A4 4 0 1 0 11 19V7h6V3H9z"/>
+      </svg>
+      <input
+        type="range"
+        id="volume"
+        name="volume"
+        min="0"
+        max="10"
+        value="5"
+        step="0.5"
+      />
+    </div>
     <div class="controls">
       <div class="overlay">
         <h2 data-translate="controls">CONTROLES</h2>
@@ -110,7 +134,9 @@
       </div>
     </section>
     <section id="keys" class="containerKeys">
-      <div class="containerKeys-title" data-translate="inventory">Inventory</div>
+      <div class="containerKeys-title" data-translate="inventory">
+        Inventory
+      </div>
       <div
         style="background-image: url('/key1.png')"
         class="containerKeys-key"
@@ -134,7 +160,7 @@
 
     <button class="escape" data-translate="escape">ESCAPE</button>
 
-    <div class="debug-ui" style="display: none;">
+    <div class="debug-ui" style="display: none">
       <button id="mutehub">mute hub</button>
       <button id="unmutehub">unmute hub</button>
       <button id="mutebgm">mute bgm</button>

@@ -41,6 +41,10 @@ export default class SoundHandler {
       room1: BGMroom1,
     };
     this.gameEngine = gameEngine;
+    window.addEventListener('volumeTrack', (value: CustomEvent) => {
+      this.manageVolume(parseInt(value.detail) / 10)
+      console.log(parseInt(value.detail) / 10)
+    })
   }
 
   playBGM(music: string, loop=true): void {
@@ -81,6 +85,10 @@ export default class SoundHandler {
         this.playBGMmusicHub[0].fade(0, 1, 3000);
       }
     });
+  }
+
+  manageVolume(value: number) {
+    Howler.volume(value);
   }
 
   playSFX(music: string): void {
