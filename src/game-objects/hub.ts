@@ -48,8 +48,11 @@ export default class Hub extends GameObject {
             if(room.props.isLocked(gameEngine, room)){
               gameEngine.uiHandler.triggerDialog('text', gameEngine.translate().game.doorLocked)
             }else{
-              interactableObject.gameObject.doorLeft.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), -Math.PI/2)
-              interactableObject.gameObject.doorRight.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), Math.PI/2)
+              if (!gameEngine.gameState.doors[room.props.index]){
+                gameEngine.gameState.doors[room.props.index] = true
+                interactableObject.gameObject.doorLeft.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), -Math.PI / 2)
+                interactableObject.gameObject.doorRight.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), Math.PI / 2)
+              }
               setTimeout(() => {
                 gameEngine.cameraControls.enterRoomInspectionMode(interactableObject.gameObject)
                 gameEngine.activeMode = 'roomInspection'
