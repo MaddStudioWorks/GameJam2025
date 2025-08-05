@@ -130,7 +130,6 @@ export default class UIHandler {
         const image = document.createElement("img")
         image.src = url
         dialogContent.appendChild(image)
-        console.log(url)
         const paragraph = document.createElement("div")
         paragraph.innerHTML = text
         dialogContent.appendChild(paragraph)
@@ -154,7 +153,6 @@ export default class UIHandler {
         }</p>`,
         keysTextures[keyNumber]
       )
-      console.log(this.gameEngine.gameState.inventory)
       this.checkKeys()
     }
   }

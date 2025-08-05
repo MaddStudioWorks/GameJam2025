@@ -26,7 +26,7 @@ export default class Hub extends GameObject {
 
     // Rooms
     roomLayouts.forEach(roomProps => {
-      const room = new Room(roomProps)
+      const room = new Room(roomProps, gameEngine)
       // Place each room on the clock
       const angle = roomProps.index * -Math.PI * 2 / 12
       room.meshGroup.rotateY(angle)

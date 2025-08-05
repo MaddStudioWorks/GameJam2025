@@ -9,6 +9,7 @@ export interface KeyObject{
   position: Vector3
   rotation: Euler
   onClick: (engine: GameEngine, gameObject: GameObject) => void
+  gameEngine: GameEngine
 }
 
 /*

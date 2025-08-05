@@ -17,15 +17,16 @@ export default class RoomInterior extends GameObject {
   material: MeshBasicNodeMaterial
   roomSize: number
   interactableObjects: InteractableObject[] = []
+  gameEngine: GameEngine
 
-  constructor(props: RoomProps) {
+  constructor(props: RoomProps, gameEngine: GameEngine) {
     super()
 
     this.roomSize = 0.5
 
     // Spawn interactive objects
     props.content.keyObjects.forEach(keyObject => {
-      const newKeyObject = new InteractiveObject(keyObject)
+      const newKeyObject = new InteractiveObject(keyObject, gameEngine)
       
       const newKeyObjectBbox = new Box3().setFromObject(newKeyObject.meshGroup)
       const size = new Vector3

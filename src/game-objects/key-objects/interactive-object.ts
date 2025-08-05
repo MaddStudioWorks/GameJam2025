@@ -51,12 +51,13 @@ export default class InteractiveObject extends GameObject {
   starTexture: Texture
   toggledStarTexture: Texture
 
-  constructor({ id, type }: KeyObject) {
+  constructor({ id, type }: KeyObject, gameEngine: GameEngine) {
     super()
     this.id = id
     this.type = type
 
-    const interactiveObjectTextureMap = new TextureLoader().load(textureName[type][id])
+    const texturePath = textureName[type][id](gameEngine)
+    const interactiveObjectTextureMap = new TextureLoader().load(texturePath)
     this.starTexture = new TextureLoader().load(star)
     this.toggledStarTexture = new TextureLoader().load(starToggled)
     interactiveObjectTextureMap.anisotropy = 16
@@ -96,7 +97,7 @@ export default class InteractiveObject extends GameObject {
   }
 
   onHover(){
-    console.log('InteractiveObject hovered', this)
+
   }
 
   tick(engine: GameEngine) {

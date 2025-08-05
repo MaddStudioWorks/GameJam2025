@@ -22,11 +22,13 @@ export default class Room extends GameObject {
   doorNumber: RoomNumber
   hitbox: Mesh
   interactableObjects: RaycastableCollection<GameObject> | null = null
+  gameEngine: GameEngine
 
-  constructor(props: RoomProps) {
+  constructor(props: RoomProps, gameEngine: GameEngine) {
     super()
 
     this.props = props
+    this.gameEngine = gameEngine
 
     // Calculate the room's angle around the hub
     const roomAngle = this.props.index * -Math.PI * 2 / 12
@@ -90,7 +92,7 @@ export default class Room extends GameObject {
     this.meshGroup.add(this.hitbox)
 
     // Room mesh
-    this.roomInterior = new RoomInterior(this.props)
+    this.roomInterior = new RoomInterior(this.props, this.gameEngine)
     // Place the room behind the entrance
     this.roomInterior.meshGroup.position.z = -this.roomInterior.roomSize * 0.5
     this.roomInterior.meshGroup.translateY(0.001)
