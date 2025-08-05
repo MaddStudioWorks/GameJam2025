@@ -43,7 +43,6 @@ export default class SoundHandler {
     this.gameEngine = gameEngine;
     window.addEventListener('volumeTrack', (value: CustomEvent) => {
       this.manageVolume(parseInt(value.detail) / 10)
-      console.log(parseInt(value.detail) / 10)
     })
   }
 
@@ -55,7 +54,6 @@ export default class SoundHandler {
     });
     this.playBGMmusic.play();
     this.playBGMmusic.fade(0, 1, 2000);
-    console.log("playBGM", music);
   }
 
   playBGMHub(music: string, loop: boolean, isFade: boolean): void {

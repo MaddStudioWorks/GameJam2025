@@ -27,7 +27,6 @@
       controlsHTML.classList.add("controls-show");
     };
     const hideControls = () => {
-      console.log("ccccc");
       controlsHTML.classList.remove("controls-show");
     };
 
@@ -35,7 +34,6 @@
     closeControls.onclick = () => hideControls();
 
     window.addEventListener("final", () => {
-      console.log("final test");
       setTimeout(() => {
         finalScene.classList.add("finalScene-show");
       }, 200);
@@ -54,20 +52,26 @@
       }, 44000);
     });
 
-
-    const volumeEvent = (value) => new CustomEvent('volumeTrack', {
-      detail: value
-    })
+    const volumeEvent = (value) =>
+      new CustomEvent("volumeTrack", {
+        detail: value,
+      });
 
     const range = document.querySelector(".volume");
     range.addEventListener("input", (e) => {
-      dispatchEvent(volumeEvent(e.target.value))
+      dispatchEvent(volumeEvent(e.target.value));
     });
   </script>
   <body>
     <div class="volume">
-      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="gold" viewBox="0 0 24 24">
-        <path d="M9 3v12.26A4 4 0 1 0 11 19V7h6V3H9z"/>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        fill="gold"
+        viewBox="0 0 24 24"
+      >
+        <path d="M9 3v12.26A4 4 0 1 0 11 19V7h6V3H9z" />
       </svg>
       <input
         type="range"

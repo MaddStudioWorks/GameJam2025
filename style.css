@@ -28,7 +28,6 @@ canvas {
   align-items: center;
 }
 
-/* style de base */
 .volume input[type="range"] {
   appearance: none;
   border-radius: 3px;
