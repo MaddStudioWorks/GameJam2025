@@ -1,0 +1,76 @@
+.escape {
+  width: 150px;
+  height: 60px;
+  position: absolute;
+  bottom: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-image: url("/escapeButton.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 2px solid rgb(112, 60, 18);
+  border-radius: 8px;
+  transition: all 0.3s;
+  color: white;
+}
+
+.escape-show {
+  bottom: 50px;
+}
+
+.escape:hover {
+  bottom: 40px;
+}
+
+.dialog {
+  max-width: 60%;
+  max-height: 80vh;
+  width: 500px;
+  min-height: 300px;
+  background: wheat;
+  position: absolute;
+  top: -100%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  border-radius: 8px;
+  border: 6px solid rgba(112, 60, 18, 0.39);
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  transition: all 0.5s;
+  padding-bottom: 10px;
+}
+
+.dialogContent {
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  width: 100%;
+  padding: 15px;
+}
+
+.dialogContent img {
+  width: 350px;
+  height: auto;
+}
+
+.dialog-displayed {
+  top: 50%;
+}
+
+.dialog-close {
+  height: 35px;
+  width: 80px;
+  background-image: url("/escapeButton.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 2px solid rgb(112, 60, 18);
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+}

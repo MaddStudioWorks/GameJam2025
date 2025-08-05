@@ -1,0 +1,36 @@
+.debug-ui {
+  height: 80vh;
+  width: 200px;
+  background: wheat;
+  position: absolute;
+  right: 130px;
+  border-radius: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  overflow: auto;
+}
+
+.debug-ui>button {
+  border: 1px saddlebrown solid;
+  background: none;
+  padding: 10px 5px;
+  border-radius: 6px;
+  color: saddlebrown;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.debug-ui>button:hover {
+  background: saddlebrown;
+  color: white;
+  cursor: pointer;
+}
+
+.divider {
+  border: 3px saddlebrown solid;
+  margin: 10px 0;
+}
