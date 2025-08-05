@@ -8,34 +8,37 @@ import switch1 from '~/assets/textures/interactive-objects/switch1.png'
 import constellationPoster1 from '~/assets/textures/interactive-objects/constellationPoster1.png'
 import constellationPoster2 from '~/assets/textures/interactive-objects/constellationPoster2.png'
 import constellationPoster3 from '~/assets/textures/interactive-objects/constellationPoster3.png'
-import note1 from '~/assets/textures/interactive-objects/note1-fr.png'
-import note2 from '~/assets/textures/interactive-objects/note2-fr.png'
-import note3 from '~/assets/textures/interactive-objects/note3-fr.png'
+import note1EN from '~/assets/textures/interactive-objects/note1-en.png'
+import note2EN from '~/assets/textures/interactive-objects/note2-en.png'
+import note3EN from '~/assets/textures/interactive-objects/note3-en.png'
+import note1FR from '~/assets/textures/interactive-objects/note1-fr.png'
+import note2FR from '~/assets/textures/interactive-objects/note2-fr.png'
+import note3FR from '~/assets/textures/interactive-objects/note3-fr.png'
 import star from '~/assets/textures/interactive-objects/star.png'
 import starToggled from '~/assets/textures/interactive-objects/starToggled.png'
 import { KeyObject } from '~/interfaces/room-props'
 
 const textureName = {
   key : {
-    1: key1,
-    2: key2,
-    3: key3,
+    1: (gameEngine: GameEngine) => key1,
+    2: (gameEngine: GameEngine) => key2,
+    3: (gameEngine: GameEngine) => key3,
   },
   switch: {
-    1: switch1,
+    1: (gameEngine: GameEngine) => switch1,
   },
   constellationPoster: {
-    1: constellationPoster1,
-    2: constellationPoster2,
-    3: constellationPoster3,
+    1: (gameEngine: GameEngine) => constellationPoster1,
+    2: (gameEngine: GameEngine) => constellationPoster2,
+    3: (gameEngine: GameEngine) => constellationPoster3,
   },
   note: {
-    1: note1,
-    2: note2,
-    3: note3,
+    1: (gameEngine: GameEngine) => gameEngine.translationHandler.lang === 'en' ? note1EN : note1FR,
+    2: (gameEngine: GameEngine) => gameEngine.translationHandler.lang === 'en' ? note2EN : note2FR,
+    3: (gameEngine: GameEngine) => gameEngine.translationHandler.lang === 'en' ? note3EN : note3FR,
   },
   star: {
-    1: star
+    1: (gameEngine: GameEngine) => star
   }
 }
 
