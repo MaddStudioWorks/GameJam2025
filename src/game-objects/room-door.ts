@@ -1,6 +1,6 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { color, Color, distance, Fn, length, Mesh, MeshBasicNodeMaterial, mix, pow, RepeatWrapping, saturate, smoothstep, SRGBColorSpace, step, texture, TextureLoader, uv, vec2 } from 'three/webgpu'
+import { color, Fn, Mesh, MeshBasicNodeMaterial, mix, pow, RepeatWrapping, saturate, smoothstep, SRGBColorSpace, texture, TextureLoader, uniform, uv } from 'three/webgpu'
 import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import DoorModelL from '~/assets/meshes/Room_Door_L.glb?url'
 import DoorModelR from '~/assets/meshes/Room_Door_R.glb?url'
@@ -22,9 +22,15 @@ const doorTextures: Record<RoomProps["doorType"], string> = {
 export default class RoomDoor extends GameObject {
   material: MeshBasicNodeMaterial
   open = false
+  hovered = false
 
   constructor(side: "left" | "right", doorType: RoomProps["doorType"]) {
     super()
+
+    const hovered = uniform(1)
+    hovered.onFrameUpdate(() => {
+      return this.hovered ? 1 : 0
+    })
 
     const doorTexture = doorTextures[doorType]
     const roomTextureMap = new TextureLoader().load(doorTexture)
@@ -32,6 +38,7 @@ export default class RoomDoor extends GameObject {
     roomTextureMap.colorSpace = SRGBColorSpace
     roomTextureMap.anisotropy = 16
     roomTextureMap.wrapS = roomTextureMap.wrapT = RepeatWrapping
+
     this.material = new MeshBasicNodeMaterial
     this.material.colorNode = Fn(() => {
       const texel = texture(roomTextureMap, uv())
@@ -40,7 +47,13 @@ export default class RoomDoor extends GameObject {
       const distanceFromCenter = x.add(y)
       const shadow = smoothstep(0.25, 1, distanceFromCenter)
       const shadow2 = saturate(pow(shadow, 2))
-      return mix(texel, color(0x000000), shadow2)
+      const baseColor = mix(texel, color(0x000000), shadow2)
+
+      // Apply contrast: mix between original color and high contrast version
+      const contrastColor = mix(color(0.5), baseColor, 2.0) // Increase contrast
+      const result = mix(baseColor, contrastColor, hovered)
+
+      return result
     })()
 
     const loader = new GLTFLoader()

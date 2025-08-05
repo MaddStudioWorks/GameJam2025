@@ -24,6 +24,7 @@ export default class GameEngine {
   uniforms = globalUniforms
   deltaTime: number = 0
   cursor: Vector2 = new Vector2(0, 0)
+  cursorType = 'default'
   gameState = gameState
 
   // Engine components
@@ -121,6 +122,12 @@ export default class GameEngine {
     }
   }
 
+  updateCursorType() {
+    if(document.body.style.cursor !== this.cursorType){
+      document.body.style.cursor = this.cursorType
+    }
+  }
+
   onKeyUp(event: KeyboardEvent) {
     if(event.key === 'Escape'){
       this.cameraControls.enterHubMode()
@@ -138,6 +145,7 @@ export default class GameEngine {
     this.gameState.time = timeProgress > 1 ? 1 : timeProgress
 
     // Game state updates
+    this.updateCursorType()
     this.clockHandler.tick()
     if(!this.cameraControls.isOrbiting){
       this.raycasterHandler.handleHover()
