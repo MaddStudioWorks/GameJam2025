@@ -1,5 +1,5 @@
 import { Euler, Vector3 } from 'three'
-import { RoomProps } from '~/interfaces/room-props'
+import { RoomProps } from '~/types/room-props'
 import { bgm } from '~/controls/sound-handler'
 import note3EN from '~/assets/textures/interactive-objects/note3-en.png'
 import note3FR from '~/assets/textures/interactive-objects/note3-fr.png'

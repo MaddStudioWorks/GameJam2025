@@ -1,6 +1,6 @@
 import { Euler, Vector3 } from 'three'
 import GameEngine from '~/game-engine'
-import { RoomProps } from '~/interfaces/room-props'
+import { RoomProps } from '~/types/room-props'
 import { bgm } from '~/controls/sound-handler'
 
 const checkStarsCombination = (gameEngine: GameEngine) => {

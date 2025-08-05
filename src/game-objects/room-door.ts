@@ -9,7 +9,7 @@ import DoorTexture_denial from '~/assets/textures/doors/denial.jpg?url'
 import DoorTexture_anger from '~/assets/textures/doors/anger.jpg?url'
 import DoorTexture_sadness from '~/assets/textures/doors/sadness.jpg?url'
 import DoorTexture_acceptance from '~/assets/textures/doors/acceptance.jpg?url'
-import { RoomProps } from '~/interfaces/room-props'
+import { RoomProps } from '~/types/room-props'
 
 const doorTextures: Record<RoomProps["doorType"], string> = {
   default: DoorTexture_default,

@@ -16,7 +16,7 @@ import note2FR from '~/assets/textures/interactive-objects/note2-fr.png'
 import note3FR from '~/assets/textures/interactive-objects/note3-fr.png'
 import star from '~/assets/textures/interactive-objects/star.png'
 import starToggled from '~/assets/textures/interactive-objects/starToggled.png'
-import { KeyObject } from '~/interfaces/room-props'
+import { KeyObject } from '~/types/room-props'
 
 const textureName = {
   key : {

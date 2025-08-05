@@ -1,4 +1,4 @@
-import { RoomProps } from '~/interfaces/room-props'
+import { RoomProps } from '~/types/room-props'
 import room1 from '~/room-layouts/room-1'
 import room2 from '~/room-layouts/room-2'
 import room3 from '~/room-layouts/room-3'

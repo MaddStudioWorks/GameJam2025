@@ -1,5 +1,5 @@
 import { Euler, Vector3 } from 'three'
-import { RoomProps } from '~/interfaces/room-props'
+import { RoomProps } from '~/types/room-props'
 import { bgm, sfx } from '~/controls/sound-handler'
 
 const roomLayout: RoomProps = {
