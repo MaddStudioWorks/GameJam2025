@@ -33,6 +33,7 @@ export default class CameraHandler {
     this.gameEngine.musicHandler.transitionFromRoomToHub()
 
     // Enable interactions in the Hub
+    this.gameEngine.uiHandler.toggleEscape(false)
     this.gameEngine.hub.interactableDoors!.enabled = true
     // Disable interactions inside the Rooms
     this.gameEngine.hub.rooms.forEach(room => room.interactableObjects!.enabled = false)
@@ -65,6 +66,7 @@ export default class CameraHandler {
     this.gameEngine.orbitControls.update()
 
     // Enable interactions in the Hub
+    this.gameEngine.uiHandler.toggleEscape(true)
     this.gameEngine.hub.interactableDoors!.enabled = true
     // Disable interactions inside the Rooms
     this.gameEngine.hub.rooms.forEach(room => room.interactableObjects!.enabled = false)
@@ -100,6 +102,7 @@ export default class CameraHandler {
     this.gameEngine.musicHandler.transitionFromHubToRoom(room.props.content.music)
 
     // Disable interactions in the Hub
+    this.gameEngine.uiHandler.toggleEscape(true)
     this.gameEngine.hub.interactableDoors!.enabled = false
     // Enable interactions inside the room 
     room.interactableObjects!.enabled = true

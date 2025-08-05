@@ -34,11 +34,11 @@ export default class UIHandler {
 
     // Escape menu buttons
     this.setupButton("#escape", () => {
-      this.toggleEscape("open")
+      this.toggleEscape(true)
     })
 
     this.setupButton("#escapehide", () => {
-      this.toggleEscape("close")
+      this.toggleEscape(false)
     })
 
     this.setupButton(".escape", () => {
@@ -85,15 +85,14 @@ export default class UIHandler {
   }
 
   triggerEscape() {
-    const escape = document.querySelector(".escape")
-    const eventEscape = new CustomEvent("escape")
-    if (escape) dispatchEvent(eventEscape)
+    this.gameEngine.cameraControls.enterHubMode()
+    this.toggleEscape(false)
   }
 
-  toggleEscape(type: string) {
+  toggleEscape(show: boolean) {
     const escape = document.querySelector(".escape")
     if (escape) {
-      type === "open"
+      show
         ? escape.classList.add("escape-show")
         : escape.classList.remove("escape-show")
     }
