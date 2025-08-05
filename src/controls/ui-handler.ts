@@ -21,6 +21,7 @@ export default class UIHandler {
 
   initializeUI() {
     this.setupUIButtons()
+    this.setupKeyInventory()
     this.setupLanguageSelector()
     // Translate UI on initialization
     this.gameEngine.translationHandler.translateUI()
@@ -43,6 +44,22 @@ export default class UIHandler {
 
     this.setupButton(".escape", () => {
       this.triggerEscape()
+    })
+  }
+
+  setupKeyInventory() {
+    const keyImages = {
+      1: key1,
+      2: key2,
+      3: key3
+    }
+
+    // Update existing key elements with imported assets
+    Object.entries(keyImages).forEach(([keyId, imagePath]) => {
+      const keyElement = document.getElementById(`key-${keyId}`)
+      if (keyElement) {
+        keyElement.style.backgroundImage = `url('${imagePath}')`
+      }
     })
   }
 

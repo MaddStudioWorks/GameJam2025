@@ -1,4 +1,5 @@
 import GameEngine from "~/game-engine"
+import key1 from '~/assets/textures/interactive-objects/key1.png'
 
 export default class DebugHandler {
   gameEngine: GameEngine
@@ -21,7 +22,7 @@ export default class DebugHandler {
   setupDebugButtons() {
     // Dialog debug buttons
     this.setupButton("#dImage", () => {
-      this.gameEngine.uiHandler.triggerDialog("url", "/key1.png")
+      this.gameEngine.uiHandler.triggerDialog("url", key1)
     })
 
     this.setupButton("#dClose", () => {
@@ -33,7 +34,7 @@ export default class DebugHandler {
     })
 
     this.setupButton("#dImageText", () => {
-      this.gameEngine.uiHandler.triggerDialog("both", "Vous avez récupéré un indice", "/key2.png")
+      this.gameEngine.uiHandler.triggerDialog("both", "Vous avez récupéré un indice", key1)
     })
 
     // Music debug buttons
