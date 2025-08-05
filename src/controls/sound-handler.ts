@@ -54,13 +54,13 @@ export default class SoundHandler {
       room1: BGMroom1,
     };
     this.gameEngine = gameEngine;
-    window.addEventListener('volumeTrack', (value: CustomEvent) => {
-      this.manageVolume(parseInt(value.detail) / 10)
-    })
-    this.playSFX(sfx.tick, true)
+    window.addEventListener("volumeTrack", (value: CustomEvent) => {
+      this.manageVolume(parseInt(value.detail) / 10);
+    });
+    this.playSFX(sfx.tick, true);
   }
 
-  playBGM(music: string, loop=true): void {
+  playBGM(music: string, loop = true): void {
     this.playBGMmusic = new Howl({
       src: [music],
       loop,
@@ -107,7 +107,7 @@ export default class SoundHandler {
     this.playSFXsound = new Howl({
       src: [music],
       loop,
-      volume: 0.2
+      volume: 0.2,
     });
     this.playSFXsound.play();
   }
