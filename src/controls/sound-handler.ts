@@ -11,6 +11,11 @@ import BGMpattern1 from "/pattern.ogg";
 import BGMpattern2 from "/pattern2.ogg";
 import BGMpattern3 from "/pattern3.ogg";
 import BGMpattern4 from "/pattern4.ogg";
+import SFXswitch from "/sfx/doorOpen.wav";
+import SFXmecanismOne from "/sfx/mecanismOne.wav";
+import SFXmecanismTwo from "/sfx/mecanismTwo.wav";
+import SFXtick from "/sfx/tick.mp3";
+import SFXdoor from "/sfx/switch.wav";
 
 export const bgm = {
   theme: BGMtheme,
@@ -24,6 +29,14 @@ export const bgm = {
   pattern4: BGMpattern4,
   secondary: BGMroomsecondary,
   menu: BGMmenu,
+} as const;
+
+export const sfx = {
+  door: SFXswitch,
+  mecanismOne: SFXmecanismOne,
+  mecanismTwo: SFXmecanismTwo,
+  switch: SFXdoor,
+  tick: SFXtick,
 } as const;
 
 export default class SoundHandler {
@@ -44,6 +57,7 @@ export default class SoundHandler {
     window.addEventListener('volumeTrack', (value: CustomEvent) => {
       this.manageVolume(parseInt(value.detail) / 10)
     })
+    this.playSFX(sfx.tick, true)
   }
 
   playBGM(music: string, loop=true): void {
@@ -89,9 +103,11 @@ export default class SoundHandler {
     Howler.volume(value);
   }
 
-  playSFX(music: string): void {
+  playSFX(music: string, loop: boolean = false): void {
     this.playSFXsound = new Howl({
       src: [music],
+      loop,
+      volume: 0.2
     });
     this.playSFXsound.play();
   }

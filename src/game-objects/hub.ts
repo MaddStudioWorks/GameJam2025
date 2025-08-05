@@ -6,6 +6,7 @@ import HubFloor from '~/game-objects/hub-floor'
 import GameClock from '~/game-objects/clock'
 import { InteractableObject, RaycastableCollection } from '~/controls/raycaster-handler'
 import { roomLayouts } from '~/room-layouts/room-layouts'
+import { sfx } from "~/controls/sound-handler";
 
 export default class Hub extends GameObject {
   rooms: Room[] = []
@@ -52,6 +53,7 @@ export default class Hub extends GameObject {
                 gameEngine.gameState.doors[room.props.index] = true
                 interactableObject.gameObject.doorLeft.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), -Math.PI / 2)
                 interactableObject.gameObject.doorRight.meshGroup.rotateOnAxis(new Vector3(0, 1, 0), Math.PI / 2)
+                gameEngine.musicHandler.playSFX(sfx.door)
               }
               setTimeout(() => {
                 gameEngine.cameraControls.enterRoomInspectionMode(interactableObject.gameObject)

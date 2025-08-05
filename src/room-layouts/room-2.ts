@@ -1,6 +1,6 @@
 import { Euler, Vector3 } from 'three'
 import { RoomProps } from '~/interfaces/room-props'
-import { bgm } from '~/controls/sound-handler'
+import { bgm, sfx } from '~/controls/sound-handler'
 
 const roomLayout: RoomProps = {
   index: 2,
@@ -19,6 +19,7 @@ const roomLayout: RoomProps = {
             switchObject.meshGroup.rotateZ(Math.PI)
             gameEngine.gameState.inventory.switch2 = true
             gameEngine.uiHandler.triggerDialog('text', gameEngine.translate().game.switchActivated)
+            gameEngine.musicHandler.playSFX(sfx.switch)
           }
         }
       },

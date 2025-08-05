@@ -1,6 +1,6 @@
 import { Euler, Vector3 } from "three";
 import { RoomProps } from "~/interfaces/room-props";
-import { bgm } from "~/controls/sound-handler";
+import { bgm, sfx } from "~/controls/sound-handler";
 import note2EN from '~/assets/textures/interactive-objects/note2-en.png'
 import note2FR from '~/assets/textures/interactive-objects/note2-fr.png'
 
@@ -24,6 +24,7 @@ const roomLayout: RoomProps = {
               "text",
               gameEngine.translate().game.switchActivated
             );
+            gameEngine.musicHandler.playSFX(sfx.switch)
           }
         },
       },
