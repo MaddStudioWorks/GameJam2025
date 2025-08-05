@@ -1,32 +1,22 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
 import { Mesh, MeshBasicNodeMaterial, PlaneGeometry, SRGBColorSpace, TextureLoader } from 'three/webgpu'
-import DoorNumber1 from '~/assets/textures/doors/numbers/number-1.png?url'
-import DoorNumber2 from '~/assets/textures/doors/numbers/number-2.png?url'
-import DoorNumber3 from '~/assets/textures/doors/numbers/number-3.png?url'
-import DoorNumber4 from '~/assets/textures/doors/numbers/number-4.png?url'
-import DoorNumber5 from '~/assets/textures/doors/numbers/number-5.png?url'
-import DoorNumber6 from '~/assets/textures/doors/numbers/number-6.png?url'
-import DoorNumber7 from '~/assets/textures/doors/numbers/number-7.png?url'
-import DoorNumber8 from '~/assets/textures/doors/numbers/number-8.png?url'
-import DoorNumber9 from '~/assets/textures/doors/numbers/number-9.png?url'
-import DoorNumber10 from '~/assets/textures/doors/numbers/number-10.png?url'
-import DoorNumber11 from '~/assets/textures/doors/numbers/number-11.png?url'
-import DoorNumber12 from '~/assets/textures/doors/numbers/number-12.png?url'
+import DoorNumbers from '~/assets/textures/doors/numbers.png?url'
 
-const doorTextures = {
-  1: DoorNumber1,
-  2: DoorNumber2,
-  3: DoorNumber3,
-  4: DoorNumber4,
-  5: DoorNumber5,
-  6: DoorNumber6,
-  7: DoorNumber7,
-  8: DoorNumber8,
-  9: DoorNumber9,
-  10: DoorNumber10,
-  11: DoorNumber11,
-  0: DoorNumber12
+const UVCoords = {
+  1: { offsetX: 0, offsetY: 0.75 },      // Row 1, Col 1
+  2: { offsetX: 0.25, offsetY: 0.75 },   // Row 1, Col 2
+  3: { offsetX: 0.5, offsetY: 0.75 },    // Row 1, Col 3
+  4: { offsetX: 0.75, offsetY: 0.75 },   // Row 1, Col 4
+  5: { offsetX: 0, offsetY: 0.5 },       // Row 2, Col 1
+  6: { offsetX: 0.25, offsetY: 0.5 },    // Row 2, Col 2
+  7: { offsetX: 0.5, offsetY: 0.5 },     // Row 2, Col 3
+  8: { offsetX: 0.75, offsetY: 0.5 },    // Row 2, Col 4
+  9: { offsetX: 0, offsetY: 0.25 },      // Row 3, Col 1
+  10: { offsetX: 0.25, offsetY: 0.25 },  // Row 3, Col 2
+  11: { offsetX: 0.5, offsetY: 0.25 },   // Row 3, Col 3
+  12: { offsetX: 0.75, offsetY: 0.25 },  // Row 3, Col 4
+  0: { offsetX: 0.75, offsetY: 0.25 }    // Same as 12
 }
 
 export default class RoomNumber extends GameObject {
@@ -36,10 +26,20 @@ export default class RoomNumber extends GameObject {
   constructor(number: number) {
     super()
 
-    const doorTexture = doorTextures[number]
-    const numberTextureMap = new TextureLoader().load(doorTexture)
+    const uvCoord = UVCoords[number as keyof typeof UVCoords]
+    console.log("Created Room Number", number, uvCoord)
+    
+    const numberTextureMap = new TextureLoader().load(DoorNumbers)
+    numberTextureMap.onUpdate = () => {
+      console.log("Loaded Room Number texture", number, uvCoord, numberTextureMap)
+    }
     numberTextureMap.colorSpace = SRGBColorSpace
     numberTextureMap.anisotropy = 16
+    
+    // Set texture repeat and offset for atlas sampling
+    numberTextureMap.repeat.set(0.25, 0.25) // Each tile is 1/4 of the texture
+    numberTextureMap.offset.set(uvCoord.offsetX, uvCoord.offsetY)
+    
     this.material = new MeshBasicNodeMaterial({
       map: numberTextureMap,
       transparent: true
