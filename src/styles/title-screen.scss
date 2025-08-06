@@ -1,78 +1,4 @@
-.controls {
-  position: absolute;
-  width: 60vw;
-  height: 60vh;
-  background: white;
-  z-index: 1001;
-  left: 50%;
-  top: -90%;
-  transform: translate(-50%, -50%);
-  background: url('/final/final1.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  transition: all .3s;
-  border-radius: 0.4vw;
-  border: 0.2vw white solid;
-
-}
-
-.controls-show {
-  transform: translate(-50%, -50%) !important;
-  top: 50% !important;
-}
-
-.overlay {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.842);
-  color: white;
-  padding: 1vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: space-around;
-}
-
-.overlay p,
-h2 {
-  margin-top: 0;
-}
-
-.overlay h2 {
-  margin-bottom: 5vh;
-}
-
-.overlay span {
-  margin-top: 1vh;
-}
-
-.close-controls {
-  display: flex;
-  width: fit-content;
-  padding: 0.5vw;
-  align-self: center;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  height: 5vh;
-  width: 6vw;
-  background-image: url("/escapeButton.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  border: 0.1vw solid rgb(112, 60, 18);
-  border-radius: 0.1vw;
-  color: white;
-  text-align: center;
-}
-
-.controls-command {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
+// Title Screen
 
 .menu,
 .finalScene {
@@ -207,27 +133,6 @@ h2 {
   gap: var(--font-small-button);
 }
 
-.menu-title button {
-  height: 9vh;
-  background-image: url("/escapeButton.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  color: var(--button-text);
-  font-family: var(--font-secondary);
-  font-size: var(--font-medium-button);
-  font-weight: bold;
-  text-shadow: 0 0.1em 0 var(--button-900), 0.05em 0.1em 0 var(--button-900), -0.05em 0.1em 0 var(--button-900);
-  padding: 0.1em 1em 0 1em;
-  cursor: pointer;
-  transition: all 0.3s;
-
-  &:hover {
-    box-shadow: 0 1.5vh 3vh rgba(255, 0, 191, 0.25),
-      0 1vh 1vh rgba(126, 15, 120, 0.22);
-  }
-}
-
 .menu-title select {
   height: 9vh;
   background:
@@ -280,5 +185,90 @@ h2 {
 
   100% {
     transform: rotateZ(0deg);
+  }
+}
+
+// Controls popup
+
+.controls {
+  position: absolute;
+  width: 60vw;
+  height: 60vh;
+  background: white;
+  z-index: 1001;
+  left: 50%;
+  top: -90%;
+  transform: translate(-50%, -50%);
+  background: url('/final/final1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition: all .3s;
+  border-radius: 0.4vw;
+  border: 0.2vw white solid;
+  box-shadow: 0 0 20vh 30vh rgba(0, 0, 0, 0.66);
+  font-family: var(--font-primary);
+
+  h2{
+    font-size: var(--font-controls-title);
+    font-weight: bold;
+  }
+
+  h3{
+    font-size: var(--font-controls-name);
+    font-weight: bold;
+  }
+
+  .keybind-group{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .keybind{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 5vh;
+    background-color: var(--ui-500);
+    border: 0.15em solid var(--ui-text);
+    border-radius: 0.33em;
+    padding: 0 1em;
+    font-size: var(--font-controls-keybind);
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--ui-text);
+  }
+}
+
+.controls-show {
+  transform: translate(-50%, -50%) !important;
+  top: 50% !important;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.66);
+  color: white;
+  padding: 1vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.controls-command {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .controls-command-entry{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh;
   }
 }

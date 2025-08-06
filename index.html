@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="src/index.ts"></script>
     <link rel="stylesheet" href="src/styles/main.scss" />
-    <title>GAMEJAM</title>
+    <title>Midnight Lament</title>
   </head>
   <script type="module">
     const menu = document.querySelector(".menu");
@@ -87,16 +87,20 @@
       <div class="overlay">
         <h2 data-translate="controls">CONTROLES</h2>
         <div class="controls-command">
-          <div>
+          <div class="controls-command-entry">
             <h3 data-translate="openSelect">OUVRIR/SÉLECTIONNER</h3>
-            <p data-translate="leftClick">Clic Gauche</p>
+            <div class="keybind" data-translate="leftClick">Clic Gauche</div>
           </div>
-          <div>
+          <div class="controls-command-entry">
             <h3 data-translate="exit">SORTIR</h3>
-            <p data-translate="escapeOrRightClick">Échap ou Clic Droit</p>
+            <div class="keybind-group">
+              <div class="keybind" data-translate="escape">Échap</div>
+              <span data-translate="or">ou</span>
+              <div class="keybind" data-translate="rightClick">Clic Droit</div>
+            </div>
           </div>
         </div>
-        <button class="close-controls" data-translate="close">FERMER</button>
+        <button class="medium-button close-controls" data-translate="close">FERMER</button>
       </div>
     </div>
     <section class="menu">
@@ -104,8 +108,8 @@
         <div class="menu-title">
           <img class="menu-logo" src="/menu/logomid.png" />
           <div class="menu-options">
-            <button id="play" data-translate="play">JOUER</button>
-            <button id="controls" data-translate="controls">CONTROLES</button>
+            <button class="medium-button" id="play" data-translate="play">JOUER</button>
+            <button class="medium-button" id="controls" data-translate="controls">CONTROLES</button>
             <!-- Language selector will be inserted here by UIHandler -->
           </div>
         </div>
@@ -149,10 +153,10 @@
     </section>
     <div class="dialog">
       <div class="dialogContent"></div>
-      <button class="dialog-close" data-translate="close">CLOSE</button>
+      <button class="medium-button dialog-close" data-translate="close">CLOSE</button>
     </div>
 
-    <button class="escape" data-translate="escape">ESCAPE</button>
+    <button class="escape medium-button" data-translate="escape">ESCAPE</button>
 
     <div class="debug-ui" style="display: none">
       <button id="mutehub">mute hub</button>

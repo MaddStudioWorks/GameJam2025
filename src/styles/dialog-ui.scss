@@ -1,25 +1,17 @@
 .escape {
-  width: 150px;
-  height: 60px;
   position: absolute;
   bottom: -150px;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url("/escapeButton.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 8px;
   transition: all 0.3s;
-  color: white;
 }
 
 .escape-show {
-  bottom: 50px;
+  bottom: 5vh;
 }
 
 .escape:hover {
-  bottom: 40px;
+  transform: translateX(-50%) translateY(25%);
 }
 
 .dialog {
@@ -69,16 +61,4 @@
 
 .dialog-displayed {
   top: 50%;
-}
-
-.dialog-close {
-  height: 35px;
-  width: 80px;
-  background-image: url("/escapeButton.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 2px;
-  color: white;
-  cursor: pointer;
 }

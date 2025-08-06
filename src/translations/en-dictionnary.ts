@@ -6,10 +6,11 @@ const enDictionnary = {
     openSelect: "Open/Select",
     leftClick: "Left Click",
     exit: "Exit",
-    escapeOrRightClick: "Escape or Right Click",
+    escape: "Escape",
+    rightClick: "Right Click",
+    or: "or",
     close: "Close",
     play: "Play",
-    escape: "Escape",
     inventory: "Inventory",
   },
   game: {

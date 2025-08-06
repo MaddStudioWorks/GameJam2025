@@ -6,10 +6,11 @@ const frDictionnary = {
     openSelect: "Ouvrir/Sélectionner",
     leftClick: "Clic gauche",
     exit: "Sortir",
-    escapeOrRightClick: "Échap ou clic droit",
+    escape: "Échap",
+    rightClick: "Clic droit",
+    or: "ou",
     close: "Fermer",
     play: "Jouer",
-    escape: "Escape",
     inventory: "Inventaire",
   },
   game: {
