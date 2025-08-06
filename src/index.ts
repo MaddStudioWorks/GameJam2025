@@ -18,10 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const hideControls = () => {
     controlsHTML.classList.remove("controls-show")
   }
-
-  play.addEventListener("click", () => {
+  const startGame = () => {
     hideMenu()
     gameEngine.start()
+  }
+
+  play.addEventListener("click", () => {
+    startGame()
   })
   controls.addEventListener("click", () => {
     showControls()

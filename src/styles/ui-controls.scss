@@ -1,15 +1,12 @@
-.medium-button {
-  height: 8vh;
+.button {
   background-image: url("/escapeButton.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
   color: var(--button-text);
   font-family: var(--font-secondary);
-  font-size: var(--font-medium-button);
   font-weight: bold;
   text-shadow: 0 0.1em 0 var(--button-900), 0.05em 0.1em 0 var(--button-900), -0.05em 0.1em 0 var(--button-900);
-  padding: 0.1em 1em 0 1em;
   cursor: pointer;
   transition: all 0.3s;
 
@@ -17,5 +14,16 @@
     box-shadow: 0 1.5vh 3vh rgba(255, 0, 191, 0.25),
       0 1vh 1vh rgba(126, 15, 120, 0.22);
     filter: brightness(1.25);
+  }
+
+  &, &.medium-button {
+    height: 8vh;
+    font-size: var(--font-medium-button);
+    padding: 0.1em 1em 0 1em;
+  }
+
+  &.small-button {
+    height: 6vh;
+    font-size: var(--font-small-button);
   }
 }
