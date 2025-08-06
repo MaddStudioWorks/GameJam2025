@@ -36,7 +36,7 @@ export default class DebugHandler {
     })
 
     this.setupButton("#dImageText", () => {
-      this.gameEngine.uiHandler.triggerDialog("both", "Vous avez récupéré un indice", key1)
+      this.gameEngine.uiHandler.triggerDialog("both", "Vous avez obtenu la Clé du Déni ! <br>Le premier pas est souvent dans l’obscurité.", key1)
     })
 
     // Game Debug buttons

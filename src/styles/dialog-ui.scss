@@ -15,43 +15,39 @@
 }
 
 .dialog {
-  max-width: 60%;
-  max-height: 80vh;
-  width: 500px;
-  min-height: 300px;
-  background: wheat;
+  --parchment-ratio: 670/906;
+  --dialog-height: 56vh;
   position: absolute;
+  z-index: 1;
   top: -100%;
   right: 50%;
   transform: translate(50%, -50%);
-  border-radius: 8px;
-  border: 6px solid rgba(112, 60, 18, 0.39);
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: space-around;
-  display: flex;
   transition: all 0.5s;
-  padding-bottom: 10px;
+  background: url(/parchment.png) no-repeat center center / contain;
+  display: flex;
+  flex-direction: column;
+  width: calc(var(--dialog-height) * var(--parchment-ratio));
+  height: var(--dialog-height);
+  padding: 13vh 9.5vh 10vh;
 }
 
 .dialogContent {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  gap: 2vh;
+  gap: 1.25vh;
+  justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%;
-  padding: 5vw;
 
   font-size: var(--font-dialog-text);
   font-family: var(--font-primary);
-  line-height: 95%;
-
-  p:first-child{
-    font-weight: bold;
-  }
+  font-style: italic;
+  line-height: 100%;
+  text-shadow: 0.1em 0 var(--ui-500),
+    0.05em 0.1em 0 var(--ui-500),
+    -0.05em 0.1em 0 var(--ui-500);
 }
 
 .dialogContent img {
@@ -59,6 +55,63 @@
   height: auto;
 }
 
+.dialog-item-get{
+  transform: translate(25%, -50%);
+
+  .dialogContent:before, .dialogContent:after{
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+    display: block;
+    content: "";
+    width: var(--dialog-height);
+    height: var(--dialog-height);
+    transform: translateX(45%) scale(1.5) rotate(30deg);
+    animation: shine 16s linear infinite;
+    background: url(/shine-layer1.png) no-repeat center center / contain;
+  }
+
+  .dialogContent:after{
+    animation-duration: 24s;
+    background: url(/shine-layer2.png) no-repeat center center / contain;
+  }
+
+  img{
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+    height: calc(var(--dialog-height));
+    width: auto;
+    transform: translateX(45%) rotate(30deg);
+  }
+}
+
+.dialog-image{
+  background: none;
+  padding: 0;
+
+  img{
+    height: calc(var(--dialog-height));
+    width: auto;
+  }
+}
+
 .dialog-displayed {
   top: 50%;
+}
+
+.dialog-close{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@keyframes shine {
+  from{
+    transform: translateX(45%) scale(1.5) rotate(0);
+  }
+  to{
+    transform: translateX(45%) scale(1.5) rotate(360deg);
+  }
 }
