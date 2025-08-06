@@ -36,6 +36,7 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           const note2 = gameEngine.translationHandler.lang === 'en' ? note2EN : note2FR
           gameEngine.uiHandler.triggerDialog('url', note2)
+          gameEngine.musicHandler.playSFX(sfx.note)
         }
       },
     ],

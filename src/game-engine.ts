@@ -147,6 +147,7 @@ export default class GameEngine {
     // Game state updates
     this.updateCursorType()
     this.clockHandler.tick()
+    this.musicHandler.tick()
     if(!this.cameraControls.isOrbiting){
       this.raycasterHandler.handleHover()
     }
