@@ -118,6 +118,7 @@ export default class UIHandler {
   triggerDialog(type: "url" | "text" | "close" | "both", text?: string, url?: string) {
     const dialog = document.querySelector(".dialog")
     const dialogContent = document.querySelector(".dialogContent")
+    dialog.classList.remove("dialog-text")
     dialog.classList.remove("dialog-image")
     dialog.classList.remove("dialog-item-get")
 
@@ -141,6 +142,7 @@ export default class UIHandler {
       if (dialog && text && dialogContent) {
         dialogContent.innerHTML = ""
         dialog.classList.add("dialog-displayed")
+        dialog.classList.add("dialog-text")
         // Split text by <br> tags and create separate p elements
         const textParts = text.split('<br>')
         textParts.forEach(part => {

@@ -55,6 +55,27 @@
   height: auto;
 }
 
+.dialog-text{
+  --parchment-ratio: 906/777;
+  --dialog-height: 45vh;
+  position: absolute;
+  z-index: 1;
+  top: -100%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  transition: all 0.5s;
+  background: url(/message.png) no-repeat center center / contain;
+  display: flex;
+  flex-direction: column;
+  width: calc(var(--dialog-height) * var(--parchment-ratio));
+  height: var(--dialog-height);
+  padding: 11vh 9.5vh 10vh;
+
+  .dialogContent {
+    text-shadow: none;
+  }
+}
+
 .dialog-item-get{
   transform: translate(25%, -50%);
 
