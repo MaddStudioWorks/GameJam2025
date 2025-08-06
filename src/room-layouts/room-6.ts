@@ -1,6 +1,6 @@
 import { Euler, Vector3 } from "three";
 import { RoomProps } from "~/types/room-props";
-import { bgm } from "~/controls/sound-handler";
+import { bgm, sfx } from "~/controls/sound-handler";
 import constellationPoster from "~/assets/textures/interactive-objects/constellationPoster2.png";
 
 const roomLayout: RoomProps = {
