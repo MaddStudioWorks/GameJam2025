@@ -14,8 +14,12 @@ import BGMpattern4 from "/pattern4.ogg";
 import SFXswitch from "/sfx/doorOpen.wav";
 import SFXmecanismOne from "/sfx/mecanismOne.wav";
 import SFXmecanismTwo from "/sfx/mecanismTwo.wav";
-import SFXtick from "/sfx/tick.mp3";
+import SFXtickOne from "/sfx/tickOne.mp3";
+import SFXtickTwo from "/sfx/tickTwo.mp3";
+import SFXclockRing from "/sfx/clockRing.wav";
 import SFXdoor from "/sfx/switch.wav";
+import SFXkey from "/sfx/keys.wav";
+import SFXnote from "/sfx/paper.mp3";
 
 export const bgm = {
   theme: BGMtheme,
@@ -36,7 +40,11 @@ export const sfx = {
   mecanismOne: SFXmecanismOne,
   mecanismTwo: SFXmecanismTwo,
   switch: SFXdoor,
-  tick: SFXtick,
+  tickOne: SFXtickOne,
+  tickTwo: SFXtickTwo,
+  clockRing: SFXclockRing,
+  keys: SFXkey,
+  note: SFXnote
 } as const;
 
 export default class SoundHandler {
@@ -47,6 +55,7 @@ export default class SoundHandler {
   playSFXsound?: Howl;
   isHubMute: boolean = false;
   gameEngine: GameEngine;
+  checkedTime: Record<string, boolean>
 
   constructor(gameEngine: GameEngine) {
     this.sfx = {
@@ -57,7 +66,34 @@ export default class SoundHandler {
     window.addEventListener("volumeTrack", (value: CustomEvent) => {
       this.manageVolume(parseInt(value.detail) / 10);
     });
-    this.playSFX(sfx.tick, true);
+    this.playSFX(sfx.tickOne, true);
+    this.playSFX(sfx.tickTwo, true);
+    this.checkedTime = {
+      first: false,
+      second: false,
+      third: false
+    }
+  }
+
+  playClockRinging() {
+    let time = this.gameEngine.gameState.time
+
+    if (time >= 0.25 && this.checkedTime.first === false) {
+      this.checkedTime.first = true
+      this.playSFX(sfx.clockRing);
+      console.log('first')
+    }
+    if (time >= 0.5 && this.checkedTime.second === false) {
+      this.playSFX(sfx.clockRing);
+      this.checkedTime.second = true
+    }
+    if (time >= 0.75 && this.checkedTime.third === false) {
+      this.playSFX(sfx.clockRing);
+      this.checkedTime.third = true
+    }
+  }
+  tick() {
+    this.playClockRinging();
   }
 
   playBGM(music: string, loop = true): void {

@@ -18,6 +18,7 @@ const roomLayout: RoomProps = {
         onClick: (gameEngine) => {
           gameEngine.gameState.inventory.key2 = true;
           gameEngine.uiHandler.addKeyToUI(2);
+          gameEngine.musicHandler.playSFX(sfx.keys)
         },
       },
       {
@@ -27,6 +28,7 @@ const roomLayout: RoomProps = {
         rotation: new Euler(),
         onClick: (gameEngine) => {
           gameEngine.uiHandler.triggerDialog("url", constellationPoster);
+          gameEngine.musicHandler.playSFX(sfx.note)
         },
       },
     ],
