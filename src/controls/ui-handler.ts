@@ -182,7 +182,7 @@ export default class UIHandler {
       this.keys.push(`key-${keyNumber}`)
       this.triggerDialog(
         "both",
-        this.gameEngine.translate().game[`keyGet${keyNumber}`],
+        this.gameEngine.translate().game[`key${keyNumber}Get`],
         keysTextures[keyNumber]
       )
       this.checkKeys()
