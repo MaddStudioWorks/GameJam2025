@@ -5,7 +5,7 @@ import constellationPoster from "~/assets/textures/interactive-objects/constella
 
 const roomLayout: RoomProps = {
   index: 3,
-  isLocked: (gameEngine, room) => gameEngine.gameState.time <= (1 / 12) * 9,
+  isLocked: (gameEngine, room) => false,//gameEngine.gameState.time <= (1 / 12) * 9,
   doorType: "denial",
   content: {
     roomType: "denial",

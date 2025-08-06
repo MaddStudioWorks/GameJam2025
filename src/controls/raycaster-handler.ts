@@ -53,7 +53,7 @@ export default class RaycasterHandler {
       if (filteredResults.length > 0) {
         this.gameEngine.cursorType = 'pointer'
         // Find the interactable object that corresponds to the intersected hitbox
-        hoveredObject = collection.list.find(item => item.hitbox === results[0].object) || null
+        hoveredObject = collection.list.find(item => item.hitbox === filteredResults[0].object) || null
       }else{
         this.gameEngine.cursorType = 'default'
       }
@@ -86,7 +86,7 @@ export default class RaycasterHandler {
       const filteredResults = results.filter(result => result.distance > 0.1)
 
       if (filteredResults.length > 0) {
-        const interactableObject = collection.list.find(item => item.hitbox === results[0].object)
+        const interactableObject = collection.list.find(item => item.hitbox === filteredResults[0].object)
         if (interactableObject) {
           interactableObject.onClick?.(interactableObject, this.gameEngine)
         }
