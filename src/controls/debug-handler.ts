@@ -10,9 +10,12 @@ export default class DebugHandler {
   }
 
   initializeDebugUI() {
-    // Hide debug mode unless `#debug` is present in the URL
+    // Show debug mode when `#debug` is present in the URL
+    // And automatically start the game
     if (window.location.hash === "#debug") {
       (document.querySelector(".debug-ui") as HTMLDivElement).style.display = "block"
+      this.gameEngine.start()
+      document.querySelector(".menu").classList.add("menu-hide")
     }
 
     this.setupDebugButtons()
