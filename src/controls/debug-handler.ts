@@ -11,9 +11,8 @@ export default class DebugHandler {
 
   initializeDebugUI() {
     // Hide debug mode unless `#debug` is present in the URL
-    if (window.location.hash !== "#debug") {
-      (document.querySelector(".debug-ui") as HTMLDivElement).style.display = "none"
-      return
+    if (window.location.hash === "#debug") {
+      (document.querySelector(".debug-ui") as HTMLDivElement).style.display = "block"
     }
 
     this.setupDebugButtons()
@@ -35,6 +34,20 @@ export default class DebugHandler {
 
     this.setupButton("#dImageText", () => {
       this.gameEngine.uiHandler.triggerDialog("both", "Vous avez récupéré un indice", key1)
+    })
+
+    // Game Debug buttons
+    this.setupButton("#Key1", () => {
+      this.gameEngine.gameState.inventory.key1 = true
+      this.gameEngine.uiHandler.addKeyToUI(1)
+    })
+    this.setupButton("#Key2", () => {
+      this.gameEngine.gameState.inventory.key2 = true
+      this.gameEngine.uiHandler.addKeyToUI(2)
+    })
+    this.setupButton("#Key3", () => {
+      this.gameEngine.gameState.inventory.key3 = true
+      this.gameEngine.uiHandler.addKeyToUI(3)
     })
 
     // Music debug buttons
