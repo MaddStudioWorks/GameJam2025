@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GAMEJAM</title>
-    <script type="module" crossorigin src="./assets/index-Dd468X3n.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DHQeP0QZ.css">
+    <title>Midnight Lament</title>
+    <script type="module" crossorigin src="./assets/index-DCJd3Rn4.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CrbtosrF.css">
   </head>
   <body>
     <div class="volume">
@@ -32,25 +32,31 @@
       <div class="overlay">
         <h2 data-translate="controls">CONTROLES</h2>
         <div class="controls-command">
-          <div>
+          <div class="controls-command-entry">
             <h3 data-translate="openSelect">OUVRIR/SÉLECTIONNER</h3>
-            <p data-translate="leftClick">Clic Gauche</p>
+            <div class="keybind" data-translate="leftClick">Clic Gauche</div>
           </div>
-          <div>
+          <div class="controls-command-entry">
             <h3 data-translate="exit">SORTIR</h3>
-            <p data-translate="escapeOrRightClick">Échap ou Clic Droit</p>
+            <div class="keybind-group">
+              <div class="keybind" data-translate="escape">Échap</div>
+              <span data-translate="or">ou</span>
+              <div class="keybind" data-translate="rightClick">Clic Droit</div>
+            </div>
           </div>
         </div>
-        <button class="close-controls" data-translate="close">FERMER</button>
+        <button class="medium-button close-controls" data-translate="close">FERMER</button>
       </div>
     </div>
     <section class="menu">
       <div class="menu-container">
-        <div class="logo">
-          <img src="./menu/logomid.png" />
-          <button id="play" data-translate="play">JOUER</button>
-          <button id="controls" data-translate="controls">CONTROLS</button>
-          <!-- Language selector will be inserted here by UIHandler -->
+        <div class="menu-title">
+          <img class="menu-logo" src="./menu/logomid.png" />
+          <div class="menu-options">
+            <button class="medium-button" id="play" data-translate="play">JOUER</button>
+            <button class="medium-button" id="controls" data-translate="controls">CONTROLES</button>
+            <!-- Language selector will be inserted here by UIHandler -->
+          </div>
         </div>
         <img class="top-left rotateHoraire" src="./menu/Rouage1.png" />
 
@@ -92,10 +98,10 @@
     </section>
     <div class="dialog">
       <div class="dialogContent"></div>
-      <button class="dialog-close" data-translate="close">CLOSE</button>
+      <button class="medium-button dialog-close" data-translate="close">CLOSE</button>
     </div>
 
-    <button class="escape" data-translate="escape">ESCAPE</button>
+    <button class="escape medium-button" data-translate="escape">ESCAPE</button>
 
     <div class="debug-ui" style="display: none">
       <button id="mutehub">mute hub</button>
