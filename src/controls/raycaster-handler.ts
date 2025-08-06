@@ -48,8 +48,9 @@ export default class RaycasterHandler {
 
       // Find which interactable object (if any) is being hovered
       let hoveredObject: InteractableObject<GameObject> | null = null
+      const filteredResults = results.filter(result => result.distance > 0.1)
 
-      if (results.length > 0) {
+      if (filteredResults.length > 0) {
         this.gameEngine.cursorType = 'pointer'
         // Find the interactable object that corresponds to the intersected hitbox
         hoveredObject = collection.list.find(item => item.hitbox === results[0].object) || null
