@@ -18,7 +18,7 @@ import SFXtickOne from "/sfx/tickOne.mp3";
 import SFXtickTwo from "/sfx/tickTwo.mp3";
 import SFXclockRing from "/sfx/clockRing.wav";
 import SFXdoor from "/sfx/switch.wav";
-import SFXkey from "/sfx/keys.wav";
+import SFXkey from "/sfx/keys.mp3";
 import SFXnote from "/sfx/paper.mp3";
 
 export const bgm = {
