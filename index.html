@@ -7,61 +7,6 @@
     <link rel="stylesheet" href="src/styles/main.scss" />
     <title>Midnight Lament</title>
   </head>
-  <script type="module">
-    const menu = document.querySelector(".menu");
-    const play = document.querySelector("#play");
-    const controls = document.querySelector("#controls");
-    const controlsHTML = document.querySelector(".controls");
-    const closeControls = document.querySelector(".close-controls");
-    const hideMenu = () => {
-      if (menu) menu.classList.add("menu-hide");
-    };
-    if (play) play.onclick = hideMenu;
-    const finalScene = document.querySelector(".finalScene");
-    const finalOne = document.querySelector(".finalOne");
-    const finalTwo = document.querySelector(".finalTwo");
-    const finalThree = document.querySelector(".finalThree");
-    const finalFour = document.querySelector(".finalFour");
-
-    const showControls = () => {
-      controlsHTML.classList.add("controls-show");
-    };
-    const hideControls = () => {
-      controlsHTML.classList.remove("controls-show");
-    };
-
-    controls.onclick = () => showControls();
-    closeControls.onclick = () => hideControls();
-
-    window.addEventListener("final", () => {
-      setTimeout(() => {
-        finalScene.classList.add("finalScene-show");
-      }, 200);
-      setTimeout(() => {
-        finalOne.classList.add("finalOne-opacity");
-      }, 11000);
-      setTimeout(() => {
-        finalTwo.classList.add("finalTwo-opacity");
-      }, 22000);
-      setTimeout(() => {
-        finalThree.classList.add("finalThree-opacity");
-      }, 33000);
-      setTimeout(() => {
-        finalFour.classList.add("finalFour-opacity");
-        window.location.reload();
-      }, 44000);
-    });
-
-    const volumeEvent = (value) =>
-      new CustomEvent("volumeTrack", {
-        detail: value,
-      });
-
-    const range = document.querySelector(".volume");
-    range.addEventListener("input", (e) => {
-      dispatchEvent(volumeEvent(e.target.value));
-    });
-  </script>
   <body>
     <div class="volume">
       <svg

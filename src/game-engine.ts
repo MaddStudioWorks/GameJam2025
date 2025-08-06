@@ -19,6 +19,8 @@ export const globalUniforms: GlobalUniforms = {
 }
 
 export default class GameEngine {
+  running = false
+
   // Tracked values
   clock = new Clock
   uniforms = globalUniforms
@@ -73,6 +75,11 @@ export default class GameEngine {
     this.cameraControls.enterHubMode()
 
     this.renderer.setAnimationLoop(() => { this.tick() })
+  }
+
+  start(){
+    this.gameState.startTime = this.clock.getElapsedTime()
+    this.running = true
   }
 
   addEntity(entity: GameObject) {
@@ -139,19 +146,21 @@ export default class GameEngine {
   }
 
   tick() {
-    // Time updates
-    this.deltaTime = this.clock.getDelta()
-    const timeProgress = this.clock.getElapsedTime() / this.gameState.endOfTime
-    this.gameState.time = timeProgress > 1 ? 1 : timeProgress
+    if(this.running){
+      // Time updates
+      this.deltaTime = this.clock.getDelta()
+      const timeProgress = this.clock.getElapsedTime() / (this.gameState.endOfTime - this.gameState.startTime)
+      this.gameState.time = timeProgress > 1 ? 1 : timeProgress
 
-    // Game state updates
-    this.updateCursorType()
-    this.clockHandler.tick()
-    if(!this.cameraControls.isOrbiting){
-      this.raycasterHandler.handleHover()
+      // Game state updates
+      this.updateCursorType()
+      this.clockHandler.tick()
+      if (!this.cameraControls.isOrbiting) {
+        this.raycasterHandler.handleHover()
+      }
+      this.entities.forEach(entry => entry.tick(this))
+      this.orbitControls.update()
+      this.renderer.render(this.scene, this.camera)
     }
-    this.entities.forEach(entry => entry.tick(this))
-    this.orbitControls.update()
-    this.renderer.render(this.scene, this.camera)
   }
 }
