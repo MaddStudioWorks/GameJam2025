@@ -12,3 +12,7 @@ body{
   color: var(--ui-text);
   font-family: var(--font-secondary);
 }
+
+*{
+  user-select: none;
+}
