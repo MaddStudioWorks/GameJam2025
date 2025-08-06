@@ -1,6 +1,6 @@
 const gameState = {
   time: 0,
-  endOfTime: 60 * 12,
+  endOfTime: 60 * 6,
   startTime: 0,
   hasWon: false,
   doors: {
@@ -26,6 +26,7 @@ const gameState = {
     switch3: false,
     switch4: false,
     switch5: false,
+    lastDoorOpen: () => gameState.inventory.key1 === true && gameState.inventory.key2 === true && gameState.inventory.key3 === true ? true : false
   },
   stars: {
     star1: false,
