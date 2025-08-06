@@ -51,6 +51,9 @@ export default class RoomInterior extends GameObject {
         onHover: (keyObject) => {
           (keyObject.gameObject as InteractiveObject).onHover()
         },
+        onBlur: (keyObject) => {
+          (keyObject.gameObject as InteractiveObject).onBlur()
+        },
         onClick: (interactableObject, gameEngine) => {
           (interactableObject.gameObject as InteractiveObject).onClick()
           keyObject.onClick(gameEngine, interactableObject.gameObject)

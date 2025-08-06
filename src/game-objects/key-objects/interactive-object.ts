@@ -1,6 +1,6 @@
 import GameEngine from '~/game-engine'
 import GameObject from '~/game-objects/game-object'
-import { Mesh, MeshBasicNodeMaterial, PlaneGeometry, SRGBColorSpace, Texture, TextureLoader } from 'three/webgpu'
+import { color, distance, Fn, Mesh, MeshBasicNodeMaterial, mix, PlaneGeometry, saturate, smoothstep, SRGBColorSpace, step, texture, Texture, TextureLoader, uniform, uv, vec2, vec4 } from 'three/webgpu'
 import key1 from '~/assets/textures/interactive-objects/key1.png'
 import key2 from '~/assets/textures/interactive-objects/key2.png'
 import key3 from '~/assets/textures/interactive-objects/key3.png'
@@ -17,6 +17,7 @@ import note3FR from '~/assets/textures/interactive-objects/note3-fr.png'
 import star from '~/assets/textures/interactive-objects/star.png'
 import starToggled from '~/assets/textures/interactive-objects/starToggled.png'
 import { KeyObject } from '~/types/room-props'
+import radialNoise from '~/shaders/util/radial-noise'
 
 const textureName = {
   key : {
@@ -44,10 +45,11 @@ const textureName = {
 
 export default class InteractiveObject extends GameObject {
   clicked = false
-  material: MeshBasicNodeMaterial
+  hovered = false
   id: KeyObject['id']
   type: KeyObject['type']
   mesh: Mesh
+  material: MeshBasicNodeMaterial
   starTexture: Texture
   toggledStarTexture: Texture
 
@@ -55,6 +57,11 @@ export default class InteractiveObject extends GameObject {
     super()
     this.id = id
     this.type = type
+
+    const hovered = uniform(1)
+    hovered.onFrameUpdate(() => {
+      return this.hovered ? 1 : 0
+    })
 
     const texturePath = textureName[type][id](gameEngine)
     const interactiveObjectTextureMap = new TextureLoader().load(texturePath)
@@ -65,9 +72,18 @@ export default class InteractiveObject extends GameObject {
 
     this.material = new MeshBasicNodeMaterial({
       transparent: true,
-      map: interactiveObjectTextureMap,
       depthWrite: false
     })
+    this.material.colorNode = Fn(() => {
+      const noise = radialNoise(uv())
+      const glowIntensity = distance(uv(), vec2(0.5)).mul(2).oneMinus().mul(noise).mul(hovered)
+      const textureColor = texture(interactiveObjectTextureMap)
+      const glowColor = color('#FFFFFF')
+      const texel = mix(glowColor, textureColor, textureColor.a)
+      const alpha = saturate(textureColor.a.add(glowIntensity))
+
+      return vec4(texel.rgb, alpha)
+    })()
     const InteractiveObjectGeometry = new PlaneGeometry(1, 1)
     this.mesh = new Mesh(InteractiveObjectGeometry, this.material)
 
@@ -97,7 +113,11 @@ export default class InteractiveObject extends GameObject {
   }
 
   onHover(){
+    this.hovered = true
+  }
 
+  onBlur(){
+    this.hovered = false
   }
 
   tick(engine: GameEngine) {
