@@ -180,13 +180,7 @@ export default class UIHandler {
       this.keys.push(`key-${keyNumber}`)
       this.triggerDialog(
         "both",
-        `<p>${this.gameEngine.translate().game.keyGet(keyNumber.toString())} ${
-          this.gameEngine.gameState.inventory.key1 === true &&
-          this.gameEngine.gameState.inventory.key2 === true &&
-          this.gameEngine.gameState.inventory.key3 === true
-            ? `<br> <br> ${this.gameEngine.translate().game.finalClueReached}`
-            : ""
-        }</p>`,
+        this.gameEngine.translate().game[`keyGet${keyNumber}`],
         keysTextures[keyNumber]
       )
       this.checkKeys()
@@ -207,8 +201,11 @@ export default class UIHandler {
     const keysContainer = document.querySelector("#keys")
     if (keysContainer) {
       setTimeout(() => {
+        const finalClue = document.createElement("p")
+        finalClue.classList.add('final-clue')
+        finalClue.innerHTML = this.gameEngine.translate().game.finalClue
         keysContainer.innerHTML = ""
-        keysContainer.textContent = this.gameEngine.translate().game.finalClue
+        keysContainer.appendChild(finalClue)
       }, 800)
     }
   }

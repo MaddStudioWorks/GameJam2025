@@ -54,3 +54,46 @@
 .key-3 {
   display: flex;
 }
+
+.final-clue{
+  font-family: var(--font-primary);
+  font-size: 2.5vh;
+  text-transform: uppercase;
+  font-family: var(--font-primary);
+  font-weight: bold;
+  font-style: italic;
+  color: white;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.75);
+
+  &:before,
+  &:after {
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+    display: block;
+    content: "";
+    width: 20vh;
+    height: 20vh;
+    top: 50%;
+    left: 50%;
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.25) rotate(0);
+    animation: smallShine 16s linear infinite;
+    background: url(/shine-layer1.png) no-repeat center center / contain;
+  }
+
+  &:after {
+    animation-duration: 24s;
+    background: url(/shine-layer2.png) no-repeat center center / contain;
+  }
+}
+
+@keyframes smallShine {
+  from {
+    transform: translate(-50%, -50%) scale(1.25) rotate(0);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1.25) rotate(360deg);
+  }
+}

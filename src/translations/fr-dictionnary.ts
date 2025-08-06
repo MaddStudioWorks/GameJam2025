@@ -22,8 +22,9 @@ const frDictionnary = {
     note: "Note",
     doorLocked: "La porte est verrouillée",
     gameOver: "La boucle n'a pas été brisée, et le cycle recommence",
-    keyGet: variables("Vous avez obtenu la clé {keyNumber}"),
-    finalClueReached: "Vous avez atteint l'indice final",
+    key1Get: "Vous avez obtenu la Clé du Déni ! <br>Le premier pas est souvent dans l’obscurité.",
+    key2Get: "Vous avez obtenu la Clé de la Colère ! <br>Une rage aveugle ne vous mènera nulle part.",
+    key3Get: "Vous avez obtenu la Clé de la Tristesse ! <br>Vous ouvrez les yeux sur la réelle solution.",
     finalClue: "Acceptation"
   }
 }

@@ -22,9 +22,10 @@ const enDictionnary = {
     note: "Note",
     doorLocked: "Door is locked",
     gameOver: "The loop has not been broken, and the cycle begins anew",
-    keyGet: variables("You have obtained key {keyNumber}"),
-    finalClueReached: "You have reached the final clue",
-    finalClue: "Acceptation"
+    key1Get: "You have obtained the Key of Denial! <br>The first step is often in darkness.",
+    key2Get: "You have obtained the Key of Anger! <br>Blind rage will lead you nowhere.",
+    key3Get: "You have obtained the Key of Sadness! <br>You open your eyes to the real solution.",
+    finalClue: "Acceptance"
   }
 }
 
