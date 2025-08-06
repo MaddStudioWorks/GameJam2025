@@ -83,7 +83,9 @@ export default class RaycasterHandler {
     this.collections.filter(collection => collection.enabled).forEach(collection => {
       const intersectableObjects = collection.list.map(item => item.hitbox)
       const results = this.raycaster.intersectObjects(intersectableObjects)
-      if (results.length > 0) {
+      const filteredResults = results.filter(result => result.distance > 0.1)
+
+      if (filteredResults.length > 0) {
         const interactableObject = collection.list.find(item => item.hitbox === results[0].object)
         if (interactableObject) {
           interactableObject.onClick?.(interactableObject, this.gameEngine)
