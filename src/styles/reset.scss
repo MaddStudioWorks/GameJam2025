@@ -9,6 +9,10 @@ body {
   background-color: black;
 }
 
+h1, h2, h3, p{
+  margin: 0;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -16,4 +20,15 @@ body {
 canvas {
   width: 100vw;
   height: 100vh;
+}
+
+button{
+  display: block;
+  background: none;
+  border: none;
+  outline: none;
+
+  &:hover{
+    cursor: pointer;
+  }
 }

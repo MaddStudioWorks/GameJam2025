@@ -5,63 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="src/index.ts"></script>
     <link rel="stylesheet" href="src/styles/main.scss" />
-    <title>GAMEJAM</title>
+    <title>Midnight Lament</title>
   </head>
-  <script type="module">
-    const menu = document.querySelector(".menu");
-    const play = document.querySelector("#play");
-    const controls = document.querySelector("#controls");
-    const controlsHTML = document.querySelector(".controls");
-    const closeControls = document.querySelector(".close-controls");
-    const hideMenu = () => {
-      if (menu) menu.classList.add("menu-hide");
-    };
-    if (play) play.onclick = hideMenu;
-    const finalScene = document.querySelector(".finalScene");
-    const finalOne = document.querySelector(".finalOne");
-    const finalTwo = document.querySelector(".finalTwo");
-    const finalThree = document.querySelector(".finalThree");
-    const finalFour = document.querySelector(".finalFour");
-
-    const showControls = () => {
-      controlsHTML.classList.add("controls-show");
-    };
-    const hideControls = () => {
-      controlsHTML.classList.remove("controls-show");
-    };
-
-    controls.onclick = () => showControls();
-    closeControls.onclick = () => hideControls();
-
-    window.addEventListener("final", () => {
-      setTimeout(() => {
-        finalScene.classList.add("finalScene-show");
-      }, 200);
-      setTimeout(() => {
-        finalOne.classList.add("finalOne-opacity");
-      }, 11000);
-      setTimeout(() => {
-        finalTwo.classList.add("finalTwo-opacity");
-      }, 22000);
-      setTimeout(() => {
-        finalThree.classList.add("finalThree-opacity");
-      }, 33000);
-      setTimeout(() => {
-        finalFour.classList.add("finalFour-opacity");
-        window.location.reload();
-      }, 44000);
-    });
-
-    const volumeEvent = (value) =>
-      new CustomEvent("volumeTrack", {
-        detail: value,
-      });
-
-    const range = document.querySelector(".volume");
-    range.addEventListener("input", (e) => {
-      dispatchEvent(volumeEvent(e.target.value));
-    });
-  </script>
   <body>
     <div class="volume">
       <svg
@@ -87,25 +32,31 @@
       <div class="overlay">
         <h2 data-translate="controls">CONTROLES</h2>
         <div class="controls-command">
-          <div>
+          <div class="controls-command-entry">
             <h3 data-translate="openSelect">OUVRIR/SÉLECTIONNER</h3>
-            <p data-translate="leftClick">Clic Gauche</p>
+            <div class="keybind" data-translate="leftClick">Clic Gauche</div>
           </div>
-          <div>
+          <div class="controls-command-entry">
             <h3 data-translate="exit">SORTIR</h3>
-            <p data-translate="escapeOrRightClick">Échap ou Clic Droit</p>
+            <div class="keybind-group">
+              <div class="keybind" data-translate="escape">Échap</div>
+              <span data-translate="or">ou</span>
+              <div class="keybind" data-translate="rightClick">Clic Droit</div>
+            </div>
           </div>
         </div>
-        <button class="close-controls" data-translate="close">FERMER</button>
+        <button class="medium-button close-controls" data-translate="close">FERMER</button>
       </div>
     </div>
     <section class="menu">
       <div class="menu-container">
-        <div class="logo">
-          <img src="/menu/logomid.png" />
-          <button id="play" data-translate="play">JOUER</button>
-          <button id="controls" data-translate="controls">CONTROLS</button>
-          <!-- Language selector will be inserted here by UIHandler -->
+        <div class="menu-title">
+          <img class="menu-logo" src="/menu/logomid.png" />
+          <div class="menu-options">
+            <button class="medium-button" id="play" data-translate="play">JOUER</button>
+            <button class="medium-button" id="controls" data-translate="controls">CONTROLES</button>
+            <!-- Language selector will be inserted here by UIHandler -->
+          </div>
         </div>
         <img class="top-left rotateHoraire" src="/menu/Rouage1.png" />
 
@@ -147,10 +98,10 @@
     </section>
     <div class="dialog">
       <div class="dialogContent"></div>
-      <button class="dialog-close" data-translate="close">CLOSE</button>
+      <button class="medium-button dialog-close" data-translate="close">CLOSE</button>
     </div>
 
-    <button class="escape" data-translate="escape">ESCAPE</button>
+    <button class="escape medium-button" data-translate="escape">ESCAPE</button>
 
     <div class="debug-ui" style="display: none">
       <button id="mutehub">mute hub</button>

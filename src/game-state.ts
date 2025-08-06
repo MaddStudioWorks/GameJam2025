@@ -1,6 +1,7 @@
 const gameState = {
   time: 0,
   endOfTime: 60 * 12,
+  startTime: 0,
   hasWon: false,
   doors: {
     1: false,

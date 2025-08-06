@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Grandstander:wght@700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root{
+  // Colors
+  --ui-900: #703c12;
+  --ui-500: #f5deb3;
+  --ui-text: #000000;
+  --button-900: #18313d;
+  --button-700: #477795;
+  --button-500: #5baac9;
+  --button-text: #FFFFFF;
+
+  // Fonts
+  --font-primary: "PT Serif", serif;
+  --font-secondary: "Grandstander", sans-serif;
+
+  // Sizes
+  --font-small-button: 1vh;
+  --font-medium-button: 3.5vh;
+  --font-dialog-text: 3vh;
+  --font-controls-title: 7vh;
+  --font-controls-name: 3.5vh;
+  --font-controls-keybind: 2vh;
+}

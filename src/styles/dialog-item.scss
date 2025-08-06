@@ -1,31 +1,31 @@
 .containerKeys {
   background: url("/backgroundKeys.jpg");
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
-  backdrop-filter: blur(10px);
-  width: 200px;
-  height: 66px;
+  width: 27vh;
+  height: 9vh;
   position: absolute;
-  top: 20px;
+  top: 2vh;
   left: 50%;
   border-radius: 8px;
   transform: translateX(-50%);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 5px;
-  padding: 5px;
+  gap: 1vh;
+  padding: 1vh;
 }
 
 .containerKeys-title {
   position: absolute;
-  top: -5px;
+  top: -4%;
   left: 50%;
   transform: translateX(-50%);
   color: white;
-  font-size: 13px;
+  font-size: 1.75vh;
   text-transform: uppercase;
+  font-family: var(--font-primary);
   font-weight: bold;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.75);
 }
