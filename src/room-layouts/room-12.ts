@@ -21,8 +21,7 @@ const checkStarsCombination = (gameEngine: GameEngine) => {
 
 const roomLayout: RoomProps = {
   index: 0,
-  isLocked: (gameEngine, room) =>
-    !gameEngine.gameState.inventory.lastDoorOpen(),
+  isLocked: (gameEngine, room) => !gameEngine.gameState.inventory.lastDoorOpen(),
   doorType: "acceptance",
   content: {
     roomType: "acceptance",

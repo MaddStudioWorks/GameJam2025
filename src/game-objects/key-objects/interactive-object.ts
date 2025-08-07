@@ -57,10 +57,15 @@ export default class InteractiveObject extends GameObject {
     super()
     this.id = id
     this.type = type
+    const isStar = type === 'star' ? 1 : 0
 
     const hovered = uniform(1)
     hovered.onFrameUpdate(() => {
       return this.hovered ? 1 : 0
+    })
+    const clicked = uniform(1)
+    clicked.onFrameUpdate(() => {
+      return this.clicked ? 1 : 0
     })
 
     const texturePath = textureName[type][id](gameEngine)
@@ -72,15 +77,18 @@ export default class InteractiveObject extends GameObject {
 
     this.material = new MeshBasicNodeMaterial({
       transparent: true,
+      map: interactiveObjectTextureMap,
       depthWrite: false
     })
     this.material.colorNode = Fn(() => {
       const noise = radialNoise(uv())
       const glowIntensity = distance(uv(), vec2(0.5)).mul(2).oneMinus().mul(noise).mul(hovered)
       const textureColor = texture(interactiveObjectTextureMap)
+      const starColor = mix(texture(this.starTexture), texture(this.toggledStarTexture), clicked)
+      const finalTexture = mix(textureColor, starColor, isStar)
       const glowColor = color('#FFFFFF')
-      const texel = mix(glowColor, textureColor, textureColor.a)
-      const alpha = saturate(textureColor.a.add(glowIntensity))
+      const texel = mix(glowColor, finalTexture, finalTexture.a)
+      const alpha = saturate(finalTexture.a.add(glowIntensity.mul(finalTexture.a.oneMinus())))
 
       return vec4(texel.rgb, alpha)
     })()
